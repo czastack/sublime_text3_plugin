@@ -1,0 +1,10 @@
+[
+    { "keys": ["f5"], "command": "exec_selection" },
+    { "keys": ["ctrl+f5"], "command": "exec_document" },
+    { "keys": ["ctrl+shift+f5"], "command": "to_expr" },
+    { "keys": ["ctrl+shift+e"], "command": "eval_selection" },
+    { "keys": ["alt+c"], "command": "insert_list" },
+
+    { "keys": ["ctrl+alt+g"], "command": "reload_gbk" },
+    { "keys": ["ctrl+\\"], "command": "html_jade" },
+]

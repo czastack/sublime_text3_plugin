@@ -1,0 +1,22 @@
+[
+	{
+		"caption": "An: 打开安装的包",
+		"command": "view_installed_package"
+	},
+	{
+		"caption": "An: 打开自带的包",
+		"command": "view_default_package"
+	},
+	{
+		"caption": "An: 快速选中所有行首",
+		"command": "select_line_start"
+	},
+	{
+		"caption": "An: 快速选中所有行尾",
+		"command": "select_line_end"
+	},
+	{
+		"caption": "An: 快速选中所有行",
+		"command": "select_line_all"
+	},
+]

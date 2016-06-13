@@ -50,11 +50,12 @@ class ToExprCommand(sublime_plugin.TextCommand):
 	def on_exec(self, edit, text):
 		an.set(self.view, edit)
 		try:
-			i = 0
+			edit.i = 0
 			for region in self.view.selection:
-				src=self.view.substr(region)
-				i += 1
-				self.view.replace(edit, region, str(eval(text), edit.__dict__))
+				edit.src=self.view.substr(region)
+				edit.i += 1
+				an._eval(text)
+				self.view.replace(edit, region, str(edit._ret))
 		except Exception as e:
 			logerr(e)
 

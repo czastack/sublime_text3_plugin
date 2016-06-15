@@ -88,8 +88,16 @@ class InsertListCommand(sublime_plugin.TextCommand):
 			if selectionlen > 1:
 				# 依次应用到光标
 				itr = iter(edit._ret)
+				i = 0
 				for region in self.view.selection:
-					self.view.replace(edit, region, itr.__next__())
+					if i == selectionlen:
+						break
+					else:
+						i += 1
+					cur = itr.__next__() # 当前要插入的文本
+					if not isinstance(cur, str):
+						cur = str(cur)
+					self.view.replace(edit, region, cur)
 			else:
 				# 列表插入到当前位置
 				regions = []

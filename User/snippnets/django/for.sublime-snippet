@@ -1,0 +1,10 @@
+<snippet>
+	<content><![CDATA[
+{% for $1 in $2 %}
+	$0
+{% endfor %}
+]]></content>
+	<tabTrigger>djfor</tabTrigger>
+	<scope>text.html</scope>
+	<description>django 模板for循环</description>
+</snippet>

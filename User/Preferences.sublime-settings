@@ -1,0 +1,11 @@
+{
+	"color_scheme": "Packages/Theme - Brogrammer/brogrammer.tmTheme",
+	"fold_buttons": true,
+	"font_size": 15,
+	"ignored_packages":
+	[
+		"PyQt5 Completions",
+		"Vintage"
+	],
+	"update_check": false
+}

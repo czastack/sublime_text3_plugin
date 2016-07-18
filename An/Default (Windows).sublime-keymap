@@ -7,4 +7,5 @@
 
     { "keys": ["ctrl+alt+g"], "command": "reload_gbk" },
     { "keys": ["ctrl+\\"], "command": "html_jade" },
+    { "keys": ["ctrl+f9"], "command": "sass_compile", "scope": "source.sass" },
 ]

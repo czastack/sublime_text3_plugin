@@ -1,0 +1,12 @@
+<snippet>
+	<content><![CDATA[
+{pc:content action="category" catid="$1" num="$2" order="listorder ASC"}
+	{loop \$data \$r}
+	<li><a href="{\$r[url]}"><span>{\$r[catname]}</span></a></li>
+	{/loop}
+{/pc}
+]]></content>
+	<tabTrigger>pccat</tabTrigger>
+	<scope>text.html</scope>
+	<description>phpcms category</description>
+</snippet>

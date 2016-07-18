@@ -1,0 +1,8 @@
+<snippet>
+	<content><![CDATA[
+{\$${0:r}[$1]}
+]]></content>
+	<tabTrigger>pcvar</tabTrigger>
+	<scope>text.html</scope>
+	<description>phpcms 变量</description>
+</snippet>

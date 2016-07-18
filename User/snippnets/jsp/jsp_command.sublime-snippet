@@ -1,0 +1,8 @@
+<snippet>
+	<content><![CDATA[
+<% $1 %>
+]]></content>
+	<tabTrigger>jc</tabTrigger>
+	<scope>text.html.jsp</scope>
+	<description>jsp指令</description>
+</snippet>

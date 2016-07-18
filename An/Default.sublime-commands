@@ -19,4 +19,16 @@
 		"caption": "An: 快速选中所有行",
 		"command": "select_line_all"
 	},
+	{
+		"caption": "An: 按长度分隔选区",
+		"command": "split_select_by_len"
+	},
+	{
+		"caption": "An: 用正则表达式分隔选区",
+		"command": "split_select_by_reg"
+	},
+	{
+		"caption": "An: 还原Unicode转义",
+		"command": "unicode_decode"
+	},
 ]

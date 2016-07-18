@@ -1,0 +1,8 @@
+<snippet>
+	<content><![CDATA[
+{cza:js href="$1" /}
+]]></content>
+	<tabTrigger>tpczajs</tabTrigger>
+	<scope>text.html</scope>
+	<description>thinkphp cza js</description>
+</snippet>

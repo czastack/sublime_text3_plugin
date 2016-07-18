@@ -1,0 +1,10 @@
+<snippet>
+	<content><![CDATA[
+{present name="$1"}
+	$0
+{/present}
+]]></content>
+	<tabTrigger>tppresent</tabTrigger>
+	<scope>text.html</scope>
+	<description>thinkphp present</description>
+</snippet>

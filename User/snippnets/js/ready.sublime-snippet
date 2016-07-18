@@ -1,0 +1,10 @@
+<snippet>
+	<content><![CDATA[
+\$(document).ready(function(){
+	$1
+});
+$2]]></content>
+	<tabTrigger>ready</tabTrigger>
+	<scope>source.js</scope>
+	<description>载入监听</description>
+</snippet>

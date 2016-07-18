@@ -1,0 +1,10 @@
+<snippet>
+	<content><![CDATA[
+<?php
+$1
+?>
+]]></content>
+	<tabTrigger>phpb</tabTrigger>
+	<scope>text.html</scope>
+	<description>PHP标签</description>
+</snippet>

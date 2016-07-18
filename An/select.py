@@ -1,6 +1,6 @@
 # 快速选中所有行首或者行尾
 
-import sublime_plugin
+import sublime, sublime_plugin
 from An import An, an
 
 # 快速选中所有行首
@@ -27,3 +27,56 @@ class SelectLineAllCommand(sublime_plugin.TextCommand):
 		regions = An.lines(self.view)
 		self.view.selection.clear()
 		self.view.selection.add_all(regions)
+
+# 按长度分隔选区
+class SplitSelectByLenCommand(sublime_plugin.TextCommand):
+	def run(self, edit):
+		# 显示输入框
+		input_panel = self.view.window().show_input_panel('分隔长度', '', self.on_input_text, None, None)
+
+	def on_input_text(self, text):
+		regions = []
+		step = int(text)
+		if step > 0:
+			for region in self.view.selection:
+				if not region.empty():
+					start = region.begin()
+					end = region.end()
+					i = start
+					while i < end:
+						regions.append(sublime.Region(i, min(i + step, end)))
+						i += step
+			if len(regions) > 0:
+				self.view.selection.clear()
+				self.view.selection.add_all(regions)
+
+# 用正则表达式分隔选区
+class SplitSelectByRegCommand(sublime_plugin.TextCommand):
+	def run(self, edit):
+		# 显示输入框
+		input_panel = self.view.window().show_input_panel('分隔文本', '', self.on_input_text, None, None)
+
+	def on_input_text(self, text):
+		if text is not '':
+			import re
+			reg = re.compile(text)
+			pos = 0
+			regions = []
+			for region in self.view.selection:
+				if not region.empty():
+					start = region.begin()
+					end = region.end()
+					itemtext = self.view.substr(region)
+					while True:
+						matcher = reg.search(itemtext, pos)
+						if not matcher:
+							break
+						span = matcher.span()
+						regions.append(sublime.Region(start + pos, start + span[0]))
+						pos = span[1]
+
+					if pos < end:
+						 regions.append(sublime.Region(start + pos, end))
+			if len(regions) > 0:
+				self.view.selection.clear()
+				self.view.selection.add_all(regions)

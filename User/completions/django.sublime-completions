@@ -1,0 +1,8 @@
+{
+	"scope": "source.python",
+
+	"completions":
+	[
+		{ "trigger": "django render\tdjango渲染模板", "contents": "render(request, '$1', $2)" },
+	]
+}

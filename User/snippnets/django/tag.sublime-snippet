@@ -1,0 +1,8 @@
+<snippet>
+	<content><![CDATA[
+{% $1 %}
+]]></content>
+	<tabTrigger>djt</tabTrigger>
+	<scope>text.html</scope>
+	<description>django 模板标签</description>
+</snippet>

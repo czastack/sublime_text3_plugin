@@ -1,0 +1,11 @@
+{
+	"scope": "source.c, source.c++",
+
+	"completions":
+	[
+		{ "trigger": "double", "contents": "double" },
+		{ "trigger": "std", "contents": "std::" },
+		{ "trigger": "sizeof", "contents": "sizeof($1)" },
+		{ "trigger": "decltype", "contents": "decltype($1)" },
+	]
+}

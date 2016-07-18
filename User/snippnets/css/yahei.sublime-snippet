@@ -1,0 +1,8 @@
+<snippet>
+	<content><![CDATA[
+font-family: 'Microsoft YaHei';
+]]></content>
+	<tabTrigger>yh</tabTrigger>
+	<scope>source.css</scope>
+	<description>微软雅黑</description>
+</snippet>

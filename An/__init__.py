@@ -10,11 +10,15 @@ class An:
 		edit.view = view
 		edit.sublime = sublime
 
-	def show_output(self):
+	def show_output(self, text=None):
 		win = sublime.active_window()
 		if not self.output:
 			self.output = win.create_output_panel('an')
 			self.output.settings().set('color_scheme', self.view.settings().get('color_scheme'))
+		
+		if text:
+			self.output.run_command('set_text', {'text': text})
+		
 		win.run_command('show_panel', {'panel': 'output.an'})
 
 	def cls(self):
@@ -63,6 +67,9 @@ class An:
 	def selected_text(self):
 		return view_selected_text(self.view)
 
+	def popup(self, text, **args):
+		self.view.show_popup('<style>body{margin:0; padding:10px; color:#ccc; font-size:18px; background-color:#000;}</style>' + text, **args);
+
 	def __getattr__(self, name):
 		return None
 
@@ -78,6 +85,10 @@ an = An()
 # 打印错误
 def logerr(e):
 	print(type(e).__name__ + ': ' + str(e), file=an)
+
+# 是否是列表或元组
+def is_list_or_tuple(var):
+	return isinstance(var, list) or isinstance(var, tuple)
 
 # 生成字符序列
 def strsq(a, b, split = ''):

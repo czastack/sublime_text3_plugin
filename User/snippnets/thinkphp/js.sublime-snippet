@@ -1,0 +1,8 @@
+<snippet>
+	<content><![CDATA[
+{js href="__JS__$1.js" /}
+]]></content>
+	<tabTrigger>tpjs</tabTrigger>
+	<scope>text.html</scope>
+	<description>thinkphp js</description>
+</snippet>

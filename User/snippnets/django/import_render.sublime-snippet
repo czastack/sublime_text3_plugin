@@ -1,0 +1,8 @@
+<snippet>
+	<content><![CDATA[
+from django.shortcuts import render
+]]></content>
+	<tabTrigger>django import render</tabTrigger>
+	<scope>source.python</scope>
+	<description>　</description>
+</snippet>

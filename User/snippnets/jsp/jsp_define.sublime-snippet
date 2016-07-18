@@ -1,0 +1,8 @@
+<snippet>
+	<content><![CDATA[
+<%! $1; %>
+]]></content>
+	<tabTrigger>jd</tabTrigger>
+	<scope>text.html.jsp</scope>
+	<description>jsp声明变量</description>
+</snippet>

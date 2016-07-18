@@ -1,5 +1,5 @@
 import sublime, sublime_plugin
-from An import An, an, logerr
+from An import An, an, logerr, is_list_or_tuple
 
 # 清空内容
 class ClearTextCommand(sublime_plugin.TextCommand):
@@ -39,25 +39,23 @@ class ToExprCommand(sublime_plugin.TextCommand):
 			self.on_exec(edit, text)
 			return
 
-		default = 'src'
+		default = an.to_expr_last if an.to_expr_last else 'src'
 		input_panel = self.view.window().show_input_panel('to expr', default, self.on_input_text, None, None)
 		#选中默认文字
 		input_panel.selection.add(An.region(input_panel));
 
 	def on_input_text(self, text):
+		an.to_expr_last = text
 		self.view.run_command(self.name(), {"text": text})
 
 	def on_exec(self, edit, text):
 		an.set(self.view, edit)
-		try:
-			edit.i = 0
-			for region in self.view.selection:
-				edit.src=self.view.substr(region)
-				edit.i += 1
-				an._eval(text)
+		edit.i = 0
+		for region in self.view.selection:
+			edit.src=self.view.substr(region)
+			edit.i += 1
+			if(an._eval(text)):
 				self.view.replace(edit, region, str(edit._ret))
-		except Exception as e:
-			logerr(e)
 
 # 插入列表
 class InsertListCommand(sublime_plugin.TextCommand):
@@ -115,14 +113,17 @@ class InsertListCommand(sublime_plugin.TextCommand):
 						if not isinstance(item, str):
 							item = str(item)
 					else:
-						if isinstance(item, list) or isinstance(item, tuple):
-							if len(item) == 1:
+						if is_list_or_tuple(item):
+							argslen = len(item) # 当前参数的长度
+							iscontainer = argslen > 0 and is_list_or_tuple(item[0])
+							if iscontainer and argslen == 1:
 								item = tpl.format(*item[0])
-							elif len(item) == 2:
+							elif iscontainer and argslen == 2:
 								item = tpl.format(*item[0], **item[1])
-						else:
-							item = tpl.format(item) # 替换一个参数
-						pass
+							else:
+								item = tpl.format(*item)
+						elif isinstance(item, dict):
+							item = tpl.format(**item) # 替换一个参数
 					cur = self.view.selection[-1].a
 					regions.append(sublime.Region(cur, cur + len(item)))
 					self.view.insert(edit, cur, item)

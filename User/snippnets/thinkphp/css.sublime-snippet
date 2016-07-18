@@ -1,0 +1,8 @@
+<snippet>
+	<content><![CDATA[
+{css href="__CSS__$1.css" /}
+]]></content>
+	<tabTrigger>tpcss</tabTrigger>
+	<scope>text.html</scope>
+	<description>thinkphp css</description>
+</snippet>

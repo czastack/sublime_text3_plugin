@@ -4,6 +4,8 @@
 	"font_size": 15,
 	"ignored_packages":
 	[
+		"Color Scheme - Default",
+		"DocBlockr",
 		"PyQt5 Completions",
 		"Vintage"
 	],

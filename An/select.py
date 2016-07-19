@@ -60,10 +60,10 @@ class SplitSelectByRegCommand(sublime_plugin.TextCommand):
 		if text is not '':
 			import re
 			reg = re.compile(text)
-			pos = 0
 			regions = []
 			for region in self.view.selection:
 				if not region.empty():
+					pos = 0
 					start = region.begin()
 					end = region.end()
 					itemtext = self.view.substr(region)

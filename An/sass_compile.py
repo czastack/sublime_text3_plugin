@@ -1,4 +1,4 @@
-import sublime, sublime_plugin
+import sublime_plugin
 import os, sasshelper
 from os import path as Path
 from An import an

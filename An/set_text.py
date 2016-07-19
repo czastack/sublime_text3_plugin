@@ -1,4 +1,4 @@
-import sublime, sublime_plugin
+import sublime_plugin
 from An import An
 
 class SetTextCommand(sublime_plugin.TextCommand):

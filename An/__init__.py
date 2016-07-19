@@ -6,7 +6,6 @@ class An:
 		self.edit = edit
 
 		edit.an = self
-		edit.edit = edit
 		edit.view = view
 		edit.sublime = sublime
 
@@ -53,8 +52,14 @@ class An:
 			logerr(e)
 			return False
 
-	def text(self):
-		return self.view.substr(An.region(self.view))
+	# 获取设置文本
+	def text(self, text = None):
+		if text:
+			if not isinstance(text, str):
+				text = str(text)
+			self.view.replace(self.edit, __class__.region(self.view), text)
+		else:
+			return self.view.substr(__class__.region(self.view))
 
 	def view_selected_text(view):
 		texts = []
@@ -78,7 +83,7 @@ class An:
 		return sublime.Region(0, view.size())
 
 	def lines(view):
-		return view.lines(An.region(view))
+		return view.lines(__class__.region(view))
 
 an = An()
 

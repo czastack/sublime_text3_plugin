@@ -1,7 +1,8 @@
 import sublime_plugin
-from An import An
+from An import an
 
 class SetTextCommand(sublime_plugin.TextCommand):
 	def run(self, edit, text):
-		self.view.replace(edit, An.region(self.view), text);
+		an.set(self.view, edit)
+		an.text(text);
 		self.view.selection.clear()

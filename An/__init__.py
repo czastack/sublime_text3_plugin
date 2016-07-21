@@ -15,7 +15,7 @@ class An:
 			self.output = win.create_output_panel('an')
 			self.output.settings().set('color_scheme', self.view.settings().get('color_scheme'))
 		
-		if text:
+		if text is not None:
 			self.output.run_command('set_text', {'text': text})
 		
 		win.run_command('show_panel', {'panel': 'output.an'})
@@ -54,7 +54,7 @@ class An:
 
 	# 获取设置文本
 	def text(self, text = None):
-		if text:
+		if text is not None:
 			if not isinstance(text, str):
 				text = str(text)
 			self.view.replace(self.edit, __class__.region(self.view), text)

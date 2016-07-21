@@ -1,4 +1,4 @@
-import sublime, sublime_plugin
+import sublime_plugin
 
 class HtmlJadeCommand(sublime_plugin.TextCommand):
 	def run(self, edit):

@@ -80,3 +80,19 @@ class SplitSelectByRegCommand(sublime_plugin.TextCommand):
 			if len(regions) > 0:
 				self.view.selection.clear()
 				self.view.selection.add_all(regions)
+
+# 选区行尾互换
+class SelectStartToEndCommand(sublime_plugin.TextCommand):
+	def run(self, edit):
+		regions = [sublime.Region(region.end(), region.begin()) for region in self.view.selection]
+		self.view.selection.clear()
+		self.view.selection.add_all(regions)
+
+# 交换两个选区的内容
+class ExchangeSelectCommand(sublime_plugin.TextCommand):
+	def run(self, edit):
+		if len(self.view.selection) == 2:
+			view = self.view
+			tmp = view.substr(view.selection[0])
+			view.replace(edit, view.selection[0], view.substr(view.selection[1]))
+			view.replace(edit, view.selection[1], tmp)

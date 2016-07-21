@@ -23,5 +23,6 @@
             "activate": true,
             "browsers" : ["chrome"]
         }
-    }
+    },
+    { "keys": ["ctrl+alt+p"], "command": "prompt_select_workspace" },
 ]

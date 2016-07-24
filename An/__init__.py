@@ -16,9 +16,15 @@ class An:
 			self.output.settings().set('color_scheme', self.view.settings().get('color_scheme'))
 		
 		if text is not None:
+			if not isinstance(text, str):
+				text = str(text)
 			self.output.run_command('set_text', {'text': text})
 		
 		win.run_command('show_panel', {'panel': 'output.an'})
+
+	# show_output的别名
+	def tout(self, text=None):
+		self.show_output(text)
 
 	def cls(self):
 		if self.output:
@@ -74,6 +80,9 @@ class An:
 
 	def popup(self, text, **args):
 		self.view.show_popup('<style>body{margin:0; padding:10px; color:#ccc; font-size:18px; background-color:#000;}</style>' + text, **args);
+
+	def open_file(self, file):
+		sublime.active_window().open_file(file)
 
 	def __getattr__(self, name):
 		return None

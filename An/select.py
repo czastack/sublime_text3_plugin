@@ -84,7 +84,7 @@ class SplitSelectByRegCommand(sublime_plugin.TextCommand):
 # 选区行尾互换
 class SelectStartToEndCommand(sublime_plugin.TextCommand):
 	def run(self, edit):
-		regions = [sublime.Region(region.end(), region.begin()) for region in self.view.selection]
+		regions = [sublime.Region(region.b, region.a) for region in self.view.selection]
 		self.view.selection.clear()
 		self.view.selection.add_all(regions)
 

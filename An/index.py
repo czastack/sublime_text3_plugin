@@ -78,10 +78,8 @@ class InsertListCommand(sublime_plugin.TextCommand):
 	def on_insert(self, edit, text):
 		an.set(self.view, edit)
 		edit._ret = None
-		if ';' in text:
-			an._exec(text)
-		else:
-			an._eval(text)
+		edit._newline = True
+		an._eval(text) or an._exec(text)
 		if hasattr(edit._ret, '__len__'):
 			selectionlen = len(self.view.selection)
 			if selectionlen > 1:
@@ -131,7 +129,7 @@ class InsertListCommand(sublime_plugin.TextCommand):
 					regions.append(sublime.Region(cur, cur + len(item)))
 					self.view.insert(edit, cur, item)
 					i += 1
-					if i < itemlen:
+					if edit._newline and i < itemlen:
 						self.view.run_command('insert', {"characters": "\n"});
 				self.view.selection.clear()
 				self.view.selection.add_all(regions)

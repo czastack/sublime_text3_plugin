@@ -1,5 +1,6 @@
 import sublime, sublime_plugin
 from An import An, an, logerr, is_list_or_tuple
+from type import astr
 
 # 清空内容
 class ClearTextCommand(sublime_plugin.TextCommand):
@@ -110,8 +111,7 @@ class InsertListCommand(sublime_plugin.TextCommand):
 				while i < itemlen:
 					item = edit._ret[i]
 					if not usetpl:
-						if not isinstance(item, str):
-							item = str(item)
+						item = astr(item)
 					else:
 						if is_list_or_tuple(item):
 							argslen = len(item) # 当前参数的长度
@@ -124,6 +124,9 @@ class InsertListCommand(sublime_plugin.TextCommand):
 								item = tpl.format(*item)
 						elif isinstance(item, dict):
 							item = tpl.format(**item) # 替换一个参数
+						else:
+							item = astr(item)
+							item = tpl.format(item)
 					cur = self.view.selection[-1].a
 					regions.append(sublime.Region(cur, cur + len(item)))
 					self.view.insert(edit, cur, item)

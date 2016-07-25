@@ -1,33 +1,14 @@
-import sublime, re
+import re
 from type import DictRef
 from utils import add_brother_path
-
-# return 格式化后的文本
-def format(text, syntax, pre_indent_level = 0, ispart = False):
-    global formatter_instance
-    if formatter_instance and formatter_instance.syntax == syntax:
-        pass
-    elif syntax in FORMATTER_MAP:
-        settings = sublime.load_settings('CodeFormatter.sublime-settings')
-        formatter_instance = FORMATTER_MAP[syntax](syntax, settings)
-    else:
-        formatter_instance = None
-        sublime.error_message('未识别语法')
-    if formatter_instance:
-        text = formatter_instance.format(text).rstrip()
-        text = re.sub(r'\r?\n', '\n' + formatter_instance.getIndent(pre_indent_level), text)
-        if not ispart and formatter_instance.opts.__get__('add_empty_line_at_end', False):
-            text += '\n'
-        return text
-    return None
 
 class BaseFormatter:
     __slots__ = ('syntax', 'opts')
 
     def __init__(self, syntax, settings):
         self.syntax = syntax
-        prefix = self.prefix if hasattr(self, 'prefix') else syntax
-        self.opts = DictRef(settings.get(prefix + '_options'))
+        # prefix = self.prefix if hasattr(self, 'prefix') else syntax
+        self.opts = DictRef(settings.get(syntax + '_options'))
         env = globals()
         if self.depand not in env:
             # 加载依赖库
@@ -53,7 +34,6 @@ class BaseFormatter:
 class JsFormatter(BaseFormatter):
     __slots__ = ()
     depand = 'jsbeautifier'
-    prefix = 'js'
 
     def format(self, text):
         options = jsbeautifier.default_options()
@@ -90,8 +70,6 @@ class HtmlFormatter(BaseFormatter):
 FORMATTER_MAP = {
     'html': HtmlFormatter,
     'css': CssFormatter,
-    'javascript': JsFormatter,
+    'js': JsFormatter,
     'json': JsFormatter,
 }
-
-formatter_instance = None

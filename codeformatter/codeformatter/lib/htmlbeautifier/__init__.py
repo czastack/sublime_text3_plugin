@@ -202,6 +202,9 @@ class Beautifier:
 		if self.reduce_empty_tags:
 			beautiful = re.sub(r'<(\S+)([^>]*)>\s+</\1>',r'<\1\2></\1>',beautiful)
 
+		# 没有子元素的标签，去掉内部空白字符
+		beautiful = re.sub(r'(<([^! ]+)[^>]*>)\s+([^<]+?)\s+(</\2>)',r'\1\3\4', beautiful)
+
 		# Replace JS, CSS, and comments in the opposite order of their removal
 		beautiful = self.replace_comments(beautiful)
 		beautiful = self.replace_css(beautiful)

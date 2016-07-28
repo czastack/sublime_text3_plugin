@@ -8,5 +8,6 @@
 		{ "trigger": "querySelectorAll", "contents": "querySelectorAll($1)" },
 		{ "trigger": "da\t字符串连接", "contents": " + $1 + " },
 		{ "trigger": "vthis\tvar $this = $(this);", "contents": "var \\$this = \\$(this);" },
+		{ "trigger": "$this attr", "contents": "\\$(this).attr('$1')" },
 	]
 }

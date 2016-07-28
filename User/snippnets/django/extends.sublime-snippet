@@ -1,0 +1,8 @@
+<snippet>
+	<content><![CDATA[
+{% extends "$1.html" %}
+]]></content>
+	<tabTrigger>djext</tabTrigger>
+	<scope>text.html</scope>
+	<description>django extends</description>
+</snippet>

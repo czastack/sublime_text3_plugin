@@ -1,6 +1,6 @@
 import sublime, sublime_plugin
-from An import An, an, logerr, is_list_or_tuple
-from type import astr
+from An import An, an
+from type import astr, is_list_or_tuple
 
 # 清空内容
 class ClearTextCommand(sublime_plugin.TextCommand):
@@ -78,7 +78,7 @@ class InsertListCommand(sublime_plugin.TextCommand):
 	def on_insert(self, edit, text):
 		an.set(self.view, edit)
 		edit._ret = None
-		edit._newline = True
+		edit._n = True # 是否自动插入换行
 		an._eval(text) or an._exec(text)
 		if hasattr(edit._ret, '__len__'):
 			selectionlen = len(self.view.selection)
@@ -129,7 +129,7 @@ class InsertListCommand(sublime_plugin.TextCommand):
 					regions.append(sublime.Region(cur, cur + len(item)))
 					self.view.insert(edit, cur, item)
 					i += 1
-					if edit._newline and i < itemlen:
+					if edit._n and i < itemlen:
 						self.view.run_command('insert', {"characters": "\n"});
 				self.view.selection.clear()
 				self.view.selection.add_all(regions)

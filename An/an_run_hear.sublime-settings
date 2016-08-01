@@ -1,0 +1,6 @@
+{
+    "run_list": [
+    	{"title": "cmd", "path": "cmd"},
+    	{"title": "git", "path": "D:/MinGW/git/git-bash.exe"},
+    ],
+}

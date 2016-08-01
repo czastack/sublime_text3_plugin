@@ -6,6 +6,12 @@ def astr(text):
 def is_list_or_tuple(var):
 	return isinstance(var, list) or isinstance(var, tuple)
 
+# 更新dict全部或指定字段
+# dst: 模板dict, src: 来源dict
+def puts(dst, src, keys = None):
+	for key in keys or src:
+		dst[key] = src[key]
+
 class Map(dict):
 	__slots__ = ()
 
@@ -14,6 +20,9 @@ class Map(dict):
 
 	def __setattr__(self, name, value):
 		self[name] = value
+
+	def __puts__(self, src, keys = None):
+		puts(self, src, keys)
 
 # data = DictRef({'a': 1})
 # print(data.a) # get 1
@@ -26,17 +35,16 @@ class DictRef(object):
 		else:
 			raise TypeError('obj must be a dict')
 
+	def __getattribute__(self, name):
+		if name in ['__str__', '__iter__', '__getitem__', '__setitem__']:
+			return getattr(self.__dict__, name)
+		return object.__getattribute__(self, name)
+
 	def __getattr__(self, name):
 		return self.__dict__[name] if name in self.__dict__ else None
 
 	def __setattr__(self, name, value):
 		self.__dict__[name] = value
-
-	def __str__(self):
-		return self.__dict__.__str__()
-
-	def __iter__(self):
-		return self.__dict__.__iter__()
 
 	def __attrs__(self, select = None):
 		result = []
@@ -52,6 +60,9 @@ class DictRef(object):
 
 	def __get__(self, name, default):
 		return self.__getattr__(name) or default
+
+	def __puts__(self, src, keys = None):
+		puts(self, src, keys)
 
 # 接收字典列表
 # datas = DictRef([{'a': 1}, {'a': 2}])

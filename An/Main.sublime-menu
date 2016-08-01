@@ -1,0 +1,34 @@
+[
+	{
+		"id": "preferences",
+		"children":
+		[
+			{
+				"id": "package-settings",
+				"children":
+				[
+					{
+						"caption": "An",
+						"children":
+						[
+							{
+								"command": "open_file",
+								"args": {
+									"file": "${packages}/An/Default (Windows).sublime-keymap",
+									"platform": "Windows"
+								},
+								"caption": "按键绑定"
+							},
+							{ "caption": "-" },
+							{
+								"command": "open_file",
+								"args": {"file": "${packages}/An/an_run_hear.sublime-settings"},
+								"caption": "设置 – 在此运行"
+							},
+						]
+					}
+				]
+			}
+		]
+	}
+]

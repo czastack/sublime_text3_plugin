@@ -1,0 +1,8 @@
+<snippet>
+	<content><![CDATA[
+{%if $1%}$2{%endif%}
+]]></content>
+	<tabTrigger>djifi</tabTrigger>
+	<scope>text.html</scope>
+	<description>django 模板if inline</description>
+</snippet>

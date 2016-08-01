@@ -11,4 +11,5 @@
 	{"caption": "An: 10.选区行尾互换",	"command": "select_start_to_end"},
 	{"caption": "An: 11.驼峰下划线转换",	"command": "camel_to_lower"},
 	{"caption": "An: 12.交换两个选区的内容",	"command": "exchange_select"},
+	{"caption": "An: 13.在此目录运行",	"command": "run_hear"},
 ]

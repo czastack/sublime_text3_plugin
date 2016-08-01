@@ -70,6 +70,7 @@ class HtmlFormatter(BaseFormatter):
 FORMATTER_MAP = {
     'html': HtmlFormatter,
     'css': CssFormatter,
+    'sass': CssFormatter,
     'js': JsFormatter,
     'json': JsFormatter,
 }

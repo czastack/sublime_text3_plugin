@@ -96,3 +96,42 @@ class ExchangeSelectCommand(sublime_plugin.TextCommand):
 			tmp = view.substr(view.selection[0])
 			view.replace(edit, view.selection[0], view.substr(view.selection[1]))
 			view.replace(edit, view.selection[1], tmp)
+
+class SelectionQuoteCommand(sublime_plugin.TextCommand):
+	def run(self, edit):
+		view = self.view
+		regions = []
+		for region in view.selection:
+			desc = region.a > region.b
+			if desc:
+				region.a, region.b = region.b, region.a
+
+			quote = view.substr(region.begin())
+			if quote in '\'"':
+				# deflate 缩小
+				inflate = False
+			else:
+				quote = view.substr(region.begin() - 1)
+				if quote in '\'"':
+					# inflate 扩充
+					inflate = True
+				else:
+					quote = None
+			if quote:
+				da, db = (-1, 1) if inflate else (1, -1)
+				if inflate:
+					while view.substr(region.a + da) == quote:
+						region.a += da
+					while view.substr(region.b) == quote:
+						region.b += db
+				else:
+					while view.substr(region.a) == quote:
+						region.a += da
+					while view.substr(region.b + db) == quote:
+						region.b += db
+				if desc:
+					region.a, region.b = region.b, region.a
+				regions.append(region)
+		if regions:
+			view.selection.clear()
+			view.selection.add_all(regions)

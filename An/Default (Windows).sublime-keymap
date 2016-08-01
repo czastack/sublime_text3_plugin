@@ -13,5 +13,5 @@
     { "keys": ["alt+pageup"], "command": "viewport_scrool", "args": {"di": -2}},
     { "keys": ["alt+pagedown"], "command": "viewport_scrool", "args": {"di": 2}},
     { "keys": ["alt+home"], "command": "viewport_scrool", "args": {"di": -4}},
-    { "keys": ["alt+end"], "command": "viewport_scrool", "args": {"di": 4}},
+    { "keys": ["ctrl+'"], "command": "selection_quote"},
 ]

@@ -1,0 +1,10 @@
+<snippet>
+	<content><![CDATA[
+{% if $1 %}
+	$2
+{% endif %}
+]]></content>
+	<tabTrigger>djif</tabTrigger>
+	<scope>text.html</scope>
+	<description>django 模板if</description>
+</snippet>

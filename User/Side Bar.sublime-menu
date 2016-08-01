@@ -210,11 +210,6 @@
 		}
 	},
 	{
-		"caption": "在此运行",
-		"id": "side-bar-run-hear"
-	},
-
-	{
 		"caption": "-",
 		"id": "side-bar-edit-open-separator"
 	},

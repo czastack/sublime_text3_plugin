@@ -6,6 +6,7 @@ formatter_instance = None
 SCOPE_SYNTAX_MAP = (
     ('source.js', 'js'),
     ('source.css', 'css'),
+    ('source.sass', 'css'),
     ('text.html', 'html'),
 )
 

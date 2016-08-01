@@ -11,7 +11,8 @@ class ViewPackageCommand(sublime_plugin.WindowCommand):
 
 	def openPackageWithWinrar(self, i):
 		if i != -1:
-			os.popen('start winrar "%s\\%s"' % (self.packages_path, self.packages[i]))
+			p = os.popen('start winrar "%s\\%s"' % (self.packages_path, self.packages[i]))
+			p.close()
 
 class ViewDefaultPackageCommand(ViewPackageCommand):
 	def run(self):

@@ -45,6 +45,7 @@ class An:
 
 	def _exec(self, text):
 		try:
+			self.init_exec_env()
 			exec(text, self.edit.__dict__)
 			return True
 		except Exception as e:
@@ -53,11 +54,16 @@ class An:
 
 	def _eval(self, text):
 		try:
+			self.init_exec_env()
 			self.edit._ret = eval(text, self.edit.__dict__)
 			return True
 		except Exception as e:
 			logerr(e)
 			return False
+
+	def init_exec_env(self):
+		self.edit.print = self.echo
+		self.edit._print = print
 
 	# 获取设置文本
 	def text(self, text = None):

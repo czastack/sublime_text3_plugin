@@ -12,15 +12,22 @@ class SassCompileCommand(sublime_plugin.TextCommand):
 
 		an.set(self.view, edit)
 
-		include_path = sublime.load_settings('an_sass.sublime-settings').get('include_path')
-		helper.set_include_path(include_path)
+		settings = sublime.load_settings('an_sass.sublime-settings')
+		helper.set_include_path(settings.get('include_path'))
+		autoload = settings.get('autoload')
+
+		# 要编译的文本
+		text = an.text()
+
+		if autoload:
+			text = ''.join(['@import "%s";\n' % item for item in autoload]) + text
 
 		# 切换工作目录
 		# curdir = Path.dirname(self.view.file_name())
 		# oldir = os.getcwd()
 		# os.chdir(curdir)
 		# 取得编译结果
-		result = helper.compile_string(an.text(), Path.dirname(self.view.file_name()))
+		result = helper.compile_string(text, Path.dirname(self.view.file_name()))
 		# 切回当前目录
 		# os.chdir(oldir)
 

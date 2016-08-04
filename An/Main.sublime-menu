@@ -12,6 +12,12 @@
 						"children":
 						[
 							{
+								"command": "open_dir",
+								"args": {"dir": "$packages/An/lib"},
+								"caption": "浏览lib目录"
+							},
+							{ "caption": "-" },
+							{
 								"command": "open_file",
 								"args": {
 									"file": "${packages}/An/Default (Windows).sublime-keymap",
@@ -19,13 +25,16 @@
 								},
 								"caption": "按键绑定"
 							},
-							{ "caption": "-" },
 							{
 								"command": "open_file",
 								"args": {"file": "${packages}/An/an_run_hear.sublime-settings"},
 								"caption": "设置 – 在此运行"
 							},
-							{ "command": "open_dir", "args": {"dir": "$packages/An/lib"}, "caption": "lib" },
+							{
+								"command": "open_file",
+								"args": {"file": "${packages}/An/an_sass.sublime-settings"},
+								"caption": "设置 – sass"
+							},
 						]
 					}
 				]

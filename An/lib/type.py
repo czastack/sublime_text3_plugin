@@ -12,6 +12,17 @@ def puts(dst, src, keys = None):
 	for key in keys or src:
 		dst[key] = src[key]
 
+# 方法代理
+def method_proxy(member, key):
+	def fn(self, *args, **kwargs):
+		return getattr(getattr(self, member), key)(*args, **kwargs)
+	return fn
+
+# 给类添加方法代理
+def add_method_proxy(cls, member, keys):
+	for key in keys:
+		setattr(cls, key, method_proxy(member, key))
+
 class Map(dict):
 	__slots__ = ()
 
@@ -34,11 +45,6 @@ class DictRef(object):
 			object.__setattr__(self, '__dict__', obj)
 		else:
 			raise TypeError('obj must be a dict')
-
-	def __getattribute__(self, name):
-		if name in ['__str__', '__iter__', '__getitem__', '__setitem__']:
-			return getattr(self.__dict__, name)
-		return object.__getattribute__(self, name)
 
 	def __getattr__(self, name):
 		return self.__dict__[name] if name in self.__dict__ else None
@@ -63,6 +69,11 @@ class DictRef(object):
 
 	def __puts__(self, src, keys = None):
 		puts(self, src, keys)
+
+	def __repr__(self):
+		return __class__.__name__ + '(' + self.__str__() + ')'
+
+add_method_proxy(DictRef, '__dict__', ['__str__', '__iter__', '__getitem__', '__setitem__'])
 
 # 接收字典列表
 # datas = DictRef([{'a': 1}, {'a': 2}])

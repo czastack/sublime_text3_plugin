@@ -2,13 +2,13 @@ import sublime, sys
 from os import path as Path
 
 class An:
-	def set(self, view, edit):
+	def set(self, view, edit = None):
 		self.view = view
 		self.edit = edit
-
-		edit.an = self
-		edit.view = view
-		edit.sublime = sublime
+		if edit:
+			edit.an = self
+			edit.view = view
+			edit.sublime = sublime
 
 	def show_output(self, text=None):
 		win = sublime.active_window()
@@ -17,9 +17,7 @@ class An:
 			self.output.settings().set('color_scheme', self.view.settings().get('color_scheme'))
 		
 		if text is not None:
-			if not isinstance(text, str):
-				text = str(text)
-			self.output.run_command('set_text', {'text': text})
+			self.output.run_command('set_text', {'text': astr(text)})
 		
 		win.run_command('show_panel', {'panel': 'output.an'})
 
@@ -68,9 +66,7 @@ class An:
 	# 获取设置文本
 	def text(self, text = None):
 		if text is not None:
-			if not isinstance(text, str):
-				text = str(text)
-			self.view.replace(self.edit, __class__.region(self.view), text)
+			self.view.replace(self.edit, __class__.region(self.view), astr(text))
 		else:
 			return self.view.substr(__class__.region(self.view))
 
@@ -119,3 +115,4 @@ def default_packages_path():
 	return Path.join(sublime_path(), 'packages')
 
 add_path(Path.join(Path.dirname(__file__), 'lib'))
+from type import astr

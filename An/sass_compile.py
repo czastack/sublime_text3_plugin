@@ -4,40 +4,50 @@ from An import an
 
 helper = None
 
-class SassCompileCommand(sublime_plugin.TextCommand):
-	def run(self, edit):
-		global helper
-		if not helper:
-			helper = sasshelper.SassHelper()
+def get_settings():
+	return sublime.load_settings('an_sass.sublime-settings')
 
-		an.set(self.view, edit)
+def compile(view):
+	filename = view.file_name()
+	if not filename:
+		return False
 
-		settings = sublime.load_settings('an_sass.sublime-settings')
-		helper.set_include_path(settings.get('include_path'))
-		autoload = settings.get('autoload')
+	global helper
+	if not helper:
+		helper = sasshelper.SassHelper()
 
-		# 要编译的文本
-		text = an.text()
+	an.set(view)
 
-		if autoload:
-			text = ''.join(['@import "%s";\n' % item for item in autoload]) + text
+	settings = get_settings()
+	helper.set_include_path(settings.get('include_path'))
+	autoload = settings.get('autoload')
 
-		# 切换工作目录
-		# curdir = Path.dirname(self.view.file_name())
-		# oldir = os.getcwd()
-		# os.chdir(curdir)
-		# 取得编译结果
-		result = helper.compile_string(text, Path.dirname(self.view.file_name()))
-		# 切回当前目录
-		# os.chdir(oldir)
+	# 要编译的文本
+	text = an.text()
 
-		content = result.contents.content.decode()
-		if result.contents.success:
-			filename = self.view.file_name()
-			dirname  = Path.dirname(filename)
-			filename = Path.join(dirname, '..', 'css', Path.splitext(Path.basename(filename))[0] + '.css')
-			with open(filename, 'w', encoding='utf-8') as f:
-				f.write(content)
-			sublime.status_message('编译成功')
-		else:
-			an.tout(content)
+	if autoload:
+		text = ''.join(['@import "%s";\n' % item for item in autoload]) + text
+
+	result = helper.compile_string(text, Path.dirname(filename))
+
+	content = result.contents.content.decode()
+	if result.contents.success:
+		dirname  = Path.dirname(filename)
+		filename = Path.join(dirname, '..', 'css', Path.splitext(Path.basename(filename))[0] + '.css')
+		with open(filename, 'w', encoding='utf-8') as f:
+			f.write(content)
+		sublime.status_message('编译成功')
+		return True
+	else:
+		an.tout(content)
+		return False
+
+class SassCompileCommand(sublime_plugin.WindowCommand):
+	def run(self):
+		compile(self.window.active_view())
+
+class BuildonSave(sublime_plugin.EventListener):
+	def on_post_save(self, view):
+		filename = view.file_name()
+		if filename and filename.endswith(".scss") and get_settings().get('build_on_save'):
+			compile(view)

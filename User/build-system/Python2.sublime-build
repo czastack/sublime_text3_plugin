@@ -1,8 +1,7 @@
 {
-	"shell_cmd": "D:/Python27/python.exe -u \"$file\"",
-	// "working_dir": "D:/Python27/",
+	"shell_cmd": "python2 -u \"$file\"",
 	"file_regex": "^[ ]*File \"(...*?)\", line ([0-9]*)",
 	"selector": "source.python",
 	"encoding":"cp936",
-	"env": {"PYTHONIOENCODING": "utf-8"},
+	"env": {"PYTHONHOME": "D:/Python27", "PYTHONIOENCODING": "utf-8"},
 }

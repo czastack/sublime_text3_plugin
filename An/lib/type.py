@@ -97,6 +97,10 @@ class DictRef(object):
 	def __repr__(self):
 		return __class__.__name__ + '(' + self.__str__() + ')'
 
+	def __and__(self, keys):
+		if is_list_or_tuple(keys):
+			return __class__({key: self.__getattr__(key) for key in keys})
+
 # add_method_proxy(DictRef, '__dict__', ['__str__', '__iter__', '__getitem__', '__setitem__'])
 
 # 接收字典列表

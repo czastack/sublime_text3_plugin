@@ -1,6 +1,6 @@
 {
-	"shell_cmd": "D:/Python35/python.exe -u \"$file\"",
-	// "working_dir": "D:/Python35/",
+	"shell_cmd": "D:/Python27/python.exe -u \"$file\"",
+	// "working_dir": "D:/Python27/",
 	"file_regex": "^[ ]*File \"(...*?)\", line ([0-9]*)",
 	"selector": "source.python",
 	"encoding":"cp936",

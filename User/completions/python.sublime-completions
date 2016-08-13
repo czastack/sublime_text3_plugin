@@ -6,7 +6,7 @@
 		{"trigger": "encoding utf8", "contents": "#encoding: utf8"},
 		{"trigger": "kv\tkey: value", "contents": "'$1':$2"},
 
-		{"trigger": "import"},
+		{"trigger": "import", "contents": "import "},
 		{"trigger": "from import", "contents": "from $1 import $2"},
 		{"trigger": "isinstance", "contents": "isinstance($1, ${2:type})"},
 		{"trigger": "rawargs\t*args, **kwargs", "contents": "*args, **kwargs"},

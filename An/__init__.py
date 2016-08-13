@@ -8,7 +8,6 @@ class An:
 		if edit:
 			edit.an = self
 			edit.view = view
-			edit.sublime = sublime
 
 	def show_output(self, text=None):
 		win = sublime.active_window()
@@ -89,6 +88,12 @@ class An:
 
 	def __getattr__(self, name):
 		return None
+
+	# 复制的数组（用换行分隔）
+	@property
+	def copied(self):
+		return sublime.get_clipboard().split('\n')
+	
 
 	# 静态方法
 	def region(view):

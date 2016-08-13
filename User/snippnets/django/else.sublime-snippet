@@ -1,0 +1,8 @@
+<snippet>
+	<content><![CDATA[
+{% else %}
+]]></content>
+	<tabTrigger>djel</tabTrigger>
+	<scope>text.html</scope>
+	<description>django 模板else</description>
+</snippet>

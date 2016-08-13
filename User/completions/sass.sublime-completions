@@ -5,6 +5,7 @@
 	[
 		{ "trigger": "import", "contents": "@import \"$1\"" },
 		{ "trigger": "include", "contents": "@include " },
+		{ "trigger": "extend", "contents": "@extend " },
 		{ "trigger": "mixin", "contents": "@mixin $1{\n\t$2\n}" },
 	]
 }

@@ -1,35 +1,75 @@
-# 快速选中所有行首或者行尾
-
-import sublime, sublime_plugin
+import re, sublime, sublime_plugin
 from An import An, an
 
-# 快速选中所有行首
-class SelectLineStartCommand(sublime_plugin.TextCommand):
-	def run(self, edit):
-		regions = An.lines(self.view)
-		for region in regions:
-			region.b = region.a
+class BaseSelect(sublime_plugin.TextCommand):
+	def set_regions(self, regions):
 		self.view.selection.clear()
 		self.view.selection.add_all(regions)
+
+# 选中所选部分中符合指定正则表达式的内容
+class SelectReg(BaseSelect):
+	flags = re.M
+	def run(self, edit):
+		view = self.view
+		regions = []
+		sel_len = len(view.selection)
+		if sel_len == 0 or (sel_len == 1 and view.selection[0].empty()):
+			selection = [An.region(view)]
+		else:
+			selection = view.selection
+		for region in selection:
+			pt = region.begin()
+			text = view.substr(region)
+			for m in re.finditer(self.reg, text, self.flags):
+				span = m.span()
+				regions.append(sublime.Region(span[0] + pt, span[1] + pt))
+		self.set_regions(regions)
+
+# # 快速选中所有行首
+# class SelectLineStartCommand(BaseSelect):
+# 	def run(self, edit):
+# 		regions = An.lines(self.view)
+# 		for region in regions:
+# 			region.b = region.a
+# 		self.set_regions(regions)
+
+# # 快速选中所有行尾
+# class SelectLineEndCommand(BaseSelect):
+# 	def run(self, edit):
+# 		regions = An.lines(self.view)
+# 		for region in regions:
+# 			region.a = region.b
+# 		self.set_regions(regions)
+
+# # 快速选中所有行
+# class SelectLineAllCommand(BaseSelect):
+# 	def run(self, edit):
+# 		regions = An.lines(self.view)
+# 		self.set_regions(regions)
+
+# 快速选中所有行首
+class SelectLineStartCommand(SelectReg):
+	reg = '^'
 
 # 快速选中所有行尾
-class SelectLineEndCommand(sublime_plugin.TextCommand):
-	def run(self, edit):
-		regions = An.lines(self.view)
-		for region in regions:
-			region.a = region.b
-		self.view.selection.clear()
-		self.view.selection.add_all(regions)
+class SelectLineEndCommand(SelectReg):
+	reg = '$'
 
 # 快速选中所有行
-class SelectLineAllCommand(sublime_plugin.TextCommand):
-	def run(self, edit):
-		regions = An.lines(self.view)
-		self.view.selection.clear()
-		self.view.selection.add_all(regions)
+class SelectLineAllCommand(SelectReg):
+	reg = '.+'
+
+# 选中空行
+class SelectEmptyLinesCommand(SelectReg):
+	reg = '\n[ \t]*(?=\n)'
+
+# 选中行结尾的空白字符
+class SelectLineEndSpaceCommand(SelectReg):
+	reg = '[ \t]+(?=\n)'
+	
 
 # 按长度分隔选区
-class SplitSelectByLenCommand(sublime_plugin.TextCommand):
+class SplitSelectByLenCommand(BaseSelect):
 	def run(self, edit):
 		# 显示输入框
 		input_panel = self.view.window().show_input_panel('分隔长度', '', self.on_input_text, None, None)
@@ -51,7 +91,7 @@ class SplitSelectByLenCommand(sublime_plugin.TextCommand):
 				self.view.selection.add_all(regions)
 
 # 用正则表达式分隔选区
-class SplitSelectByRegCommand(sublime_plugin.TextCommand):
+class SplitSelectByRegCommand(BaseSelect):
 	def run(self, edit):
 		# 显示输入框
 		input_panel = self.view.window().show_input_panel('分隔文本', '', self.on_input_text, None, None)
@@ -82,14 +122,13 @@ class SplitSelectByRegCommand(sublime_plugin.TextCommand):
 				self.view.selection.add_all(regions)
 
 # 选区行尾互换
-class SelectStartToEndCommand(sublime_plugin.TextCommand):
+class SelectStartToEndCommand(BaseSelect):
 	def run(self, edit):
 		regions = [sublime.Region(region.b, region.a) for region in self.view.selection]
-		self.view.selection.clear()
-		self.view.selection.add_all(regions)
+		self.set_regions(regions)
 
 # 交换两个选区的内容
-class ExchangeSelectCommand(sublime_plugin.TextCommand):
+class ExchangeSelectCommand(BaseSelect):
 	def run(self, edit):
 		if len(self.view.selection) == 2:
 			view = self.view
@@ -97,7 +136,8 @@ class ExchangeSelectCommand(sublime_plugin.TextCommand):
 			view.replace(edit, view.selection[0], view.substr(view.selection[1]))
 			view.replace(edit, view.selection[1], tmp)
 
-class SelectionQuoteCommand(sublime_plugin.TextCommand):
+# 选中引号外侧/内侧
+class SelectionQuoteCommand(BaseSelect):
 	def run(self, edit):
 		view = self.view
 		regions = []
@@ -133,5 +173,30 @@ class SelectionQuoteCommand(sublime_plugin.TextCommand):
 					region.a, region.b = region.b, region.a
 				regions.append(region)
 		if regions:
-			view.selection.clear()
-			view.selection.add_all(regions)
+			self.set_regions(regions)
+
+# 选中每两个光标中间的区域（列模式）
+class SelectMiddleCommand(BaseSelect):
+	def run(self, edit, sort_by_col = False):
+		view = self.view
+		regions = []
+		selection = list(self.view.selection)
+		if sort_by_col:
+			# 横向扫描
+			selection = sorted(selection, key=lambda s: view.rowcol(s.a)[1])
+		if len(selection) & 1:
+			selection.pop()
+		itr = iter(selection)
+		for region in itr:
+			aa, ab = view.rowcol(region.a)
+			ba, bb = view.rowcol(next(itr).a)
+			while aa <= ba:
+				a = view.text_point(aa, ab)
+				b = view.text_point(aa, bb)
+				if view.rowcol(a) == (aa, ab):
+					if view.rowcol(b) != (aa, bb):
+						# 这行不够长
+						b = view.text_point(aa + 1, 0) - 1
+					regions.append(sublime.Region(a, b))
+				aa += 1
+		self.set_regions(regions)

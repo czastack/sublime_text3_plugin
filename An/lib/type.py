@@ -70,10 +70,34 @@ class DictRef(object):
 	def __puts__(self, src, keys = None):
 		puts(self, src, keys)
 
+	def __str__(self):
+		return self.__dict__.__str__()
+
+	def __iter__(self):
+		return self.__dict__.__iter__()
+
+	def __getitem__(self, key):
+		if isinstance(key, tuple):
+			return (self.__dict__[k] for k in key)
+		elif isinstance(key, list):
+			return [self.__dict__[k] for k in key]
+		return self.__dict__[key]
+
+	def __setitem__(self, key, value):
+		if is_list_or_tuple(key):
+			if is_list_or_tuple(value):
+				val = iter(value).__next__
+			else:
+				val = lambda: value
+			for k in key:
+				self.__dict__[k] = val()
+		else:
+			self.__dict__[key] = value
+
 	def __repr__(self):
 		return __class__.__name__ + '(' + self.__str__() + ')'
 
-add_method_proxy(DictRef, '__dict__', ['__str__', '__iter__', '__getitem__', '__setitem__'])
+# add_method_proxy(DictRef, '__dict__', ['__str__', '__iter__', '__getitem__', '__setitem__'])
 
 # 接收字典列表
 # datas = DictRef([{'a': 1}, {'a': 2}])

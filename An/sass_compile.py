@@ -49,5 +49,5 @@ class SassCompileCommand(sublime_plugin.WindowCommand):
 class BuildonSave(sublime_plugin.EventListener):
 	def on_post_save(self, view):
 		filename = view.file_name()
-		if filename and filename.endswith(".scss") and get_settings().get('build_on_save'):
+		if filename and filename.endswith('.scss') and ('parts' not in filename) and get_settings().get('build_on_save'):
 			compile(view)

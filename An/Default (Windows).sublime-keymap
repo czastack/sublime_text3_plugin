@@ -6,7 +6,6 @@
     { "keys": ["alt+c"], "command": "insert_list" },
 
     { "keys": ["ctrl+alt+g"], "command": "reload_gbk" },
-    { "keys": ["ctrl+\\"], "command": "html_jade" },
     { "keys": ["ctrl+f9"], "command": "sass_compile" },
     { "keys": ["alt+up"], "command": "viewport_scrool", "args": {"di": -1}},
     { "keys": ["alt+down"], "command": "viewport_scrool", "args": {"di": 1}},
@@ -14,4 +13,6 @@
     { "keys": ["alt+pagedown"], "command": "viewport_scrool", "args": {"di": 2}},
     { "keys": ["alt+home"], "command": "viewport_scrool", "args": {"di": -4}},
     { "keys": ["ctrl+'"], "command": "selection_quote"},
+    { "keys": ["ctrl+shift+\\"], "command": "select_start_to_end" },
+    { "keys": ["ctrl+shift+-"], "command": "select_line_start" },
 ]

@@ -12,4 +12,6 @@
 	{"caption": "An: 11.驼峰下划线转换",	"command": "camel_to_lower"},
 	{"caption": "An: 12.交换两个选区的内容",	"command": "exchange_select"},
 	{"caption": "An: 13.在此目录运行",	"command": "run_hear"},
+	{"caption": "An: 14.选中空行",	"command": "select_empty_lines"},
+	{"caption": "An: 15.选中行尾空白字符",	"command": "select_line_end_space"},
 ]

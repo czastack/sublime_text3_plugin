@@ -3,5 +3,5 @@
 	"file_regex": "^[ ]*File \"(...*?)\", line ([0-9]*)",
 	"selector": "source.python",
 	"encoding":"cp936",
-	"env": {"PYTHONHOME": "D:/Python27", "PYTHONIOENCODING": "utf-8"},
+	"env": {"PYTHONIOENCODING": "utf-8"},
 }

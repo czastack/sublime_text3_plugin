@@ -10,6 +10,7 @@
 		{"trigger": "from import", "contents": "from $1 import $2"},
 		{"trigger": "isinstance", "contents": "isinstance($1, ${2:type})"},
 		{"trigger": "rawargs\t*args, **kwargs", "contents": "*args, **kwargs"},
+		{"trigger": "rF\treturn False", "contents": "return False"},
 		{"trigger": "__slots__", "contents": "__slots__ = ($1)"},
 
 		// 全局函数

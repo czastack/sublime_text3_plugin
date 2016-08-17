@@ -106,7 +106,7 @@ an = An()
 
 # 打印错误
 def logerr(e):
-	print(type(e).__name__ + ': ' + str(e), file=an)
+	print(e.__class__.__name__ + ': ' + str(e), file=an)
 
 def add_path(*args):
 	for x in args:
@@ -120,4 +120,4 @@ def default_packages_path():
 	return Path.join(sublime_path(), 'packages')
 
 add_path(Path.join(Path.dirname(__file__), 'lib'))
-from type import astr
+from extypes import astr

@@ -1,5 +1,5 @@
 import re
-from type import DictRef
+from extypes import Dict
 from utils import add_brother_path
 
 class BaseFormatter:
@@ -8,7 +8,7 @@ class BaseFormatter:
     def __init__(self, syntax, settings):
         self.syntax = syntax
         # prefix = self.prefix if hasattr(self, 'prefix') else syntax
-        self.opts = DictRef(settings.get(syntax + '_options'))
+        self.opts = Dict(settings.get(syntax + '_options'))
         env = globals()
         if self.depand not in env:
             # 加载依赖库

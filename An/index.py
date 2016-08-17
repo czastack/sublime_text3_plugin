@@ -1,6 +1,6 @@
 import sublime, sublime_plugin
 from An import An, an
-from type import astr, is_list_or_tuple
+from extypes import astr, is_list_or_tuple
 
 # 清空内容
 class ClearTextCommand(sublime_plugin.TextCommand):

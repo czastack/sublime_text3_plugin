@@ -26,4 +26,5 @@
     },
     { "keys": ["ctrl+alt+p"], "command": "prompt_select_workspace" },
     // { "keys": ["ctrl+alt+f"], "command": "reindent"/*, "args": {"single_line": true}*/ },
+    { "keys": ["ctrl+\\"], "command": "alignment" }
 ]

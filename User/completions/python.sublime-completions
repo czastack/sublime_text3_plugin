@@ -12,6 +12,8 @@
 		{"trigger": "rawargs\t*args, **kwargs", "contents": "*args, **kwargs"},
 		{"trigger": "rF\treturn False", "contents": "return False"},
 		{"trigger": "__slots__", "contents": "__slots__ = ($1)"},
+		{"trigger": "bs\t'''", "contents": "'''$1'''"},
+		{"trigger": "bss\t\"\"\"", "contents": "\"\"\"$1\"\"\""},
 
 		// 全局函数
 		{"trigger": "print", "contents": "print($1)"},
@@ -20,7 +22,7 @@
 		{"trigger": "__init__"},
 		{"trigger": "__getattr__"},
 		{"trigger": "__setattr__"},
-		{"trigger": "__init__", "contents": "def __init__(self):\n\t${0:pass}"},
+		{"trigger": "__init__", "contents": "def __init__(self$2):\n\t${1:pass}"},
 		{"trigger": "def__getattr__", "contents": "def __getattr__(self, name):\n\t${0:return None}"},
 		{"trigger": "def__setattr__", "contents": "def __getattr__(self, name, value):\n\t${0:pass}"},
 		// {"trigger": "__new__", "contents": "def __new__(cls, args):\n\t${0:pass}"},

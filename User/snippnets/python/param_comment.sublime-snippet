@@ -1,0 +1,8 @@
+<snippet>
+	<content><![CDATA[
+:param $1: $2
+]]></content>
+	<tabTrigger>:p</tabTrigger>
+	<scope>comment.block.python</scope>
+	<description>:param</description>
+</snippet>

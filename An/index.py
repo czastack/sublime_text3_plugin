@@ -133,3 +133,10 @@ class InsertListCommand(sublime_plugin.TextCommand):
 						self.view.run_command('insert', {"characters": "\n"});
 				self.view.selection.clear()
 				self.view.selection.add_all(regions)
+
+class StartTestCommand(sublime_plugin.WindowCommand):
+	def run(self):
+		view = self.window.new_file(syntax='python.sublime-syntax')
+		view.set_name('Test')
+		an.set(view)
+		an.tout()

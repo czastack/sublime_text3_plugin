@@ -1,0 +1,8 @@
+<snippet>
+	<content><![CDATA[
+:returns $1
+]]></content>
+	<tabTrigger>:r</tabTrigger>
+	<scope>comment.block.python</scope>
+	<description>:returns</description>
+</snippet>

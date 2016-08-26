@@ -11,6 +11,8 @@ SCOPE_SYNTAX_MAP = (
 )
 
 def show_error(text):
+    import traceback
+    traceback.print_exc()
     sublime.error_message('CodeFormatter\n' + str(text))
 
 class CodeFormatterCommand(sublime_plugin.TextCommand):
@@ -64,7 +66,7 @@ def format(text, syntax, pre_indent_level = 0, ispart = False):
     if formatter_instance:
         text = formatter_instance.format(text).rstrip()
         text = re.sub(r'\r?\n', '\n' + formatter_instance.getIndent(pre_indent_level), text)
-        if not ispart and formatter_instance.opts.__get__('add_empty_line_at_end', False):
+        if not ispart and formatter_instance.opts.add_empty_line_at_end:
             text += '\n'
         return text
     return None

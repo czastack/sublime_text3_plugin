@@ -29,7 +29,7 @@ class BaseFormatter:
 
     # 是否允许保存时自动格式化
     def formatOnSaveEnabled(self):
-        return self.opts.__get__("format_on_save", False)
+        return self.opts.format_on_save
 
 class JsFormatter(BaseFormatter):
     __slots__ = ()
@@ -58,7 +58,7 @@ class HtmlFormatter(BaseFormatter):
         if self.opts.use_bs4:
             add_brother_path(__file__, 'lib/htmlbeautifier')
             from bs4 import BeautifulSoup
-            p_indent_size = self.opts.__get__("indent_size", 4)
+            p_indent_size = self.opts.indent_size or 4
             
             soup = BeautifulSoup(text, 'html.parser')
             return soup.prettify(formatter=None, indent_size=p_indent_size)

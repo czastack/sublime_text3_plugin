@@ -15,4 +15,5 @@
     { "keys": ["ctrl+'"], "command": "selection_quote"},
     { "keys": ["ctrl+shift+\\"], "command": "select_start_to_end" },
     { "keys": ["ctrl+shift+-"], "command": "select_line_start" },
+    { "keys": ["ctrl+shift+="], "command": "start_test" },
 ]

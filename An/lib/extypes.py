@@ -54,30 +54,29 @@ class Map(dict):
 # data = Dict({'a': 1})
 # print(data.a) # get 1
 class Dict:
-	__slots__ = ('__dict__')
+	__slots__ = ('_data',)
 
 	def __init__(self, obj = None):
-		if obj:
-			object.__setattr__(self, '__dict__', obj)
+		object.__setattr__(self, '_data', obj)
 
 	def __getattr__(self, name):
-		return self.__dict__.get(name, getattr(self.__dict__, name, None))
+		return self._data.get(name, getattr(self._data, name, None))
 
 	def __setattr__(self, name, value):
-		self.__dict__[name] = value
+		self._data[name] = value
 
 	def __str__(self):
-		return self.__dict__.__str__()
+		return self._data.__str__()
 
 	def __iter__(self):
-		return self.__dict__.__iter__()
+		return self._data.__iter__()
 
 	def __getitem__(self, key):
 		if isinstance(key, tuple):
-			return (self.__dict__[k] for k in key)
+			return (self._data[k] for k in key)
 		elif isinstance(key, list):
-			return [self.__dict__[k] for k in key]
-		return self.__dict__[key]
+			return [self._data[k] for k in key]
+		return self._data[key]
 
 	def __setitem__(self, key, value):
 		if is_list_or_tuple(key):
@@ -86,9 +85,9 @@ class Dict:
 			else:
 				val = lambda: value
 			for k in key:
-				self.__dict__[k] = val()
+				self._data[k] = val()
 		else:
-			self.__dict__[key] = value
+			self._data[key] = value
 
 	def __repr__(self):
 		return __class__.__name__ + '(' + self.__str__() + ')'

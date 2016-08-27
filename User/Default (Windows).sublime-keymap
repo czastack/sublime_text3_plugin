@@ -26,5 +26,13 @@
     },
     { "keys": ["ctrl+alt+p"], "command": "prompt_select_workspace" },
     // { "keys": ["ctrl+alt+f"], "command": "reindent"/*, "args": {"single_line": true}*/ },
-    { "keys": ["ctrl+\\"], "command": "alignment" }
+    { "keys": ["ctrl+\\"], "command": "alignment" },
+    {
+        "keys": ["ctrl+shift+r"], "command": "browser_refresh", "args": {
+            "auto_save": true,
+            "delay": 0.0,
+            "activate": true,
+            "browsers" : ["chrome"]
+        }
+    },
 ]

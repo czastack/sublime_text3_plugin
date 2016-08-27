@@ -17,7 +17,7 @@ class BaseFormatter:
 
     # 覆盖默认样式
     def coverOption(self, opt):
-        opt.__dict__.update(self.opts.__dict__)
+        opt.__dict__.update(self.opts._data)
 
     def getIndent(self, level):
         if level <= 0:

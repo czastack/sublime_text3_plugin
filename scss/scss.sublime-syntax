@@ -5,25 +5,12 @@ file_extensions:
   - scss
 scope: source.scss
 variables:
-  selector: '\w#\-~>+%,\.:\[\]'
+  selector: '\w#\-~>+%,\.:\[\]&'
 contexts:
   main:
     - include: common
     - include: placeholder
-    - include: 'scope:source.css#selector'
-    - match: '{'
-      push:
-        - include: common
-        - include: 'scope:source.css#rule-list-body'
-        - match: '}'
-          pop: true
-        - match: '^(?=\s*[{{selector}}][{{selector}}\s]+(\{|[^;}]$))'
-          push: 
-            - include: common
-            - include: placeholder
-            - include: 'scope:source.css#selector'
-            - match: '{'
-              pop: true
+    - include: selector
 
   line_comment:
     - match: '//'
@@ -39,10 +26,29 @@ contexts:
 
   # 关键字
   keyword:
-    - match: '@(at-root|charset|debug|each|error|extend|for|function|import|include|mixin|namespace|page|return|warn|while)\b'
+    - match: '@(at-root|charset|debug|each|error|extend|for|function|import|include|mixin|namespace|page|return|warn|while)\b|&'
       scope: keyword.control.scss
 
   common:
     - include: 'scope:source.comment-block'
     - include: line_comment
     - include: keyword
+
+  selector:
+    - match: '^(?=\s*[{{selector}}][{{selector}}\s]+(\{|[^;}]$))'
+      push: 
+        - include: common
+        - include: placeholder
+        - include: 'scope:source.css#selector'
+        - match: '(?=\{)'
+          pop: true
+    - include: ruler
+  
+  ruler:
+    - match: '{'
+      push:
+        - include: common
+        - include: 'scope:source.css#rule-list-body'
+        - include: selector
+        - match: '}'
+          pop: true

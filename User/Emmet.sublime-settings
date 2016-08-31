@@ -1,20 +1,23 @@
 {
-	"syntaxProfiles": {
+	/*"syntaxProfiles": {
 		// Enable XHTML dialect for HTML syntax
-		// "html": "xhtml"
-		// 
-		// Write chained CSS abbreviations on single line:
-		// "css": "css_line"
-	},
-
-	// "disabled_single_snippets": "cs1 cs2",
-	// "disabled_single_snippet_for_scopes": "meta.property-list.css,meta.property-value.css",
+		"html": "xhtml"
+	},*/
 	"snippets": {
 		"css": {
 			"abbreviations": {
 				"cs1": "/******** $1 ********/\n$0\n/******** $1 @end ********/",
 				"cs2": "/************ $1 ************/\n$0\n/************ $1 @end ************/",
 				"!": "!important",
+				"yh": "font-family: 'Microsoft YaHei';",
+			}
+		},
+		"scss": {
+			"abbreviations": {
+				"import": "@import \"$1\"",
+				"include": "@include ",
+				"extend": "@extend ",
+				"mixin": "@mixin $1{\n\t$2\n}",
 			}
 		}
 	},

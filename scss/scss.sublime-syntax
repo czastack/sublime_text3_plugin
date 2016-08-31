@@ -1,0 +1,41 @@
+%YAML 1.2
+---
+name: scss
+file_extensions:
+  - scss
+scope: source.scss
+variables:
+  selector: '\w#\-~>+%,\.:\[\]'
+contexts:
+  main:
+    - match: '//'
+      scope: comment.line.scss
+      push: 
+        - meta_scope: comment.line.scss
+        - match: $
+          pop: true
+    - include: placeholder
+    - include: keyword
+    - include: 'scope:source.css#selector'
+    - match: '{'
+      push:
+        - include: keyword
+        - include: 'scope:source.css#rule-list-body'
+        - match: '}'
+          pop: true
+        - match: '^(?=\s*[{{selector}}][{{selector}}\s]+(\{|[^;}]$))'
+          push: 
+            - include: placeholder
+            - include: keyword
+            - include: 'scope:source.css#selector'
+            - match: '{'
+              pop: true
+
+  placeholder:
+    - match: '%[a-zA-Z0-9_-]+'
+      scope: entity.other.attribute-name.class.sass
+
+  # 关键字
+  keyword:
+    - match: '@(at-root|charset|debug|each|error|extend|for|function|import|include|mixin|namespace|page|return|warn|while)\b'
+      scope: keyword.control.scss

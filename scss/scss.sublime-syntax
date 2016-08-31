@@ -8,28 +8,30 @@ variables:
   selector: '\w#\-~>+%,\.:\[\]'
 contexts:
   main:
+    - include: common
+    - include: placeholder
+    - include: 'scope:source.css#selector'
+    - match: '{'
+      push:
+        - include: common
+        - include: 'scope:source.css#rule-list-body'
+        - match: '}'
+          pop: true
+        - match: '^(?=\s*[{{selector}}][{{selector}}\s]+(\{|[^;}]$))'
+          push: 
+            - include: common
+            - include: placeholder
+            - include: 'scope:source.css#selector'
+            - match: '{'
+              pop: true
+
+  line_comment:
     - match: '//'
       scope: comment.line.scss
       push: 
         - meta_scope: comment.line.scss
         - match: $
           pop: true
-    - include: placeholder
-    - include: keyword
-    - include: 'scope:source.css#selector'
-    - match: '{'
-      push:
-        - include: keyword
-        - include: 'scope:source.css#rule-list-body'
-        - match: '}'
-          pop: true
-        - match: '^(?=\s*[{{selector}}][{{selector}}\s]+(\{|[^;}]$))'
-          push: 
-            - include: placeholder
-            - include: keyword
-            - include: 'scope:source.css#selector'
-            - match: '{'
-              pop: true
 
   placeholder:
     - match: '%[a-zA-Z0-9_-]+'
@@ -39,3 +41,8 @@ contexts:
   keyword:
     - match: '@(at-root|charset|debug|each|error|extend|for|function|import|include|mixin|namespace|page|return|warn|while)\b'
       scope: keyword.control.scss
+
+  common:
+    - include: 'scope:source.comment-block'
+    - include: line_comment
+    - include: keyword

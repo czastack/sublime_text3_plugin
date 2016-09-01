@@ -19,7 +19,11 @@ def compile(view):
 	an.set(view)
 
 	settings = get_settings()
-	helper.set_include_path(settings.get('include_path'))
+	include_path = settings.get('include_path')
+	if include_path:
+		if '@' in include_path:
+			include_path = include_path.replace('@', sublime.packages_path() + Path.sep)
+		helper.set_include_path(include_path)
 	autoload = settings.get('autoload')
 
 	# 要编译的文本

@@ -26,13 +26,53 @@ contexts:
 
   # 关键字
   keyword:
-    - match: '@(at-root|charset|debug|each|error|extend|for|function|import|include|mixin|namespace|page|return|warn|while)\b|&'
+    - match: '@(at-root|charset|debug|each|error|extend|for|function|import|include|mixin|namespace|page|return|warn|while)\b'
+      scope: keyword.control.scss
+      push:
+        - include: 'scope:source.css#literal-string'
+        - match: '(?=[;{])'
+          pop: true
+        - include: ruler
+        - match: '\b(\w+)(?=\()'
+          push:
+            # - meta_scope: meta.function-call.scss
+            - meta_scope: meta.property-value.css
+            - include: 'scope:source.css#function-notation-terminator'
+            - include: variable
+            - include: 'scope:source.css#property-values'
+            # - match: '\('
+            #   scope: punctuation.definition.group.begin.scss
+            #   push:
+            #     - meta_scope: meta.group.scss
+            #     - match: '\)'
+            #       pop: true
+            - match: '\)'
+              pop: true
+    - match: '&'
       scope: keyword.control.scss
 
   common:
-    - include: 'scope:source.comment-block'
+    - include: 'scope:source.css#comment-block'
     - include: line_comment
     - include: keyword
+    - include: variable_define
+
+  variable_define:
+    - match: '\$'
+      push:
+        - meta_scope: variable.parameter
+        - match: ;
+          pop: true
+        - match: ':'
+          scope: keyword.control.scss
+          push:
+            - meta_scope: meta.property-value.css
+            - include: 'scope:source.css#property-values'
+            - match: '(?=;)'
+              pop: true
+  variable:
+    - match: '\$\w+'
+      scope: variable.parameter
 
   selector:
     - match: '^(?=\s*[{{selector}}][{{selector}}\s]+(\{|[^;}]$))'

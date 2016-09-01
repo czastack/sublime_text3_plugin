@@ -4,6 +4,13 @@
 		"html": "xhtml"
 	},*/
 	"snippets": {
+		"html": {
+			"snippets": {
+				"css": "{% css '$1' %}",
+				"js":  "{%  js '$1' %}",
+				"handid":  "handler.appid",
+			}
+		},
 		"css": {
 			"abbreviations": {
 				"cs1": "/******** $1 ********/\n$0\n/******** $1 @end ********/",

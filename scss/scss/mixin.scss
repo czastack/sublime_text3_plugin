@@ -1,0 +1,82 @@
+$lg: 1200px;
+$md: 992px;
+$sm: 768px;
+
+@mixin rect($p) {
+	top: $p;
+	right: $p;
+	bottom: $p;
+	left: $p;
+}
+
+// @mixin hr($color, $w:1px) {
+// 	$w: if(unitless($w), $w, #{$w}px);
+// 	border-bottom: solid $w $color;
+// }
+
+// $n  正常状态下的字体
+// $ph 手机尺寸下的字体
+@mixin font-size($n, $ph) {
+	font-size: $n;
+	@include phone {
+		font-size: $ph;
+	}
+}
+// 垂直居中
+@mixin height_vc($n) {
+	$n: if(unitless($n), #{$n}px, $n);
+	height: $n;
+	line-height: $n;
+}
+
+@mixin css3($property, $value) {
+	@each $prefix in -webkit-, -moz-, -ms-, -o-, '' {
+		#{$prefix}#{$property}: $value;
+	}
+}
+
+@mixin transition($value) {
+	@include css3(transition, $value)
+}
+
+// 媒体查询
+// $d max or min
+// $t w=>width or h=>height
+// $value
+@mixin media($d, $t, $value) {
+	$t: if($t==w, width, height);
+	@media only screen and (#{$d}-device-#{$t}: $value), (#{$d}-#{$t}: $value) {
+		@content;
+	}
+}
+
+@mixin pcmedia($d, $t, $value) {
+	$t: if($t==w, width, height);
+	@media (#{$d}-#{$t}: $value) {
+		@content;
+	}
+}
+
+// 小于1200px
+@mixin ltpc(){
+	@include media(max, w, $value: $lg) {
+		@content;
+	}
+}
+
+// 大于1800px
+@mixin lgpc(){
+	@include pcmedia(min, w, $value: 1800px) {
+		@content;
+	}
+}
+@mixin table(){
+	@include media(max, w, $value: $md) {
+		@content;
+	}
+}
+@mixin phone(){
+	@include media(max, w, $value: $sm) {
+		@content;
+	}
+}

@@ -35,12 +35,6 @@ contexts:
             - include: 'scope:source.css#function-notation-terminator'
             - include: variable
             - include: 'scope:source.css#property-values'
-            # - match: '\('
-            #   scope: punctuation.definition.group.begin.scss
-            #   push:
-            #     - meta_scope: meta.group.scss
-            #     - match: '\)'
-            #       pop: true
             - match: '\)'
               pop: true
 
@@ -63,6 +57,10 @@ contexts:
             - include: 'scope:source.css#property-values'
             - match: '(?=;)'
               pop: true
+
+  variable:
+    - match: '\$\w+'
+      scope: variable.parameter
 
   selector:
     - match: '(^|(?<=[\};]))\s*(?=[{{selector}}][{{selector}}\s]+(\{|[^;}]$))'

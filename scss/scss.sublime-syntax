@@ -9,7 +9,6 @@ variables:
 contexts:
   main:
     - include: common
-    - include: placeholder
     - include: selector
 
   line_comment:
@@ -19,10 +18,6 @@ contexts:
         - meta_scope: comment.line.scss
         - match: $
           pop: true
-
-  placeholder:
-    - match: '%[a-zA-Z0-9_-]+'
-      scope: entity.other.attribute-name.class.sass
 
   # 关键字
   keyword:
@@ -48,8 +43,6 @@ contexts:
             #       pop: true
             - match: '\)'
               pop: true
-    - match: '&'
-      scope: keyword.control.scss
 
   common:
     - include: 'scope:source.css#comment-block'
@@ -61,7 +54,7 @@ contexts:
     - match: '\$'
       push:
         - meta_scope: variable.parameter
-        - match: ;
+        - match: (?=;)
           pop: true
         - match: ':'
           scope: keyword.control.scss
@@ -75,20 +68,23 @@ contexts:
       scope: variable.parameter
 
   selector:
-    - match: '^(?=\s*[{{selector}}][{{selector}}\s]+(\{|[^;}]$))'
-      push: 
-        - include: common
-        - include: placeholder
-        - include: 'scope:source.css#selector'
+    - match: '(^|(?<=[\};]))\s*(?=[{{selector}}][{{selector}}\s]+(\{|[^;}]$))'
+      push: 'scope:source.css#selector'
+      with_prototype:
+        - match: '%[a-zA-Z0-9_-]+'
+          scope: entity.other.attribute-name.class.sass
+        - match: '&'
+          scope: keyword.control.scss
         - match: '(?=\{)'
           pop: true
     - include: ruler
   
   ruler:
     - match: '{'
-      push:
+      push: 'scope:source.css#rule-list-body'
+      with_prototype:
         - include: common
-        - include: 'scope:source.css#rule-list-body'
+        - include: variable
         - include: selector
         - match: '}'
           pop: true

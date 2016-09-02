@@ -63,9 +63,6 @@ contexts:
             - include: 'scope:source.css#property-values'
             - match: '(?=;)'
               pop: true
-  variable:
-    - match: '\$\w+'
-      scope: variable.parameter
 
   selector:
     - match: '(^|(?<=[\};]))\s*(?=[{{selector}}][{{selector}}\s]+(\{|[^;}]$))'
@@ -84,7 +81,6 @@ contexts:
       push: 'scope:source.css#rule-list-body'
       with_prototype:
         - include: common
-        - include: variable
         - include: selector
         - match: '}'
           pop: true

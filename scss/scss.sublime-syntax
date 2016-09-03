@@ -5,7 +5,7 @@ file_extensions:
   - scss
 scope: source.scss
 variables:
-  selector: '\w#\-~>+%,\.:\[\]&'
+  selector: '\w#\-~>+%,\.:\[\]&()='
 contexts:
   main:
     - include: common
@@ -37,6 +37,14 @@ contexts:
             - include: 'scope:source.css#property-values'
             - match: '\)'
               pop: true
+        - include: place_holder
+        - match: (?<=@each)
+          push:
+            - match: '\bin\b'
+              scope: keyword.control.scss
+            - include: variable
+            - match: '(?=\{)'
+              pop: true
 
   common:
     - include: 'scope:source.css#comment-block'
@@ -48,7 +56,7 @@ contexts:
     - match: '\$'
       push:
         - meta_scope: variable.parameter
-        - match: (?=;)
+        - match: (?=[;,])
           pop: true
         - match: ':'
           scope: keyword.control.scss
@@ -59,19 +67,20 @@ contexts:
               pop: true
 
   variable:
-    - match: '\$\w+'
+    - match: '#\{\$\w+\}|\$\w+'
       scope: variable.parameter
 
   selector:
     - match: '(^|(?<=[\};]))\s*(?=[{{selector}}][{{selector}}\s]+(\{|[^;}]$))'
       push: 'scope:source.css#selector'
       with_prototype:
-        - match: '%[a-zA-Z0-9_-]+'
-          scope: entity.other.attribute-name.class.sass
+        - include: place_holder
         - match: '&'
           scope: keyword.control.scss
         - match: '(?=\{)'
           pop: true
+        - match: '#\{\$\w+\}'
+          scope: variable.parameter
     - include: ruler
   
   ruler:
@@ -82,3 +91,7 @@ contexts:
         - include: selector
         - match: '}'
           pop: true
+
+  place_holder:
+    - match: '%[a-zA-Z0-9_-]+'
+      scope: entity.other.attribute-name.class.sass

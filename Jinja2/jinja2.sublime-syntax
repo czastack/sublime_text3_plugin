@@ -25,7 +25,17 @@ contexts:
           - match: '-?%}'
             scope: punctuation.definition.tag.end.jinja2
             pop: true
-          - include: 'scope:source.python'
+          - include: 'scope:source.python#expressions'
+      # 变量
+      - match: '{{'
+        scope: punctuation.definition.tag.begin.jinja2
+        push:
+          - meta_scope: source.python
+          - include: 'scope:source.python#expressions'
+          - match: '}}'
+            scope: punctuation.definition.tag.end.jinja2
+            pop: true
+
       # 自带单标签
       - match: ({%-?)\s*(extends|include)
         captures:
@@ -35,7 +45,7 @@ contexts:
           - match: '-?%}'
             scope: punctuation.definition.tag.end.jinja2
             pop: true
-          - include: 'scope:source.python'
+          - include: 'scope:source.python#expressions'
       # 自定义标签
       - match: ({%-?)\s*(\w+)
         captures:
@@ -46,32 +56,3 @@ contexts:
             scope: punctuation.definition.tag.end.jinja2
             pop: true
           - include: 'scope:source.python'
-    
-        # - include: string-double-quoted
-        # - include: string-single-quoted
-
-  # 双引号字符串
-  # string-double-quoted:
-  #   - match: '"'
-  #     scope: punctuation.definition.string.begin.jinja2
-  #     push:
-  #       - meta_scope: string.quoted.double.html
-  #       - match: '"'
-  #         scope: punctuation.definition.string.end.jinja2
-  #         pop: true
-  # # 单引号字符串
-  # string-single-quoted:
-  #   - match: "'"
-  #     scope: punctuation.definition.string.begin.jinja2
-  #     push:
-  #       - meta_scope: string.quoted.single.html
-  #       - match: "'"
-  #         scope: punctuation.definition.string.end.jinja2
-  #         pop: true
-
-  # # 操作符关键字
-  
-  #   - match: (\+|\-|\*\*|\*|//|/|%)
-  #     name: keyword.operator.arithmetic.jinja2
-  #   - match: \b(and|else|if|in|import|not|or|recursive|with(out)?\s+context)\b
-  #     name: keyword.control.jinja2

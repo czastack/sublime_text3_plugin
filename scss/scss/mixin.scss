@@ -1,6 +1,7 @@
 $lg: 1200px;
 $md: 992px;
 $sm: 768px;
+$xsm: 450px;
 
 @mixin rect($p) {
 	top: $p;
@@ -45,7 +46,7 @@ $sm: 768px;
 // $value
 @mixin media($d, $t, $value) {
 	$t: if($t==w, width, height);
-	@media only screen and (#{$d}-device-#{$t}: $value), (#{$d}-#{$t}: $value) {
+	@media (#{$d}-device-#{$t}: $value), (#{$d}-#{$t}: $value) {
 		@content;
 	}
 }
@@ -53,6 +54,13 @@ $sm: 768px;
 @mixin pcmedia($d, $t, $value) {
 	$t: if($t==w, width, height);
 	@media (#{$d}-#{$t}: $value) {
+		@content;
+	}
+}
+
+// 大于1200px
+@mixin pc(){
+	@include pcmedia(min, w, $value: $lg) {
 		@content;
 	}
 }
@@ -65,11 +73,11 @@ $sm: 768px;
 }
 
 // 大于1800px
-@mixin lgpc(){
-	@include pcmedia(min, w, $value: 1800px) {
-		@content;
-	}
-}
+// @mixin lgpc(){
+// 	@include pcmedia(min, w, $value: 1800px) {
+// 		@content;
+// 	}
+// }
 @mixin table(){
 	@include media(max, w, $value: $md) {
 		@content;
@@ -79,4 +87,12 @@ $sm: 768px;
 	@include media(max, w, $value: $sm) {
 		@content;
 	}
+}
+
+// 多行文本溢出显示省略号
+@mixin max-line($line) {
+	display: -webkit-box;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: $line;
+	overflow: hidden;
 }

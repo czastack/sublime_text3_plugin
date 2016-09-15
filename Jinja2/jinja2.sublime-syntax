@@ -6,44 +6,46 @@ file_extensions:
 scope: text.html.jinja2
 contexts:
   main:
-    - match: '{#-?'
-      scope: entity.other.jinja2.delimiter.comment
-      push:
-        - meta_scope: comment.block.html
-        - match: '-?#}'
-          scope: entity.other.jinja2.delimiter.comment
-          pop: true
-    # 自带闭合标签
-    - match: ({%-?)\s*((end)?(block|filter|for|if|macro|raw]))
-      captures:
-        1: punctuation.definition.tag.begin.jinja2
-        2: keyword.control.jinja2
-      push:
-        - match: '-?%}'
-          scope: punctuation.definition.tag.end.jinja2
-          pop: true
-        - include: 'scope:source.python'
-    # 自带单标签
-    - match: ({%-?)\s*(extends|include)
-      captures:
-        1: punctuation.definition.tag.begin.jinja2
-        2: keyword.control.jinja2
-      push:
-        - match: '-?%}'
-          scope: punctuation.definition.tag.end.jinja2
-          pop: true
-        - include: 'scope:source.python'
-    # 自定义标签
-    - match: ({%-?)\s*(\w+)
-      captures:
-        1: punctuation.definition.tag.begin.jinja2
-        2: meta.tag.custom.html
-      push:
-        - match: '-?%}'
-          scope: punctuation.definition.tag.end.jinja2
-          pop: true
-        - include: 'scope:source.python'
-    - include: 'scope:text.html.basic'
+    - match: ''
+      push: 'scope:text.html.basic'
+      with_prototype:
+      - match: '{#-?'
+        scope: entity.other.jinja2.delimiter.comment
+        push:
+          - meta_scope: comment.block.html
+          - match: '-?#}'
+            scope: entity.other.jinja2.delimiter.comment
+            pop: true
+      # 自带闭合标签
+      - match: ({%-?)\s*((end)?(block|filter|for|if|macro|raw]))
+        captures:
+          1: punctuation.definition.tag.begin.jinja2
+          2: keyword.control.jinja2
+        push:
+          - match: '-?%}'
+            scope: punctuation.definition.tag.end.jinja2
+            pop: true
+          - include: 'scope:source.python'
+      # 自带单标签
+      - match: ({%-?)\s*(extends|include)
+        captures:
+          1: punctuation.definition.tag.begin.jinja2
+          2: keyword.control.jinja2
+        push:
+          - match: '-?%}'
+            scope: punctuation.definition.tag.end.jinja2
+            pop: true
+          - include: 'scope:source.python'
+      # 自定义标签
+      - match: ({%-?)\s*(\w+)
+        captures:
+          1: punctuation.definition.tag.begin.jinja2
+          2: meta.tag.custom.html
+        push:
+          - match: '-?%}'
+            scope: punctuation.definition.tag.end.jinja2
+            pop: true
+          - include: 'scope:source.python'
     
         # - include: string-double-quoted
         # - include: string-single-quoted

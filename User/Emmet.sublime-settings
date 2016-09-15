@@ -24,7 +24,7 @@
 				"import": "@import \"$1\"",
 				"include": "@include ",
 				"extend": "@extend ",
-				"mixin": "@mixin $1{\n\t$2\n}",
+				"mixin": "@mixin $1($2) {\n\t$3\n}",
 			}
 		}
 	},

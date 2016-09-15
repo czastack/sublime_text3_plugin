@@ -21,13 +21,14 @@ contexts:
 
   # 关键字
   keyword:
-    - match: '@(at-root|charset|debug|each|error|extend|for|function|import|include|mixin|namespace|page|return|warn|while)\b'
+    - match: '@(at-root|charset|debug|each|error|extend|for|function|import|include|mixin|namespace|page|return|warn|while|media|content)\b'
       scope: keyword.control.scss
       push:
         - include: 'scope:source.css#literal-string'
-        - match: '(?=[;{])'
+        - match: '(?=[;{}])'
           pop: true
         - include: ruler
+        - include: variable
         - match: '\b(\w+)(?=\()'
           push:
             # - meta_scope: meta.function-call.scss
@@ -45,11 +46,17 @@ contexts:
             - include: variable
             - match: '(?=\{)'
               pop: true
+        - match: '(?<=@at-root )|(?<=@extend )'
+          push:
+            - include: 'scope:source.css#selector'
+            - match: '(?=\{)'
+              pop: true
 
   common:
     - include: 'scope:source.css#comment-block'
     - include: line_comment
     - include: keyword
+    - include: variable
     - include: variable_define
 
   variable_define:
@@ -61,13 +68,22 @@ contexts:
         - match: ':'
           scope: keyword.control.scss
           push:
+            - match: '\b(\w+)(?=\()'
+              captures:
+                1: support.type.function
+              push:
+                - include: 'scope:source.css#property-values'
+                - match: ==
+                  scope: keyword.control.scss
+                - match: '\)'
+                  pop: true
             - meta_scope: meta.property-value.css
             - include: 'scope:source.css#property-values'
             - match: '(?=;)'
               pop: true
 
   variable:
-    - match: '#\{\$\w+\}|\$\w+'
+    - match: '#\{\$\w+\}|\$\w+\b(?!:)'
       scope: variable.parameter
 
   selector:
@@ -77,10 +93,9 @@ contexts:
         - include: place_holder
         - match: '&'
           scope: keyword.control.scss
+        - include: variable
         - match: '(?=\{)'
           pop: true
-        - match: '#\{\$\w+\}'
-          scope: variable.parameter
     - include: ruler
   
   ruler:

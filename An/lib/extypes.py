@@ -7,8 +7,15 @@ def is_list_or_tuple(var):
 	return isinstance(var, list) or isinstance(var, tuple)
 
 def list_re(li, fn):
+	"""列表元素映射"""
 	for i in range(len(li)):
 		li[i] = fn(li[i])
+
+def list_find(li, fn):
+	"""列表查找第一个匹配的元素"""
+	for x in li:
+		if fn(x):
+			return x;
 
 def getif(data, name):
 	return data.get(name, None)

@@ -22,4 +22,21 @@
 		},
 		{"name": "html", "path": "/var/www/html/index.html"},
 	],
+	"osx": [
+		{"name": "Note", "path": "~/Documents/note/", "children": 
+			[
+				{"name": "Todo list", "path": "todo.txt"},
+				{"name": "Quseit", "path": "quseit/", "children": 
+					[
+						{"name": "qianai", "path": "qianai.txt"},
+					]
+				},
+			]
+		},
+		{"name": "Scripts", "path": "/Users/zhenan/Library/Application Support/Sublime Text 3/Packages/An/scripts/", "children": 
+			[
+				{"name": "apitest", "path": "apitest.py"},
+			]
+		},
+	],
 }

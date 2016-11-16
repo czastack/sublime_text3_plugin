@@ -1,12 +1,14 @@
 {
-	"run_list": {
-		"windows": [
-			{"title": "cmd", "path": "cmd"},
-			{"title": "git", "path": "D:/MinGW/git/git-bash.exe"},
-		],
-		"linux": [
-			{"title": "terminal", "path": "gnome-terminal"},
-			{"title": "git", "path": "git"},
-		],
-	}
+	"windows": [
+		{"title": "cmd", "path": "cmd"},
+		{"title": "git", "path": "D:/MinGW/git/git-bash.exe"},
+	],
+	"linux": [
+		{"title": "terminal", "path": "gnome-terminal"},
+		{"title": "git", "path": "git"},
+	],
+	"osx": [
+		{"title": "terminal", "path": "/Applications/Utilities/Terminal.app"},
+		{"title": "git", "path": "git"},
+	],
 }

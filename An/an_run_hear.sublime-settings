@@ -5,7 +5,7 @@
 			{"title": "git", "path": "D:/MinGW/git/git-bash.exe"},
 		],
 		"linux": [
-			{"title": "cmd", "path": "gnome-terminal"},
+			{"title": "terminal", "path": "gnome-terminal"},
 			{"title": "git", "path": "git"},
 		],
 	}

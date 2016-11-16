@@ -59,7 +59,7 @@ class SassHelper:
 		p = create_string_buffer(path.encode())
 		self.clib.set_include_path(p)
 
-	def compile_string(self, text, path = None):
+	def compile_string(self, text, path = ''):
 		text = create_string_buffer(text.encode())
 		path = create_string_buffer(path.encode())
 		return self.clib.sass_compile_string(text, path)
@@ -73,5 +73,4 @@ class SassHelper:
 
 if __name__ == '__main__':
 	helper = SassHelper()
-	helper.set_include_path('E:/html/sass')
-	print(helper.compile_string('@import "mixin.scss";$fontSize: 12px;\nbody{\nfont-size:$fontSize;\n}').contents.content.decode())
+	print(helper.compile_string('$fontSize: 12px;\nbody{\nfont-size:$fontSize;\n}').contents.content.decode())

@@ -1,2 +1,0 @@
-# pyext
-personal sublime pylib

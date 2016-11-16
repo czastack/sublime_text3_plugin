@@ -3,6 +3,6 @@
 :returns $1
 ]]></content>
 	<tabTrigger>:r</tabTrigger>
-	<scope>comment.block.python</scope>
+	<scope>comment.block.documentation.python</scope>
 	<description>:returns</description>
 </snippet>

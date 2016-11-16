@@ -3,6 +3,6 @@
 :param $1: $2
 ]]></content>
 	<tabTrigger>:p</tabTrigger>
-	<scope>comment.block.python</scope>
+	<scope>comment.block.documentation.python</scope>
 	<description>:param</description>
 </snippet>

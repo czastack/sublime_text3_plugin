@@ -1,0 +1,9 @@
+[
+	{ "keys": ["f12"], "command": "open_in_browser" },
+	{ "keys": ["ctrl+shift+c"], "command": "close_tag" },
+	{ "keys": ["ctrl+f2"], "command": "side_bar_rename" },
+	{ "keys": ["ctrl+alt+p"], "command": "prompt_select_workspace" },
+	{ "keys": ["ctrl+shift+pagedown"], "command": "focus_neighboring_group" },
+	{ "keys": ["ctrl+shift+pageup"], "command": "focus_neighboring_group", "args": {"forward": false} },
+	{ "keys": ["f8"], "command": "info" },
+]

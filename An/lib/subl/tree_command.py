@@ -34,12 +34,19 @@ class TreeCommandBase(sublime_plugin.WindowCommand):
 	def run(self):
 		# 根结点
 		if not hasattr(self, 'node'):
-			datas = load_settings(self, "all")
-			platform_settings = load_settings(self, sublime.platform())
-			if platform_settings:
-				datas.extend(platform_settings)
-			self.node = self.NODE.parse(datas)
+			self.load_settings()
+			self._settings.add_on_change('node_data', self.on_settings_change)
 		self.show_menu()
+
+	def load_settings(self):
+		datas = load_settings(self, "all")
+		platform_settings = load_settings(self, sublime.platform())
+		if platform_settings:
+			datas.extend(platform_settings)
+		self.node = self.NODE.parse(datas)
+
+	def on_settings_change(self):
+		self.load_settings()
 
 	def on_select(self, i):
 		if i == -1:

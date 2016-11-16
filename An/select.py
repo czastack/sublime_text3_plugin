@@ -61,11 +61,11 @@ class SelectLineAllCommand(SelectReg):
 
 # 选中空行
 class SelectEmptyLinesCommand(SelectReg):
-	reg = '\n[ \t]*(?=\n)'
+	reg = '\n[ \t]*(?=\n|$)'
 
 # 选中行结尾的空白字符
 class SelectLineEndSpaceCommand(SelectReg):
-	reg = '[ \t]+(?=\n)'
+	reg = '[ \t]+(?=\n|$)'
 	
 
 # 按长度分隔选区

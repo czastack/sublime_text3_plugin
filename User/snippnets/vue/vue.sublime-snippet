@@ -1,0 +1,29 @@
+<snippet>
+	<content><![CDATA[
+<template>
+    $1
+</template>
+<script>
+    
+    export default {
+        data () {
+            return {
+                
+            }
+        },
+        created () {
+            
+        },
+        methods: {
+            
+        }
+    }
+</script>
+<style lang="sass">
+    
+</style>
+]]></content>
+	<tabTrigger>vue</tabTrigger>
+	<scope>text.html.vue</scope>
+	<description>vue 结构</description>
+</snippet>

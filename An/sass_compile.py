@@ -1,5 +1,5 @@
 import sublime, sublime_plugin, sasshelper
-from os import path as Path
+import os
 from An import an
 
 helper = None
@@ -8,6 +8,7 @@ def get_settings():
 	return sublime.load_settings('an_sass.sublime-settings')
 
 def compile(view):
+	Path = os.path
 	filename = view.file_name()
 	if not filename:
 		return False
@@ -38,6 +39,9 @@ def compile(view):
 	if result.contents.success:
 		dirname  = Path.dirname(filename)
 		filename = Path.join(dirname, '..', 'css', Path.splitext(Path.basename(filename))[0] + '.css')
+		cssdir   = Path.dirname(filename)
+		if not Path.exists(cssdir):
+			os.mkdir(cssdir)
 		with open(filename, 'w', encoding='utf-8') as f:
 			f.write(content)
 		sublime.status_message('编译成功')

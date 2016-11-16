@@ -64,7 +64,10 @@ class Dict:
 	__slots__ = ('_data',)
 
 	def __init__(self, obj = None):
-		object.__setattr__(self, '_data', obj)
+		self._attr('_data', obj)
+
+	def _attr(self, name, value):
+		object.__setattr__(self, name, value)
 
 	def __getattr__(self, name):
 		return self._data.get(name, getattr(self._data, name, None))

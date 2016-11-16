@@ -1,6 +1,12 @@
 {
-    "run_list": [
-    	{"title": "cmd", "path": "cmd"},
-    	{"title": "git", "path": "D:/MinGW/git/git-bash.exe"},
-    ],
+	"run_list": {
+		"windows": [
+			{"title": "cmd", "path": "cmd"},
+			{"title": "git", "path": "D:/MinGW/git/git-bash.exe"},
+		],
+		"linux": [
+			{"title": "cmd", "path": "gnome-terminal"},
+			{"title": "git", "path": "git"},
+		],
+	}
 }

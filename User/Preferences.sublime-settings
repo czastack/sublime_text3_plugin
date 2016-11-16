@@ -10,13 +10,10 @@
 		"CVS",
 		"__pycache__"
 	],
-	"font_size": 13,
+	"font_size": 14,
 	"ignored_packages":
 	[
 		"Color Scheme - Default",
-		"DocBlockr",
-		"PyQt5 Completions",
-		"Sass",
 		"Vintage"
 	],
 	"update_check": false

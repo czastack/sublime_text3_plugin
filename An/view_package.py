@@ -1,6 +1,7 @@
-# 调用winrar打开包
+# 调用winrar/file-roller打开包
 
 import sublime_plugin, os
+from utils import runtime
 
 # contain_default 包括默认的包(sublime根目录/Packages)
 class ViewPackageCommand(sublime_plugin.WindowCommand):
@@ -11,7 +12,8 @@ class ViewPackageCommand(sublime_plugin.WindowCommand):
 
 	def openPackageWithWinrar(self, i):
 		if i != -1:
-			p = os.popen('start winrar "%s\\%s"' % (self.packages_path, self.packages[i]))
+			cmd = ('start winrar "%s\\%s"' if runtime.is_windows else '(file-roller  "%s/%s" &)')
+			p = os.popen(cmd % (self.packages_path, self.packages[i]))
 			p.close()
 
 class ViewDefaultPackageCommand(ViewPackageCommand):

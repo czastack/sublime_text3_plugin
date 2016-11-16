@@ -83,9 +83,6 @@ class An:
 	def popup(self, text, **args):
 		self.view.show_popup('<style>body{margin:0; padding:10px; color:#ccc; font-size:18px; background-color:#000;}</style>' + text, **args);
 
-	def open_file(self, file):
-		sublime.active_window().open_file(file)
-
 	def __getattr__(self, name):
 		return None
 
@@ -102,11 +99,18 @@ class An:
 	def lines(view):
 		return view.lines(__class__.region(view))
 
+	@staticmethod
+	def open_file(file, win = None):
+		# sublime.active_window().open_file(file)
+		(win or sublime.active_window()).run_command('open_file', {"file": file})
+
 an = An()
 
 # 打印错误
 def logerr(e):
-	print(e.__class__.__name__ + ': ' + str(e), file=an)
+	# print(e.__class__.__name__ + ': ' + str(e), file=an)
+	import traceback
+	an.echo(traceback.format_exc())
 
 def add_path(*args):
 	for x in args:
@@ -117,7 +121,7 @@ def sublime_path():
 	return Path.dirname(sublime.__file__)
 
 def default_packages_path():
-	return Path.join(sublime_path(), 'packages')
+	return Path.join(sublime_path(), 'Packages')
 
 add_path(Path.join(Path.dirname(__file__), 'lib'))
 from extypes import astr

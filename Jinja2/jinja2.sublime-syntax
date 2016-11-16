@@ -29,12 +29,13 @@ contexts:
       # 变量
       - match: '{{'
         scope: punctuation.definition.tag.begin.jinja2
+        clear_scopes: true
         push:
           - meta_scope: source.python
-          - include: 'scope:source.python#expressions'
           - match: '}}'
             scope: punctuation.definition.tag.end.jinja2
             pop: true
+          - include: 'scope:source.python#expressions'
 
       # 自带单标签
       - match: ({%-?)\s*(extends|include)

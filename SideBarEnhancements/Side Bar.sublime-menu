@@ -12,7 +12,7 @@
 		"id": "side-bar-start-separator"
 	},
 	{
-		"caption": "N 新建文件…",
+		"caption": "New File…",
 		"id": "side-bar-new-file",
 		"command": "side_bar_new_file",
 		"args": {
@@ -20,7 +20,7 @@
 		}
 	},
 	{
-		"caption": "N 新建文件夹…",
+		"caption": "New Folder…",
 		"id": "side-bar-new-directory",
 		"command": "side_bar_new_directory",
 		"args": {
@@ -33,7 +33,7 @@
 	},
 
 	{
-		"caption": "编辑",
+		"caption": "Edit",
 		"id": "side-bar-edit",
 		"command": "side_bar_edit",
 		"args": {
@@ -41,7 +41,7 @@
 		}
 	},
 	{
-		"caption": "在右侧新建分组编辑",
+		"caption": "Edit to Right",
 		"id": "side-bar-edit-to-right",
 		"command": "side_bar_edit_to_right",
 		"args": {
@@ -49,7 +49,7 @@
 		}
 	},
 	{
-		"caption": "打开/运行",
+		"caption": "Open / Run",
 		"id": "side-bar-open",
 		"command": "side_bar_open",
 		"args": {
@@ -57,7 +57,7 @@
 		}
 	},
 	{
-		"caption": "在浏览器打开",
+		"caption": "Open In Browser",
 		"id": "side-bar-open-in-browser",
 		"children": [
 			{
@@ -100,7 +100,7 @@
 					"browser": "chrome"
 				}
 			},
-			/*{
+			{
 				"caption": "Canary",
 				"command": "side_bar_open_in_browser",
 				"args": {
@@ -108,11 +108,11 @@
 					"type": "testing",
 					"browser": "canary"
 				}
-			},*/
+			},
 			{
 				"caption": "-"
 			},
-			/*{
+			{
 				"caption": "Opera",
 				"command": "side_bar_open_in_browser",
 				"args": {
@@ -132,7 +132,7 @@
 			},
 			{
 				"caption": "-"
-			},*/
+			},
 			{
 				"caption": "Internet Explorer",
 				"command": "side_bar_open_in_browser",
@@ -161,7 +161,7 @@
 		]
 	},
 	{
-		"caption": "在新窗口打开",
+		"caption": "Open In New Window",
 		"id": "side-bar-open-in-new-window",
 		"command": "side_bar_open_in_new_window",
 		"args": {
@@ -169,7 +169,7 @@
 		}
 	},
 	{
-		"caption": "用搜索器打开",
+		"caption": "Open With Finder",
 		"id": "side-bar-open-with-finde",
 		"command": "side_bar_open_with_finder",
 		"args": {
@@ -177,7 +177,7 @@
 		}
 	},
 	{
-		"caption": "打开方式",
+		"caption": "Open With",
 		"id": "side-bar-files-open-with",
 
 		"children": [
@@ -202,20 +202,21 @@
 		]
 	},
 	{
-		"caption": "L 打开文件位置",
+		"caption": "Reveal",
 		"id": "side-bar-reveal",
 		"command": "side_bar_reveal",
 		"args": {
 			"paths": []
 		}
 	},
+
 	{
 		"caption": "-",
 		"id": "side-bar-edit-open-separator"
 	},
 
 	{
-		"caption": "查找替换…",
+		"caption": "Find & Replace…",
 		"id": "side-bar-find-selected",
 		"command": "side_bar_find_in_selected",
 		"args": {
@@ -223,7 +224,7 @@
 		}
 	},
 	{
-		"caption": "按名称查找文件…",
+		"caption": "Find Files Named…",
 		"id": "side-bar-find-files",
 		"command": "side_bar_find_files_path_containing",
 		"args": {
@@ -231,11 +232,11 @@
 		}
 	},
 	{
-		"caption": "高级查找",
+		"caption": "Find Advanced",
 		"id": "side-bar-find-advanced",
 		"children": [
 			{
-				"caption": "在父文件夹中…",
+				"caption": "In Parent Folder…",
 				"id": "side-bar-find-parent",
 				"command": "side_bar_find_in_parent",
 				"args": {
@@ -247,7 +248,7 @@
 				"id": "side-bar-find-parent-separator"
 			},
 			{
-				"caption": "在工程中…",
+				"caption": "In Project…",
 				"id": "side-bar-find-in-project",
 				"command": "side_bar_find_in_project",
 				"args": {
@@ -255,7 +256,7 @@
 				}
 			},
 			{
-				"caption": "在工程文件夹中…",
+				"caption": "In Project Folder…",
 				"id": "side-bar-find-project-folder",
 				"command": "side_bar_find_in_project_folder",
 				"args": {
@@ -263,7 +264,7 @@
 				}
 			},
 			{
-				"caption": "在多个工程文件夹中…",
+				"caption": "In Project Folders…",
 				"id": "side-bar-find-project-folders",
 				"command": "side_bar_find_in_project_folders"
 			},
@@ -272,7 +273,6 @@
 				"id": "side-bar-find-project-separator"
 			},
 			{
-				"caption": "在指定拓展名的文件中…",
 				"id": "side-bar-find-in-files-with-extension",
 				"command": "side_bar_find_in_files_with_extension",
 				"args": {
@@ -280,7 +280,7 @@
 				}
 			},
 			{
-				"caption": "在包含的路径中…",
+				"caption": "In Paths Containing…",
 				"id": "side-bar-find-files-path-containing",
 				"command": "side_bar_find_files_path_containing",
 				"args": {
@@ -292,7 +292,7 @@
 				"id": "side-bar-mass-rename-separator"
 			},
 			{
-				"caption": "批量重命名所选项…",
+				"caption": "Mass Rename Selection…",
 				"id": "side-bar-mass-rename",
 				"command": "side_bar_mass_rename",
 				"args": {
@@ -307,7 +307,7 @@
 		"id": "side-bar-find-separator"
 	},
 	{
-		"caption": "X 剪切",
+		"caption": "Cut",
 		"id": "side-bar-clip-cut",
 		"command": "side_bar_cut",
 		"args": {
@@ -315,7 +315,7 @@
 		}
 	},
 	{
-		"caption": "C 复制",
+		"caption": "Copy",
 		"id": "side-bar-clip-copy",
 		"command": "side_bar_copy",
 		"args": {
@@ -323,7 +323,7 @@
 		}
 	},
 	{
-		"caption": "C 复制文件名",
+		"caption": "Copy Name",
 		"id": "side-bar-clip-copy-name",
 		"command": "side_bar_copy_name",
 		"args": {
@@ -331,7 +331,7 @@
 		}
 	},
 	{
-		"caption": "C 复制路径",
+		"caption": "Copy Path",
 		"id": "side-bar-clip-copy-path",
 		"command": "side_bar_copy_path_absolute_from_project_encoded",
 		"args": {
@@ -339,7 +339,7 @@
 		}
 	},
 	{
-		"caption": "复制路径(Windows)",
+		"caption": "Copy Path (Windows)",
 		"id": "side-bar-clip-copy-path-windows",
 		"command": "side_bar_copy_path_absolute_from_project_encoded_windows",
 		"args": {
@@ -347,7 +347,7 @@
 		}
 	},
 	{
-		"caption": "复制文件夹路径",
+		"caption": "Copy Dir Path",
 		"id": "side-bar-clip-copy-dir-path",
 		"command": "side_bar_copy_dir_path",
 		"args": {
@@ -355,11 +355,11 @@
 		}
 	},
 	{
-		"caption": "复制为文本",
+		"caption": "Copy as Text",
 		"id": "side-bar-clip-copy-as",
 		"children": [
 			{
-				"caption": "相对当前文件的相对路径(编码)",
+				"caption": "Relative Path From View Encoded",
 				"id": "side-bar-clip-copy-path-relative-from-view-encoded",
 				"command": "side_bar_copy_path_relative_from_view_encoded",
 				"args": {
@@ -367,7 +367,7 @@
 				}
 			},
 			{
-				"caption": "相对当前文件的相对路径",
+				"caption": "Relative Path From View",
 				"id": "side-bar-clip-copy-path-relative-from-view",
 				"command": "side_bar_copy_path_relative_from_view",
 				"args": {
@@ -380,7 +380,7 @@
 			},
 
 			{
-				"caption": "相对工程的相对路径(编码)",
+				"caption": "Relative Path From Project Encoded",
 				"id": "side-bar-clip-copy-path-relative-from-project-encoded",
 				"command": "side_bar_copy_path_relative_from_project_encoded",
 				"args": {
@@ -388,7 +388,7 @@
 				}
 			},
 			{
-				"caption": "相对工程的相对路径",
+				"caption": "Relative Path From Project",
 				"id": "side-bar-clip-copy-path-relative-from-project",
 				"command": "side_bar_copy_path_relative_from_project",
 				"args": {
@@ -401,7 +401,7 @@
 			},
 
 			{
-				"caption": "从工程开始的绝对路径(编码)",
+				"caption": "Absolute Path From Project Encoded",
 				"id": "side-bar-clip-copy-path-absolute-from-project-encoded",
 				"command": "side_bar_copy_path_absolute_from_project_encoded",
 				"args": {
@@ -409,7 +409,7 @@
 				}
 			},
 			{
-				"caption": "从工程开始的绝对路径",
+				"caption": "Absolute Path From Project",
 				"id": "side-bar-clip-copy-path-absolute-from-project",
 				"command": "side_bar_copy_path_absolute_from_project",
 				"args": {
@@ -422,7 +422,7 @@
 			},
 
 			{
-				"caption": "路径URI",
+				"caption": "Path as URI",
 				"id": "side-bar-clip-copy-path-encoded",
 				"command": "side_bar_copy_path_encoded",
 				"args": {
@@ -430,7 +430,7 @@
 				}
 			},
 			{
-				"caption": "路径",
+				"caption": "Path",
 				"id": "side-bar-clip-copy-path",
 				"command": "side_bar_copy_path",
 				"args": {
@@ -443,7 +443,7 @@
 			},
 
 			{
-				"caption": "名称(编码)",
+				"caption": "Name Encoded",
 				"id": "side-bar-clip-copy-name-encoded",
 				"command": "side_bar_copy_name_encoded",
 				"args": {
@@ -477,7 +477,7 @@
 			},
 
 			{
-				"caption": "a标签",
+				"caption": "Tag a",
 				"id": "side-bar-clip-copy-tag-a",
 				"command": "side_bar_copy_tag_ahref",
 				"args": {
@@ -485,7 +485,7 @@
 				}
 			},
 			{
-				"caption": "img标签",
+				"caption": "Tag img",
 				"id": "side-bar-clip-copy-tag-img",
 				"command": "side_bar_copy_tag_img",
 				"args": {
@@ -493,7 +493,7 @@
 				}
 			},
 			{
-				"caption": "script标签",
+				"caption": "Tag script",
 				"id": "side-bar-clip-copy-tag-script",
 				"command": "side_bar_copy_tag_script",
 				"args": {
@@ -501,7 +501,7 @@
 				}
 			},
 			{
-				"caption": "style标签",
+				"caption": "Tag style",
 				"id": "side-bar-clip-copy-tag-style",
 				"command": "side_bar_copy_tag_style",
 				"args": {
@@ -513,7 +513,7 @@
 				"id": "side-bar-clip-copy-tag-separator"
 			},
 			{
-				"caption": "项目文件夹",
+				"caption": "Project Folders",
 				"id": "side-bar-clip-copy-project-directories",
 				"command": "side_bar_copy_project_directories",
 				"args": {
@@ -525,7 +525,7 @@
 				"id": "side-bar-clip-copy-project-directories-separator"
 			},
 			{
-				"caption": "内容(UTF-8)",
+				"caption": "Content as UTF-8",
 				"id": "side-bar-clip-copy-content-utf8",
 				"command": "side_bar_copy_content_utf8",
 				"args": {
@@ -533,7 +533,7 @@
 				}
 			},
 			{
-				"caption": "内容(Data URI)",
+				"caption": "Content as Data URI",
 				"id": "side-bar-clip-copy-content-base-64",
 				"command": "side_bar_copy_content_base64",
 				"args": {
@@ -544,7 +544,7 @@
 	},
 
 	{
-		"caption": "V 粘贴",
+		"caption": "Paste",
 		"id": "side-bar-clip-paste",
 		"command": "side_bar_paste",
 		"args": {
@@ -553,7 +553,7 @@
 		}
 	},
 	{
-		"caption": "在父目录中粘贴",
+		"caption": "Paste in Parent",
 		"id": "side-bar-clip-paste-in-parent",
 		"command": "side_bar_paste",
 		"args": {
@@ -566,7 +566,7 @@
 		"id": "side-bar-clip-separator"
 	},
 	{
-		"caption": "副本(D)…", "mnemonic": "D",
+		"caption": "Duplicate…",
 		"id": "side-bar-duplicate",
 		"command": "side_bar_duplicate",
 		"args": {
@@ -579,15 +579,16 @@
 	},
 
 	{
-		"caption": "重命名(R)…", "mnemonic": "R",
+		"caption": "Rename…",
 		"id": "side-bar-rename",
 		"command": "side_bar_rename",
+		"mnemonic": "R",
 		"args": {
 			"paths": []
 		}
 	},
 	{
-		"caption": "M 移动…",
+		"caption": "Move…",
 		"id": "side-bar-move",
 		"command": "side_bar_move",
 		"args": {
@@ -600,7 +601,7 @@
 	},
 
 	{
-		"caption": "删除",
+		"caption": "Delete",
 		"id": "side-bar-delete",
 		"command": "side_bar_delete",
 		"args": {
@@ -621,7 +622,7 @@
 	},
 
 	{
-		"caption": "刷新",
+		"caption": "Refresh",
 		"id": "side-bar-refresh",
 		"command": "refresh_folder_list"
 	},
@@ -630,11 +631,11 @@
 		"id": "side-bar-refresh-separator"
 	},
 	{
-		"caption": "项目",
+		"caption": "Project",
 		"id": "side-bar-project",
 		"children": [
 			{
-				"caption": "E 编辑项目",
+				"caption": "Edit Project",
 				"id": "side-bar-project-open-file",
 				"command": "side_bar_project_open_file",
 				"args": {
@@ -642,7 +643,7 @@
 				}
 			},
 			{
-				"caption": "E 编辑预览URLs",
+				"caption": "Edit Preview URLs",
 				"id": "side-bar-preview-edit-urls",
 				"command": "side_bar_preview_edit_urls",
 				"args": {
@@ -654,16 +655,16 @@
 				"id": "side-bar-project-open-file-separator"
 			},
 			{
-				"caption": "D 将文件夹添加到项目(D)",
 				"command": "prompt_add_folder",
-				"mnemonic": "D"
+				"caption": "Add Folder to Project…",
+				"mnemonic": "d"
 			},
 			{
 				"caption": "-",
 				"id": "side-bar-promote-as-project-folder-separator"
 			},
 			{
-				"caption": "提升为项目文件夹",
+				"caption": "Promote as Project Folder",
 				"id": "side-bar-project-item-add",
 				"command": "side_bar_project_item_add",
 				"args": {
@@ -671,7 +672,7 @@
 				}
 			},
 			{
-				"caption": "从侧栏隐藏(理论上从项目中)",
+				"caption": "Hide From Sidebar (In theory exclude from project)",
 				"id": "side-bar-project-item-exclude",
 				"command": "side_bar_project_item_exclude",
 				"args": {
@@ -727,7 +728,7 @@
 				"id": "side-bar-project-item-separator"
 			},
 			{
-				"caption": "从项目中移除文件夹",
+				"caption": "Remove Folder from Project",
 				"id": "side-bar-project-item-remove-folder",
 				"command": "side_bar_project_item_remove_folder",
 				"args": {
@@ -737,11 +738,11 @@
 
 		]
 	},
-	/*{
+	{
 		"caption": "-",
 		"id": "side-bar-donate-separator"
 	},
-	{
+	/*{
 		"caption": "Donate",
 		"command": "side_bar_donate",
 		"args": {

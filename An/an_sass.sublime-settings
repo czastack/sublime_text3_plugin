@@ -1,6 +1,5 @@
 {
-    // "include_path": "E:/html/sass",
     "include_path": "@scss/scss",
     "autoload": ["mixin.scss"],
-    "build_on_save": true,
+    "build_on_save": false,
 }

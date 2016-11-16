@@ -5,7 +5,7 @@ def do_request(url, isGet = True, headers=None, data=None, encoding="UTF-8"):
 	if data:
 		postdata = urlencode(data, encoding=encoding)
 		if isGet:
-			url = url + '?' + postdata
+			url = url + ('&' if '?' in url else '?') + postdata
 			postdata = None
 		else:
 			postdata = postdata.encode()

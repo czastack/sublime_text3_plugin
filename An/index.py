@@ -43,7 +43,7 @@ class ToExprCommand(sublime_plugin.TextCommand):
 		default = an.to_expr_last if an.to_expr_last else 'src'
 		input_panel = self.view.window().show_input_panel('to expr', default, self.on_input_text, None, None)
 		#选中默认文字
-		input_panel.selection.add(An.region(input_panel));
+		input_panel.selection.add(An.region(input_panel))
 
 	def on_input_text(self, text):
 		an.to_expr_last = text
@@ -69,7 +69,7 @@ class InsertListCommand(sublime_plugin.TextCommand):
 		default = an.insert_text_last if an.insert_text_last else '["%%01d" %% x for x in range(1, %d)]' % (len(self.view.selection) + 1)
 		input_panel = self.view.window().show_input_panel('list expr', default, self.on_input_text, None, None)
 		#选中默认文字
-		input_panel.selection.add(An.region(input_panel));
+		input_panel.selection.add(An.region(input_panel))
 
 	def on_input_text(self, text):
 		an.insert_text_last = text
@@ -130,13 +130,13 @@ class InsertListCommand(sublime_plugin.TextCommand):
 					self.view.insert(edit, cur, item)
 					i += 1
 					if edit._n and i < itemlen:
-						self.view.run_command('insert', {"characters": "\n"});
+						self.view.run_command('insert', {"characters": "\n"})
 				self.view.selection.clear()
 				self.view.selection.add_all(regions)
 
 class StartTestCommand(sublime_plugin.WindowCommand):
 	def run(self):
-		view = self.window.new_file(syntax='python.sublime-syntax')
+		view = self.window.new_file(syntax='Python.sublime-syntax')
 		view.set_name('Test')
 		an.set(view)
 		an.tout()

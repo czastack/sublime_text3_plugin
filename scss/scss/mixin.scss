@@ -10,19 +10,6 @@ $xsm: 450px;
 	left: $p;
 }
 
-// @mixin hr($color, $w:1px) {
-// 	$w: if(unitless($w), $w, #{$w}px);
-// 	border-bottom: solid $w $color;
-// }
-
-// $n  正常状态下的字体
-// $ph 手机尺寸下的字体
-@mixin font-size($n, $ph) {
-	font-size: $n;
-	@include phone {
-		font-size: $ph;
-	}
-}
 // 垂直居中
 @mixin height_vc($n) {
 	$n: if(unitless($n), #{$n}px, $n);
@@ -72,12 +59,6 @@ $xsm: 450px;
 	}
 }
 
-// 大于1800px
-// @mixin lgpc(){
-// 	@include pcmedia(min, w, $value: 1800px) {
-// 		@content;
-// 	}
-// }
 @mixin table(){
 	@include media(max, w, $value: $md) {
 		@content;
@@ -85,6 +66,11 @@ $xsm: 450px;
 }
 @mixin phone(){
 	@include media(max, w, $value: $sm) {
+		@content;
+	}
+}
+@mixin smphone(){
+	@include media(max, w, $value: $xsm) {
 		@content;
 	}
 }

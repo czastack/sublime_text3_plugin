@@ -5,7 +5,7 @@ from An import an
 
 class RunHearCommand(sublime_plugin.WindowCommand):
 	def run(self, path = None):
-		self.run_list_data = sublime.load_settings('an_run_hear.sublime-settings').get('run_list')
+		self.run_list_data = sublime.load_settings('an_run_hear.sublime-settings').get('run_list')[sublime.platform()]
 		run_list = [[item['title'], item['path']] for item in self.run_list_data]
 		if not path:
 			path = os.path.dirname(self.window.active_view().file_name())
@@ -15,5 +15,8 @@ class RunHearCommand(sublime_plugin.WindowCommand):
 		if index == -1:
 			return
 		an._run_hear_last = index
-		p = os.popen('start ' + self.run_list_data[index]['path'])
+		cmd = self.run_list_data[index]['path']
+		if sublime.platform() == 'windows':
+			cmd = 'start ' + cmd
+		p = os.popen(cmd)
 		p.close()

@@ -1,0 +1,8 @@
+<snippet>
+	<content><![CDATA[
+v-for="$1"
+]]></content>
+	<tabTrigger>vf</tabTrigger>
+	<scope>text.html.vue</scope>
+	<description>vue for</description>
+</snippet>

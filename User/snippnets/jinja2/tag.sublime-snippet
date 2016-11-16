@@ -1,10 +1,8 @@
 <snippet>
 	<content><![CDATA[
-{% macro $1 -%}
-    $2
-{%- endmacro %}
+{# $1 #}
 ]]></content>
-	<tabTrigger>macro</tabTrigger>
+	<tabTrigger>j2c</tabTrigger>
 	<scope>text.html.jinja2</scope>
-	<description></description>
+	<description>jinja2 注释</description>
 </snippet>

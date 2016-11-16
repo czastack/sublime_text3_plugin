@@ -1,0 +1,25 @@
+{
+	"all": [
+		{"name": "设置", "path": "${packages}/", "children": 
+			[
+				{"name": "默认设置", "path": "Default/Preferences.sublime-settings"},
+				{"name": "默认按键", "path": "Default/Default (${platform}).sublime-keymap"},
+				{"name": "默认菜单", "path": "Default/Main.sublime-menu"},
+				{"name": "用户设置", "path": "User/Preferences.sublime-settings"},
+				{"name": "用户按键", "path": "User/Default (${platform}).sublime-keymap"},
+			]
+		},
+	],
+	"linux": [
+		{"name": "Note", "path": "/media/an/工作/note/", "children": 
+			[
+				{"name": "Todo list", "path": "todo.txt"},
+				{"name": "Linux note", "path": "linux.txt"},
+				{"name": "Sublime note", "path": "sublime.txt"},
+				{"name": "JS note", "path": "js.txt"},
+				{"name": "Python note", "path": "python.txt"},
+			]
+		},
+		{"name": "html", "path": "/var/www/html/index.html"},
+	],
+}

@@ -9,6 +9,11 @@
 				{"name": "用户按键", "path": "User/Default (${platform}).sublime-keymap"},
 			]
 		},
+		{"name": "Scripts", "path": "${packages}/An/scripts/", "children": 
+			[
+				{"name": "apitest", "path": "apitest.py"},
+			]
+		},
 	],
 	"linux": [
 		{"name": "Note", "path": "/media/an/工作/note/", "children": 
@@ -31,11 +36,6 @@
 						{"name": "qianai", "path": "qianai.txt"},
 					]
 				},
-			]
-		},
-		{"name": "Scripts", "path": "/Users/zhenan/Library/Application Support/Sublime Text 3/Packages/An/scripts/", "children": 
-			[
-				{"name": "apitest", "path": "apitest.py"},
 			]
 		},
 	],

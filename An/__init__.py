@@ -39,6 +39,7 @@ class An:
 	def write(self, s):
 		if self.output:
 			self.output.run_command('append', {"characters": s});
+			self.output.run_command('viewport_scrool', {"di": 4});
 
 	def _exec(self, text):
 		try:

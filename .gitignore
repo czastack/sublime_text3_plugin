@@ -3,5 +3,6 @@ bz2/
 User/Package Control.cache
 User/Package Control*
 User/pending
+User/oscrypto-ca-bundle.crt
 bz2
 .DS_Store

@@ -6,4 +6,6 @@
 	{ "keys": ["ctrl+shift+pagedown"], "command": "focus_neighboring_group" },
 	{ "keys": ["ctrl+shift+pageup"], "command": "focus_neighboring_group", "args": {"forward": false} },
 	{ "keys": ["f8"], "command": "info" },
+	{ "keys": ["alt+shift+up"], "command": "select_lines", "args": {"forward": false} },
+	{ "keys": ["alt+shift+down"], "command": "select_lines", "args": {"forward": true} },
 ]

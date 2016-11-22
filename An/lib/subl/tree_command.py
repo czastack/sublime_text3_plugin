@@ -24,7 +24,7 @@ class Tree:
 		return parent
 
 class TreeCommandBase(sublime_plugin.WindowCommand):
-	__slots__ = ('node', 'first_highlight', 'focus_map')
+	__slots__ = ('node')
 	"""
 	to add:
 	NODE: 节点类型

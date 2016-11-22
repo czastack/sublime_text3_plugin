@@ -18,4 +18,5 @@
     { "keys": ["ctrl+shift+-"], "command": "select_line_start" },
     { "keys": ["ctrl+shift+="], "command": "start_test" },
     { "keys": ["ctrl+shift+o"], "command": "my_file" },
+    { "keys": ["super+alt+l"], "command": "focus_output" },
 ]

@@ -4,9 +4,9 @@ from An import an
 class FocusOutputCommand(sublime_plugin.TextCommand):
 
 	def run(self, edit):
-		an.set(self.view)
+		an.view = self.view
 		an.tout()
-		if self.view.view_id == an.output.view_id:
+		if self.view == an.output:
 			if an.last_group is not None:
 				self.view.window().focus_group(an.last_group)
 		else:

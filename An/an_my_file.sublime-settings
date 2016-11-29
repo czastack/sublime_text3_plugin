@@ -30,13 +30,14 @@
 	"osx": [
 		{"name": "Note", "path": "~/Documents/note/", "children": 
 			[
+				{"name": "Mac note", "path": "mac.txt"},
+				{"name": "Linux note", "path": "linux.txt"},
+			]
+		},
+		{"name": "Quseit", "path": "~/Documents/quseit/", "children": 
+			[
 				{"name": "Todo list", "path": "todo.txt"},
-				{"name": "Mac bote", "path": "mac.txt"},
-				{"name": "Quseit", "path": "quseit/", "children": 
-					[
-						{"name": "qianai", "path": "qianai.txt"},
-					]
-				},
+				{"name": "qianai", "path": "qianai.txt"},
 			]
 		},
 	],

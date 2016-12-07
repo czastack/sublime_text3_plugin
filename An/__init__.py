@@ -1,8 +1,20 @@
-import sublime, sys
+import sublime, sublime_api
+import sys
 from os import path as Path
 
 class An:
+	__slots__ = ('_data', 'window_id')
+
+	def __init__(self):
+		self._data = {}
+		self.attachWindow(sublime_api.active_window())
+
+	def attachWindow(self, window_id):
+		self.window_id = window_id
+		self._data.setdefault(window_id, {})
+
 	def set(self, view, edit = None):
+		self.attachWindow(sublime_api.view_window(view.view_id))
 		self.view = view
 		self.edit = edit
 		if edit:
@@ -10,10 +22,11 @@ class An:
 			edit.view = view
 
 	def show_output(self, text=None):
-		win = sublime.active_window()
+		win = sublime.Window(self.window_id)
 		if not self.output:
 			self.output = win.create_output_panel('an')
-			self.output.settings().set('color_scheme', self.view.settings().get('color_scheme'))
+			view = self.view or win.active_view()
+			self.output.settings().set('color_scheme', view.settings().get('color_scheme'))
 		
 		if text is not None:
 			self.output.run_command('set_text', {'text': astr(text)})
@@ -85,13 +98,18 @@ class An:
 		self.view.show_popup('<style>body{margin:0; padding:10px; color:#ccc; font-size:18px; background-color:#000;}</style>' + text, **args);
 
 	def __getattr__(self, name):
-		return None
+		return self._data[self.window_id].get(name, None)
+
+	def __setattr__(self, name, value):
+		if name in __class__.__slots__:
+			object.__setattr__(self, name, value)
+		else:
+			self._data[self.window_id][name] = value
 
 	# 复制的数组（用换行分隔）
 	@property
 	def copied(self):
 		return sublime.get_clipboard().split('\n')
-	
 
 	# 静态方法
 	def region(view):
@@ -109,9 +127,12 @@ an = An()
 
 # 打印错误
 def logerr(e):
-	# print(e.__class__.__name__ + ': ' + str(e), file=an)
-	import traceback
-	an.echo(traceback.format_exc())
+	if an.output:
+		import traceback
+		an.echo(traceback.format_exc())
+	else:
+		sublime.Window(an.window_id).run_command('show_panel', {"panel": "console"})
+		print('output未初始化')
 
 def add_path(*args):
 	for x in args:

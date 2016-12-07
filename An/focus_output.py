@@ -4,7 +4,7 @@ from An import an
 class FocusOutputCommand(sublime_plugin.TextCommand):
 
 	def run(self, edit):
-		an.view = self.view
+		an.set(self.view)
 		an.tout()
 		if self.view == an.output:
 			if an.last_group is not None:

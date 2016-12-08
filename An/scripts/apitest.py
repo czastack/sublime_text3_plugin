@@ -3,7 +3,7 @@ from functools import partial
 class Runner(threading.Thread):
 	def __init__(self, method, host, headers=None, data=None):
 		super(Runner, self).__init__()
-		self.host = host
+		self.host = an.host + host
 		self.method = method
 		self.headers = headers
 		self.data = data

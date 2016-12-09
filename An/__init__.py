@@ -21,7 +21,7 @@ class An:
 			edit.an = self
 			edit.view = view
 
-	def show_output(self, text=None):
+	def tout(self, text=None):
 		win = sublime.Window(self.window_id)
 		if not self.output:
 			self.output = win.create_output_panel('an')
@@ -32,10 +32,6 @@ class An:
 			self.output.run_command('set_text', {'text': astr(text)})
 		
 		win.run_command('show_panel', {'panel': 'output.an'})
-
-	# show_output的别名
-	def tout(self, text=None):
-		self.show_output(text)
 
 	def cls(self):
 		if self.output:
@@ -54,13 +50,20 @@ class An:
 			self.output.run_command('append', {"characters": s});
 			self.output.run_command('viewport_scrool', {"di": 4});
 
+	# 打印错误
+	def logerr(self, e):
+		if not self.output:
+			self.tout()
+		import traceback
+		self.echo(traceback.format_exc())
+
 	def _exec(self, text):
 		try:
 			self.init_exec_env()
 			exec(text, self.edit.__dict__)
 			return True
 		except Exception as e:
-			logerr(e)
+			self.logerr(e)
 			return False
 
 	def _eval(self, text):
@@ -69,7 +72,7 @@ class An:
 			self.edit._ret = eval(text, self.edit.__dict__)
 			return True
 		except Exception as e:
-			logerr(e)
+			self.logerr(e)
 			return False
 
 	def init_exec_env(self):
@@ -119,20 +122,11 @@ class An:
 		return view.lines(__class__.region(view))
 
 	@staticmethod
-	def open_file(file, win = None):
+	def open(file, win = None):
 		# sublime.active_window().open_file(file)
 		(win or sublime.active_window()).run_command('open_file', {"file": file})
 
 an = An()
-
-# 打印错误
-def logerr(e):
-	if an.output:
-		import traceback
-		an.echo(traceback.format_exc())
-	else:
-		sublime.Window(an.window_id).run_command('show_panel', {"panel": "console"})
-		print('output未初始化')
 
 def add_path(*args):
 	for x in args:

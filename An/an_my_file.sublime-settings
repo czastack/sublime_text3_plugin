@@ -16,7 +16,7 @@
 		},
 	],
 	"linux": [
-		{"name": "Note", "path": "/media/an/工作/note/", "children": 
+		{"name": "Note", "path": "/work/note/", "children": 
 			[
 				{"name": "Todo list", "path": "todo.txt"},
 				{"name": "Linux note", "path": "linux.txt"},

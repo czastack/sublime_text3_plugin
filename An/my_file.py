@@ -1,5 +1,6 @@
 # 打开我的文件
 
+from An import an
 from subl import tree_command
 
 class Menu(tree_command.Tree):
@@ -26,5 +27,4 @@ class MyFileCommand(tree_command.TreeCommandBase):
 	NODE = Menu
 
 	def done(self, node):
-		from An import an
 		an.open(node.path, self.window)

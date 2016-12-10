@@ -1,4 +1,12 @@
 import sublime
+from os import path as Path
+from .an import An
+
+def sublime_path():
+	return Path.dirname(sublime.__file__)
+
+def default_packages_path():
+	return Path.join(sublime_path(), 'Packages')
 
 def opened_files(change_sep = True):
 	"""当前窗口所有打开的文件名"""

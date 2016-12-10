@@ -27,4 +27,4 @@ class MyFileCommand(tree_command.TreeCommandBase):
 
 	def done(self, node):
 		from An import an
-		an.open_file(node.path, self.window)
+		an.open(node.path, self.window)

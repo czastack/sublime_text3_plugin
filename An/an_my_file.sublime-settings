@@ -41,4 +41,15 @@
 			]
 		},
 	],
+	"windows": [
+		{"name": "Note", "path": "E:/note/", "children": 
+			[
+				{"name": "Todo list", "path": "todo.txt"},
+				{"name": "Linux note", "path": "linux.txt"},
+				{"name": "Sublime note", "path": "sublime.txt"},
+				{"name": "JS note", "path": "js.txt"},
+				{"name": "Python note", "path": "python.txt"},
+			]
+		},
+	],
 }

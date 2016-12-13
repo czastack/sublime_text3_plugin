@@ -18,8 +18,6 @@ class UnicodeDecodeCommand(sublime_plugin.TextCommand):
 					self.unicode_escape_region_tostr(edit, region)
 
 	def unicode_escape_region_tostr(self, edit, region):
-		result = self.unicode_escape_tostr(self.view.substr(region))
+		origin = self.view.substr(region)
+		result = self.reg.sub(lambda matcher: matcher.group(0).encode().decode('unicode_escape'), origin)
 		self.view.replace(edit, region, result)
-
-	def unicode_escape_tostr(self, text):
-		return self.reg.sub(lambda matcher: eval('"' + matcher.group(0) + '"'), text)

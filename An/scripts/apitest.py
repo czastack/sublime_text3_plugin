@@ -1,24 +1,14 @@
-import request, os, threading
-from functools import partial
-class Runner(threading.Thread):
-	def __init__(self, method, host, headers=None, data=None):
-		super(Runner, self).__init__()
-		self.host = an.host + host
-		self.method = method
-		self.headers = headers
-		self.data = data
+from utils.thread import newthread
+import request
 
-	def run(self):
-		an.tout()
-		method = self.method
+def wrapper(fn):
+	@newthread
+	def _deco(host, *args, **keyArgs):
 		try:
-			an.echo(method(self.host, headers = self.headers, data = self.data))
+			an.echo(fn(an.host + host, *args, **keyArgs))
 		except Exception as e:
 			an.echo(e)
+	return _deco
 
-def wrapper(callee):
-	def fn(*args, **keyArgs):
-		Runner(callee, *args, **keyArgs).start()
-	return fn
 an.api_get = wrapper(request.get)
 an.api_post = wrapper(request.post)

@@ -13,7 +13,7 @@ def do_request(url, isGet = True, headers=None, data=None, encoding="UTF-8"):
 		postdata = None if isGet else b''
 	opener = request.build_opener()
 	if headers:
-		opener.addheaders = [(k, headers[k]) for k in headers];
+		opener.addheaders = headers.items()
 	result = opener.open(url, postdata)
 	the_page = result.read()
 	result.close()

@@ -8,7 +8,8 @@
 		".git",
 		".hg",
 		"CVS",
-		"__pycache__"
+		"__pycache__",
+		"node_modules"
 	],
 	"font_size": 14,
 	"ignored_packages":

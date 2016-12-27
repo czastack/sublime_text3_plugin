@@ -9,3 +9,8 @@ else:
 	def plugin_loaded():
 		from An import an
 		an.onload()
+
+		import subl, sys
+		paths = subl.load_platform_settings('an_python_path')
+		if paths:
+			sys.path[:0] = paths

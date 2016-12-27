@@ -1,6 +1,6 @@
-import sublime, sublime_plugin, os
+import sublime_plugin, os
 from utils import runtime
-from subl import load_settings
+from subl import load_platform_settings
 
 class Tree:
 	__slots__ = ('parent', 'children', 'last_sel')
@@ -39,11 +39,7 @@ class TreeCommandBase(sublime_plugin.WindowCommand):
 		self.show_menu()
 
 	def load_settings(self):
-		datas = load_settings(self, "all")
-		platform_settings = load_settings(self, sublime.platform())
-		if platform_settings:
-			datas.extend(platform_settings)
-		self.node = self.NODE.parse(datas)
+		self.node = self.NODE.parse(load_platform_settings(self))
 
 	def on_settings_change(self):
 		self.load_settings()

@@ -25,6 +25,28 @@ def load_settings(self, key, prefix = 'an_'):
 		self._settings = settings
 	return settings.get(key)
 
+def load_platform_settings(arg1):
+	"""
+	加载通用设置和平台专用设置
+	:param arg1: Command实例或配置文件名称(不包括拓展名)
+	"""
+	if isinstance(arg1, str):
+		settings = sublime.load_settings(arg1 + '.sublime-settings')
+		allsetting = settings.get("all")
+		specific = settings.get(sublime.platform())
+	else:
+		allsetting = load_settings(arg1, "all")
+		specific = load_settings(arg1, sublime.platform())
+
+	if allsetting and specific:
+		if isinstance(allsetting, list):
+			allsetting.extend(specific)
+		elif isinstance(allsetting, dict):
+			allsetting.update(specific)
+	elif specific:
+		allsetting = specific
+	return allsetting
+
 def open_zip_file(zfpath, filename):
 	import os
 	from zipfile import ZipFile

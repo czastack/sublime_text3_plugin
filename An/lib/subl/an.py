@@ -14,6 +14,7 @@ class An:
 	def attachWindow(self, window_id):
 		self.window_id = window_id
 		self._data.setdefault(window_id, {})
+		self._data[self.window_id].setdefault('globals', {})
 
 	def set(self, view, edit = None):
 		self.attachWindow(sublime_api.view_window(view.view_id))
@@ -49,8 +50,8 @@ class An:
 
 	def write(self, s):
 		if self.output:
-			self.output.run_command('append', {"characters": s});
-			self.output.run_command('viewport_scrool', {"di": 4});
+			self.output.run_command('append', {"characters": s})
+			self.output.run_command('viewport_scrool', {"di": 4})
 
 	# 打印错误
 	def logerr(self, e):
@@ -78,8 +79,12 @@ class An:
 			return False
 
 	def init_exec_env(self):
-		self.edit.print = self.echo
-		self.edit._print = print
+		edit = self.edit
+		edit.print = self.echo
+		edit._print = print
+		if self.globals:
+			for key, val in self.globals.items():
+				edit.__dict__.setdefault(key, val)
 
 	# 获取设置文本
 	def text(self, text = None):
@@ -114,6 +119,12 @@ class An:
 			object.__setattr__(self, name, value)
 		else:
 			self._data[self.window_id][name] = value
+
+	def __delattr__(self, name):
+		if name in __class__.__slots__:
+			object.__delattr__(self, name)
+		else:
+			del self._data[self.window_id][name]
 
 	def sublvars(self):
 		"""sublime variables"""

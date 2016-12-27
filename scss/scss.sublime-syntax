@@ -21,7 +21,7 @@ contexts:
 
   # 关键字
   keyword:
-    - match: '@(at-root|charset|debug|each|error|extend|for|function|import|include|mixin|namespace|page|return|warn|while|media|content)\b'
+    - match: '@(at-root|charset|debug|each|error|extend|for|function|import|include|mixin|namespace|page|return|warn|while|media|content|font-face)\b'
       scope: keyword.control.scss
       push:
         - include: 'scope:source.css#literal-string'

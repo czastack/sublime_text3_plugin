@@ -33,10 +33,9 @@ def compile(view):
 	if autoload:
 		text = ''.join(['@import "%s";\n' % item for item in autoload]) + text
 
-	result = helper.compile_string(text, Path.dirname(filename))
+	status, content = helper.compile_string(text, Path.dirname(filename))
 
-	content = result.contents.content.decode()
-	if result.contents.success:
+	if status:
 		dirname  = Path.dirname(filename)
 		filename = Path.join(dirname, '..', 'css', Path.splitext(Path.basename(filename))[0] + '.css')
 		cssdir   = Path.dirname(filename)

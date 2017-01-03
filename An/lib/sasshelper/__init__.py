@@ -1,76 +1,42 @@
-from ctypes import cdll, Structure, c_int, c_char_p, POINTER, create_string_buffer
-import os
+import ctypes
+from dllhelper import DllHelper
 
-class SassResult(Structure):
-	_fields_ = [
-		("success", c_int),
-		("content", c_char_p),
-	]
+class SassHelper(DllHelper):
 
-class SassHelper:
+	__libname__ = __file__, 'sasshelper'
 
-	def __init__(self):
-		self.clib = None
-
-	def _load(self):
-		"""Loads the libsass library if it isn't already loaded."""
-		if self.clib is None:
-			curdir = os.path.dirname(__file__)
-			
-			import platform
-			if platform.system() == 'Windows':
-				libname = 'sasshelper_win32.dll' if platform.architecture()[0].startswith('32') else 'sasshelper.dll'
-				libname = os.path.join(curdir, libname)
-			else:
-				libname = os.path.join(curdir, 'sasshelper.so')
-
-			libpath = os.path.join(curdir, libname)
-
-			if os.path.exists(libpath):
-				self.clib = cdll.LoadLibrary(libpath)
-			else:
-				raise Exception("Could not load library")
-
-			self.clib.set_include_path.argtypes = [c_char_p]
-			self.clib.set_include_path.restype = None
-
-			self.clib.sass_compile_string.argtypes = [c_char_p, c_char_p]
-			self.clib.sass_compile_string.restype = POINTER(SassResult)
-
-			self.clib.sass_compile_file.argtypes = [c_char_p]
-			self.clib.sass_compile_file.restype = POINTER(SassResult)
-
-			self.clib.free_result.argtypes = None
-			self.clib.free_result.restype = None
-
-
-
-	def __getattribute__(self, name):
-		attr = object.__getattribute__(self, name)
-		if hasattr(attr, '__call__') and name != "_load":
-			def load_wrapper(*args, **kwargs):
-				self._load()
-				return attr(*args, **kwargs)
-			return load_wrapper
-		else:
-			return attr
+	@classmethod
+	def fnsign(cls):
+		char_p = [ctypes.c_char_p]
+		return (
+			('set_include_path', char_p, None),
+			('sass_compile_string', char_p * 2, ctypes.c_int),
+			('sass_compile_file', char_p, ctypes.c_int),
+			('sass_get_result', char_p, None),
+		)
 
 	def set_include_path(self, path):
-		p = create_string_buffer(path.encode())
+		p = ctypes.create_string_buffer(path.encode())
 		self.clib.set_include_path(p)
 
 	def compile_string(self, text, path = ''):
-		text = create_string_buffer(text.encode())
-		path = create_string_buffer(path.encode())
-		return self.clib.sass_compile_string(text, path)
+		text = ctypes.create_string_buffer(text.encode())
+		path = ctypes.create_string_buffer(path.encode())
+		size_status = self.clib.sass_compile_string(text, path)
+		return self._get_result(size_status)
 
 	def compile_file(self, file):
-		p = create_string_buffer(file.encode())
-		return self.clib.sass_compile_file(p)
+		p = ctypes.create_string_buffer(file.encode())
+		size_status = self.clib.sass_compile_file(p)
+		return self._get_result(size_status)
 
-	def free_result(self):
-		self.clib.free_result()
+	def _get_result(self, size_status):
+		status = bool(size_status & 1)
+		size   = size_status >> 1
+		buff = ctypes.create_string_buffer(size)
+		self.clib.sass_get_result(buff)
+		return status, buff.raw.decode()
 
 if __name__ == '__main__':
 	helper = SassHelper()
-	print(helper.compile_string('$fontSize: 12px;\nbody{\nfont-size:$fontSize;\n}').contents.content.decode())
+	print(helper.compile_string('$fontSize: 12px;\nbody{\nfont-size:$fontSize;\n}'))

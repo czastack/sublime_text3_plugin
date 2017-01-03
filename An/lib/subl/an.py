@@ -1,5 +1,4 @@
-import sublime, sublime_api
-from extypes import astr
+import sublime, sublime_api, extypes
 
 class An:
 	__slots__ = ('_data', 'window_id')
@@ -14,7 +13,7 @@ class An:
 	def attachWindow(self, window_id):
 		self.window_id = window_id
 		self._data.setdefault(window_id, {})
-		self._data[self.window_id].setdefault('globals', {})
+		self._data[self.window_id].setdefault('globals', extypes.Map())
 
 	def set(self, view, edit = None):
 		self.attachWindow(sublime_api.view_window(view.view_id))
@@ -32,7 +31,7 @@ class An:
 			self.output.settings().set('color_scheme', view.settings().get('color_scheme'))
 		
 		if text is not None:
-			self.output.run_command('set_text', {'text': astr(text)})
+			self.output.run_command('set_text', {'text': extypes.astr(text)})
 		
 		win.run_command('show_panel', {'panel': 'output.an'})
 
@@ -89,7 +88,7 @@ class An:
 	# 获取设置文本
 	def text(self, text = None):
 		if text is not None:
-			self.view.replace(self.edit, __class__.region(self.view), astr(text))
+			self.view.replace(self.edit, __class__.region(self.view), extypes.astr(text))
 		else:
 			return self.view.substr(__class__.region(self.view))
 

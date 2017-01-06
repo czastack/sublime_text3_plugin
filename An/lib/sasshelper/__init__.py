@@ -35,7 +35,7 @@ class SassHelper(DllHelper):
 		size   = size_status >> 1
 		buff = ctypes.create_string_buffer(size)
 		self.clib.sass_get_result(buff)
-		return status, buff.raw.decode()
+		return status, buff.value.decode()
 
 if __name__ == '__main__':
 	helper = SassHelper()

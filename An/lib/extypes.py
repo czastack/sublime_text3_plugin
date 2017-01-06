@@ -56,6 +56,9 @@ class Map(dict):
 	def __setattr__(self, name, value):
 		self[name] = value
 
+	def __delattr__(self, name):
+		del self[name]
+
 	__puts__ = puts
 
 # data = Dict({'a': 1})
@@ -98,6 +101,9 @@ class Dict:
 				self._data[k] = val()
 		else:
 			self._data[key] = value
+
+	def __delattr__(self, name):
+		del self._data[name]
 
 	def __repr__(self):
 		return __class__.__name__ + '(' + self.__str__() + ')'

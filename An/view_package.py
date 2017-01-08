@@ -1,6 +1,6 @@
 # 调用winrar/file-roller打开包
 
-import sublime_plugin, os
+import sublime_plugin, os, subl
 from utils import runtime
 
 # contain_default 包括默认的包(sublime根目录/Packages)
@@ -18,8 +18,7 @@ class ViewPackageCommand(sublime_plugin.WindowCommand):
 
 class ViewDefaultPackageCommand(ViewPackageCommand):
 	def run(self):
-		import An
-		ViewPackageCommand.show(self, An.default_packages_path())
+		ViewPackageCommand.show(self, subl.default_packages_path())
 
 class ViewInstalledPackageCommand(ViewPackageCommand):
 	def run(self):

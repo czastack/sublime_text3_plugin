@@ -88,9 +88,9 @@ class An:
 	# 获取设置文本
 	def text(self, text = None):
 		if text is not None:
-			self.view.replace(self.edit, __class__.region(self.view), extypes.astr(text))
+			self.view.replace(self.edit, self.region(self.view), extypes.astr(text))
 		else:
-			return self.view.substr(__class__.region(self.view))
+			return self.view.substr(self.region(self.view))
 
 	def open(self, file, win = None):
 		"""打开文件或目录"""
@@ -138,8 +138,10 @@ class An:
 		return sublime.get_clipboard().split('\n')
 
 	# 静态方法
+	@staticmethod
 	def region(view):
 		return sublime.Region(0, view.size())
 
+	@staticmethod
 	def lines(view):
 		return view.lines(__class__.region(view))

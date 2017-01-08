@@ -1,6 +1,5 @@
 import sublime
 from os import path as Path
-from .an import An
 
 def sublime_path():
 	return Path.dirname(sublime.__file__)
@@ -46,6 +45,9 @@ def load_platform_settings(arg1):
 	elif specific:
 		allsetting = specific
 	return allsetting
+
+def open(file, win):
+	win.run_command('open_file', {"file": file})
 
 def open_zip_file(zfpath, filename):
 	import os

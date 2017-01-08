@@ -1,5 +1,5 @@
 import re, sublime, sublime_plugin
-from An import An, an
+from An import an
 
 class BaseSelect(sublime_plugin.TextCommand):
 	def set_regions(self, regions):
@@ -14,7 +14,7 @@ class SelectReg(BaseSelect):
 		regions = []
 		sel_len = len(view.selection)
 		if sel_len == 0 or (sel_len == 1 and view.selection[0].empty()):
-			selection = [An.region(view)]
+			selection = [an.region(view)]
 		else:
 			selection = view.selection
 		for region in selection:
@@ -28,7 +28,7 @@ class SelectReg(BaseSelect):
 # # 快速选中所有行首
 # class SelectLineStartCommand(BaseSelect):
 # 	def run(self, edit):
-# 		regions = An.lines(self.view)
+# 		regions = an.lines(self.view)
 # 		for region in regions:
 # 			region.b = region.a
 # 		self.set_regions(regions)
@@ -36,7 +36,7 @@ class SelectReg(BaseSelect):
 # # 快速选中所有行尾
 # class SelectLineEndCommand(BaseSelect):
 # 	def run(self, edit):
-# 		regions = An.lines(self.view)
+# 		regions = an.lines(self.view)
 # 		for region in regions:
 # 			region.a = region.b
 # 		self.set_regions(regions)
@@ -44,7 +44,7 @@ class SelectReg(BaseSelect):
 # # 快速选中所有行
 # class SelectLineAllCommand(BaseSelect):
 # 	def run(self, edit):
-# 		regions = An.lines(self.view)
+# 		regions = an.lines(self.view)
 # 		self.set_regions(regions)
 
 # 快速选中所有行首

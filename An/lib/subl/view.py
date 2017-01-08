@@ -1,3 +1,4 @@
+import sublime
 
 class ViewWriter:
 	__slots__ = ('view')
@@ -13,3 +14,24 @@ class ViewWriter:
 
 	def cls(self):
 		self.view.run_command('clear_text')
+
+
+def view_region(view):
+	return sublime.Region(0, view.size())
+
+def view_text(view):
+    return view.substr(view_region(view))
+
+def get_lines(view):
+    return view_text(view).split('\n')
+
+def lines_region(view):
+	return view.lines(region(view))
+
+def selected_text(view):
+	texts = []
+	for region in view.selection:
+		if region.empty():
+			region = view.line(region.a)
+		texts.append(view.substr(region))
+	return texts

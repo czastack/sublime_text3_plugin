@@ -1,4 +1,5 @@
 import sublime, sublime_api, extypes
+import subl, subl.view as viewlib
 
 class An:
 	__slots__ = ('_data', 'window_id')
@@ -15,13 +16,16 @@ class An:
 		self._data.setdefault(window_id, {})
 		self._data[self.window_id].setdefault('globals', extypes.Map())
 
-	def set(self, view, edit = None):
-		self.attachWindow(sublime_api.view_window(view.view_id))
+	def set(self, view, edit=None):
+		window_id = sublime_api.view_window(view.view_id)
+		if self.window_id != window_id:
+			self.attachWindow(sublime_api.view_window(view.view_id))
+
+		if view == self.output:
+			view = sublime.View(sublime_api.window_active_view(window_id))
+
 		self.view = view
 		self.edit = edit
-		if edit:
-			edit.an = self
-			edit.view = view
 
 	def tout(self, text=None):
 		win = sublime.Window(self.window_id)
@@ -29,15 +33,21 @@ class An:
 			self.output = win.create_output_panel('an')
 			view = self.view or win.active_view()
 			self.output.settings().set('color_scheme', view.settings().get('color_scheme'))
-		
+
 		if text is not None:
 			self.output.run_command('set_text', {'text': extypes.astr(text)})
-		
+
 		win.run_command('show_panel', {'panel': 'output.an'})
 
 	def cls(self):
 		if self.output:
-			self.output.run_command('clear_text')
+			view = self.output
+			if view.is_in_edit():
+				# 如果在output发起的exec, is_in_edit返回True, undo就不会运行
+				sublime.set_timeout(self.cls, 500)
+			else:
+				while view.size():
+					view.run_command('undo')
 
 	def echo(self, *args, **dictArgs):
 		dictArgs['file'] = self
@@ -79,33 +89,17 @@ class An:
 
 	def init_exec_env(self):
 		edit = self.edit
+		edit.an = self
+		edit.view = self.view
 		edit.print = self.echo
 		edit._print = print
 		if self.globals:
 			for key, val in self.globals.items():
 				edit.__dict__.setdefault(key, val)
 
-	# 获取设置文本
-	def text(self, text = None):
-		if text is not None:
-			self.view.replace(self.edit, self.region(self.view), extypes.astr(text))
-		else:
-			return self.view.substr(self.region(self.view))
-
-	def open(self, file, win = None):
+	def open(self, file):
 		"""打开文件或目录"""
-		(win or sublime.Window(self.window_id)).run_command('open_file', {"file": file})
-
-	def view_selected_text(view):
-		texts = []
-		for region in view.selection:
-			if region.empty():
-				region = view.line(region.a)
-			texts.append(view.substr(region))
-		return texts
-
-	def selected_text(self):
-		return view_selected_text(self.view)
+		subl.open(file, sublime.Window(self.window_id))
 
 	def popup(self, text, **args):
 		self.view.show_popup('<style>body{margin:0; padding:10px; color:#ccc; font-size:18px; background-color:#000;}</style>' + text, **args);
@@ -133,15 +127,19 @@ class An:
 		return sublime_api.expand_variables(val, self.sublvars())
 
 	# 复制的数组（用换行分隔）
+	# 另见: selected_text
 	@property
 	def copied(self):
 		return sublime.get_clipboard().split('\n')
 
-	# 静态方法
-	@staticmethod
-	def region(view):
-		return sublime.Region(0, view.size())
+	def text(self, view=None):
+		return viewlib.view_text(view or self.view)
 
-	@staticmethod
-	def lines(view):
-		return view.lines(__class__.region(view))
+	def selected_text(self):
+		return viewlib.selected_text(self.view)
+
+	def clone(self):
+		self.run_win_command('clone_file')
+
+	region = staticmethod(viewlib.view_region)
+	run_win_command = sublime.Window.run_command

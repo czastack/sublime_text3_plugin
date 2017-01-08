@@ -3,7 +3,7 @@ if __name__ == 'An':
 	sys.path.append(os.path.join(os.path.dirname(__file__), 'lib'))
 	del os, sys
 
-	from subl import An
+	from subl.an import An
 	an = An()
 else:
 	def plugin_loaded():

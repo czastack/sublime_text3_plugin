@@ -1,7 +1,8 @@
-import ctypes
-import os
+import ctypes, platform, os.path as Path
 
 class DllHelper:
+	__slots__ = ('clib',)
+
 	"""
 	:field __libname__: (pypath, name)
 	:classmethod fnsign() -> (name, argtypes, restypes)
@@ -14,8 +15,6 @@ class DllHelper:
 
 	@classmethod
 	def _load(cls):
-		import platform
-		Path = os.path
 		pyfile, libname = cls.__libname__
 
 		if platform.system() == 'Windows':
@@ -27,7 +26,6 @@ class DllHelper:
 
 		if Path.exists(libpath):
 			cls.clib = ctypes.cdll.LoadLibrary(libpath)
-			del cls.__libname__
 		else:
 			raise Exception("Could not load " + libpath)
 

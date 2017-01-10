@@ -6,4 +6,4 @@ class ReloadGbkCommand(sublime_plugin.TextCommand):
 		file_name = self.view.file_name()
 		if file_name:
 			with open(file_name, 'r', encoding='GBK') as f:
-				self.view.replace(edit, subl.view.region(self.view), f.read())
+				self.view.replace(edit, subl.view.view_region(self.view), f.read())

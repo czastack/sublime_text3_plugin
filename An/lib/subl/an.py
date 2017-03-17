@@ -1,5 +1,6 @@
 import sublime, sublime_api, extypes
 import subl, subl.view as viewlib
+from utils import string
 
 class An:
 	__slots__ = ('_data', 'window_id')
@@ -135,11 +136,18 @@ class An:
 	def text(self, view=None):
 		return viewlib.view_text(view or self.view)
 
-	def selected_text(self):
-		return viewlib.selected_text(self.view)
+	def selected_text(self, view=None):
+		return viewlib.selected_text(view or self.view)
 
 	def clone(self):
 		self.run_win_command('clone_file')
+
+	def matchAll(self, reg, fn):
+		return string.matchAll(self.text(), reg, fn)
+
+	def replace(self, rulers):
+		result = string.replace(self.text(), rulers)
+		self.view.run_command('set_text', {'text': result})
 
 	region = staticmethod(viewlib.view_region)
 	run_win_command = sublime.Window.run_command

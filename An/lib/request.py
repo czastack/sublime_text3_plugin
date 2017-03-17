@@ -1,5 +1,5 @@
 from urllib import request
-from urllib.parse import urlencode
+from urllib.parse import urlencode, quote
 
 def do_request(url, isGet = True, headers=None, data=None, encoding="UTF-8"):
 	if data:

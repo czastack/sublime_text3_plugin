@@ -1,6 +1,6 @@
 import re
 from extypes import Dict
-from utils import add_brother_path
+from utils.runtime import add_brother_path
 
 class BaseFormatter:
     __slots__ = ('syntax', 'opts')

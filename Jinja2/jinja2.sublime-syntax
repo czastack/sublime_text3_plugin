@@ -46,7 +46,19 @@ contexts:
           - match: '-?%}'
             scope: punctuation.definition.tag.end.jinja2
             pop: true
+          - match: '\bwith\b'
+            scope: keyword.control.jinja2
           - include: 'scope:source.python#expressions'
+      - match: ({%-?)\s*(import)
+        captures:
+          1: punctuation.definition.tag.begin.jinja2
+          2: keyword.control.jinja2
+        push:
+          - match: '-?%}'
+            scope: punctuation.definition.tag.end.jinja2
+            pop: true
+          - match: '\bas\b'
+            scope: keyword.control.jinja2
       # 自定义标签
       - match: ({%-?)\s*(\w+)
         captures:

@@ -1,5 +1,6 @@
 {
 	"linux": {
+		"font_face": "Source Code Pro",
 		"font_size": 12,
 	},
 }

@@ -13,7 +13,7 @@ contexts:
         scope: entity.other.jinja2.delimiter.comment
         push:
           - meta_scope: comment.block.html
-          - match: '-?#}'
+          - match: '-?#}|\n'
             scope: entity.other.jinja2.delimiter.comment
             pop: true
       # 自带闭合标签
@@ -49,6 +49,14 @@ contexts:
           - match: '\bwith\b'
             scope: keyword.control.jinja2
           - include: 'scope:source.python#expressions'
+      # comment
+      - match: '{% *comment *%}'
+        scope: entity.other.jinja2.delimiter.comment
+        push:
+          - meta_scope: comment.block.html
+          - match: '{% *endcomment *%}'
+            scope: entity.other.jinja2.delimiter.comment
+            pop: true
       - match: ({%-?)\s*(import)
         captures:
           1: punctuation.definition.tag.begin.jinja2

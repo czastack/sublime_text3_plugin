@@ -70,7 +70,7 @@ class An:
 		import traceback
 		self.echo(traceback.format_exc())
 
-	def _exec(self, text):
+	def exec_(self, text):
 		try:
 			self.init_exec_env()
 			exec(text, self.edit.__dict__)
@@ -79,10 +79,10 @@ class An:
 			self.logerr(e)
 			return False
 
-	def _eval(self, text):
+	def eval_(self, text):
 		try:
 			self.init_exec_env()
-			self.edit._ret = eval(text, self.edit.__dict__)
+			self.edit.ret = eval(text, self.edit.__dict__)
 			return True
 		except Exception as e:
 			self.logerr(e)

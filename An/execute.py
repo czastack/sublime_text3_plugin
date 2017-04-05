@@ -7,7 +7,7 @@ import extypes
 class ExecDocumentCommand(sublime_plugin.TextCommand):
 	def run(self, edit):
 		an.set(self.view, edit)
-		an._exec(an.text(self.view))
+		an.exec_(an.text(self.view))
 
 
 # 执行选中的语句
@@ -17,9 +17,9 @@ class ExecSelectionCommand(sublime_plugin.TextCommand):
 		for region in self.view.selection:
 			if region.empty():
 				region = self.view.line(region.a)
-			edit._ret = None
-			if an._exec(self.view.substr(region)) and edit._ret:
-				self.view.replace(edit, region, extypes.astr(edit._ret))
+			edit.ret = None
+			if an.exec_(self.view.substr(region)) and edit.ret:
+				self.view.replace(edit, region, extypes.astr(edit.ret))
 
 
 # 执行选中的表达式并替换当前文本
@@ -27,8 +27,8 @@ class EvalSelectionCommand(sublime_plugin.TextCommand):
 	def run(self, edit):
 		an.set(self.view, edit)
 		for region in self.view.selection:
-			if not region.empty() and an._eval(self.view.substr(region)):
-				self.view.replace(edit, region, extypes.astr(edit._ret))
+			if not region.empty() and an.eval_(self.view.substr(region)):
+				self.view.replace(edit, region, extypes.astr(edit.ret))
 
 
 # 选择文字替换成表达式
@@ -53,8 +53,8 @@ class ToExprCommand(sublime_plugin.TextCommand):
 		for region in self.view.selection:
 			edit.src=self.view.substr(region)
 			edit.i += 1
-			if(an._eval(text)):
-				self.view.replace(edit, region, extypes.astr(edit._ret))
+			if(an.eval_(text)):
+				self.view.replace(edit, region, extypes.astr(edit.ret))
 
 
 # 插入列表
@@ -76,14 +76,14 @@ class InsertListCommand(sublime_plugin.TextCommand):
 
 	def on_insert(self, edit, text):
 		an.set(self.view, edit)
-		edit._ret = None
+		edit.ret = None
 		edit._n = True # 是否自动插入换行
-		an._eval(text) or an._exec(text)
-		if hasattr(edit._ret, '__len__'):
+		an.eval_(text) or an.exec_(text)
+		if hasattr(edit.ret, '__len__'):
 			selectionlen = len(self.view.selection)
 			if selectionlen > 1:
 				# 依次应用到光标
-				itr = iter(edit._ret)
+				itr = iter(edit.ret)
 				i = 0
 				for region in self.view.selection:
 					if i == selectionlen:
@@ -98,7 +98,7 @@ class InsertListCommand(sublime_plugin.TextCommand):
 				# 列表插入到当前位置
 				regions = []
 				i = 0
-				itemlen = len(edit._ret)
+				itemlen = len(edit.ret)
 				usetpl = False # 使用模板
 				region = self.view.selection[0]
 				if selectionlen == 1 and region.size() > 1 and self.view.substr(region.begin()) == '%':
@@ -106,13 +106,13 @@ class InsertListCommand(sublime_plugin.TextCommand):
 					tpl = self.view.substr(sublime.Region(region.begin() + 1, region.end())) # 模板文字
 				self.view.erase(edit, region)
 				while i < itemlen:
-					item = edit._ret[i]
+					item = edit.ret[i]
 					if not usetpl:
 						item = extypes.astr(item)
 					else:
-						if extypes.is_list_or_tuple(item):
+						if isinstance(item, (list, tuple)):
 							argslen = len(item) # 当前参数的长度
-							iscontainer = argslen > 0 and extypes.is_list_or_tuple(item[0])
+							iscontainer = argslen > 0 and isinstance(item[0], (list, tuple))
 							if iscontainer and argslen == 1:
 								item = tpl.format(*item[0])
 							elif iscontainer and argslen == 2:

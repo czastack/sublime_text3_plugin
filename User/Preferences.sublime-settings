@@ -11,7 +11,8 @@
 		"__pycache__",
 		"node_modules"
 	],
-	"font_size": 12,
+	"font_face": "Source Code Pro",
+	"font_size": 13,
 	"ignored_packages":
 	[
 		"Color Scheme - Default",

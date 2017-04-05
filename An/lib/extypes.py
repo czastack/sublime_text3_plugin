@@ -15,7 +15,7 @@ def list_find(li, fn):
     """列表查找第一个匹配的元素"""
     for x in li:
         if fn(x):
-            return x;
+            return x
 
 
 def puts(dst, src, keys=None):

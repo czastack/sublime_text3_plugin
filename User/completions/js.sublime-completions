@@ -9,5 +9,6 @@
 		{ "trigger": "vthis\tvar $this = $(this);", "contents": "var \\$this = \\$(this);" },
 		{ "trigger": "$this attr", "contents": "\\$(this).attr('$1')" },
 		{ "trigger": "jqsp\tstopPropagation", "contents": "event.stopPropagation();" },
+		{ "trigger": "constructor", "contents": "constructor" },
 	]
 }

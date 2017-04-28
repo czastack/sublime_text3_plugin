@@ -1,0 +1,8 @@
+<snippet>
+	<content><![CDATA[
+{{block.super}}
+]]></content>
+	<tabTrigger>djsuper</tabTrigger>
+	<scope>text.html</scope>
+	<description>django block</description>
+</snippet>

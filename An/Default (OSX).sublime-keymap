@@ -19,4 +19,5 @@
     { "keys": ["ctrl+shift+="], "command": "start_test" },
     { "keys": ["ctrl+shift+o"], "command": "my_file" },
     { "keys": ["super+alt+l"], "command": "focus_output" },
+    { "keys": ["super+shift+alt+l"], "command": "an_script", "args": {"name": ".sublime.clear_output"} },
 ]

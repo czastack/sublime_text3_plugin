@@ -11,7 +11,7 @@
 		"__pycache__",
 		"node_modules"
 	],
-	"font_size": 13,
+	"font_size": 12,
 	"ignored_packages":
 	[
 		"Color Scheme - Default",

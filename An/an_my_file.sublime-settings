@@ -32,14 +32,12 @@
 			[
 				{"name": "Mac note", "path": "mac.txt"},
 				{"name": "Linux note", "path": "linux.txt"},
+				{"name": "Sublime note", "path": "sublime.txt"},
+				{"name": "JS note", "path": "js.txt"},
+				{"name": "Python note", "path": "python.txt"},
 			]
 		},
-		{"name": "Quseit", "path": "~/Documents/quseit/", "children": 
-			[
-				{"name": "Todo list", "path": "todo.txt"},
-				{"name": "qianai", "path": "qianai.txt"},
-			]
-		},
+		{"name": "html", "path": "/usr/local/var/www/index.html"},
 	],
 	"windows": [
 		{"name": "Note", "path": "E:/note/", "children": 

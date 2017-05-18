@@ -1,0 +1,10 @@
+{
+	"scope": "source.js",
+
+	"completions":
+	[
+		{ "trigger": "padding" },
+		{ "trigger": "paddingHorizontal"},
+		{ "trigger": "paddingVertical" },
+	]
+}

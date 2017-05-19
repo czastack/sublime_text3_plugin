@@ -56,10 +56,13 @@ class An:
 
 	#作为print file参数
 	def flush(self):
-		pass
+		if self.stdout:
+			self.stdout.flush()
 
 	def write(self, s):
-		if self.output:
+		if self.stdout:
+			self.stdout.write(s)
+		elif self.output:
 			self.output.run_command('append', {"characters": s})
 			self.output.run_command('viewport_scrool', {"di": 4})
 

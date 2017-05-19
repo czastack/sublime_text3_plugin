@@ -60,7 +60,7 @@ class An:
 			self.stdout.flush()
 
 	def write(self, s):
-		if self.stdout:
+		if self.stdout and not self.haserr:
 			self.stdout.write(s)
 		elif self.output:
 			self.output.run_command('append', {"characters": s})
@@ -71,7 +71,9 @@ class An:
 		if not self.output:
 			self.tout()
 		import traceback
+		self.haserr = True
 		self.echo(traceback.format_exc())
+		self.haserr = False
 
 	def exec_(self, text):
 		try:

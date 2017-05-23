@@ -1,10 +1,12 @@
 import re, sublime, sublime_plugin
 from An import an
 
+
 class BaseSelect(sublime_plugin.TextCommand):
 	def set_regions(self, regions):
 		self.view.selection.clear()
 		self.view.selection.add_all(regions)
+
 
 # 选中所选部分中符合指定正则表达式的内容
 class SelectReg(BaseSelect):
@@ -25,48 +27,31 @@ class SelectReg(BaseSelect):
 				regions.append(sublime.Region(span[0] + pt, span[1] + pt))
 		self.set_regions(regions)
 
-# # 快速选中所有行首
-# class SelectLineStartCommand(BaseSelect):
-# 	def run(self, edit):
-# 		regions = an.lines(self.view)
-# 		for region in regions:
-# 			region.b = region.a
-# 		self.set_regions(regions)
-
-# # 快速选中所有行尾
-# class SelectLineEndCommand(BaseSelect):
-# 	def run(self, edit):
-# 		regions = an.lines(self.view)
-# 		for region in regions:
-# 			region.a = region.b
-# 		self.set_regions(regions)
-
-# # 快速选中所有行
-# class SelectLineAllCommand(BaseSelect):
-# 	def run(self, edit):
-# 		regions = an.lines(self.view)
-# 		self.set_regions(regions)
 
 # 快速选中所有行首
 class SelectLineStartCommand(SelectReg):
 	reg = '^'
 
+
 # 快速选中所有行尾
 class SelectLineEndCommand(SelectReg):
 	reg = '$'
+
 
 # 快速选中所有行
 class SelectLineAllCommand(SelectReg):
 	reg = '.+'
 
+
 # 选中空行
 class SelectEmptyLinesCommand(SelectReg):
 	reg = '\n[ \t]*(?=\n|$)'
 
+
 # 选中行结尾的空白字符
 class SelectLineEndSpaceCommand(SelectReg):
 	reg = '[ \t]+(?=\n|$)'
-	
+
 
 # 按长度分隔选区
 class SplitSelectByLenCommand(BaseSelect):
@@ -89,6 +74,7 @@ class SplitSelectByLenCommand(BaseSelect):
 			if len(regions) > 0:
 				self.view.selection.clear()
 				self.view.selection.add_all(regions)
+
 
 # 用正则表达式分隔选区
 class SplitSelectByRegCommand(BaseSelect):
@@ -121,11 +107,13 @@ class SplitSelectByRegCommand(BaseSelect):
 				self.view.selection.clear()
 				self.view.selection.add_all(regions)
 
+
 # 选区行尾互换
 class SelectStartToEndCommand(BaseSelect):
 	def run(self, edit):
 		regions = [sublime.Region(region.b, region.a) for region in self.view.selection]
 		self.set_regions(regions)
+
 
 # 交换两个选区的内容
 class ExchangeSelectCommand(BaseSelect):
@@ -135,6 +123,7 @@ class ExchangeSelectCommand(BaseSelect):
 			tmp = view.substr(view.selection[0])
 			view.replace(edit, view.selection[0], view.substr(view.selection[1]))
 			view.replace(edit, view.selection[1], tmp)
+
 
 # 选中引号外侧/内侧
 class SelectionQuoteCommand(BaseSelect):
@@ -174,6 +163,7 @@ class SelectionQuoteCommand(BaseSelect):
 				regions.append(region)
 		if regions:
 			self.set_regions(regions)
+
 
 # 选中每两个光标中间的区域（列模式）
 class SelectMiddleCommand(BaseSelect):

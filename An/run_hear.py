@@ -5,12 +5,16 @@ from subl import load_settings
 from utils.path import run_at
 
 class RunHearCommand(sublime_plugin.WindowCommand):
-	def run(self, path = None):
+	def run(self, path=None):
 		self.run_list_data = load_settings(self, sublime.platform())
 		if self.run_list_data:
 			run_list = [[item['title'], item['cmd']] for item in self.run_list_data]
 			if not path:
-				path = os.path.dirname(self.window.active_view().file_name())
+				path = self.window.active_view().file_name()
+				if path:
+					path = os.path.dirname(path)
+				else:
+					path = sublime.packages_path()
 			self.window.show_quick_panel(run_list, run_at(self.onselect, path), selected_index=an._run_hear_last or -1)
 
 	def onselect(self, index):
@@ -18,5 +22,6 @@ class RunHearCommand(sublime_plugin.WindowCommand):
 			return
 		an._run_hear_last = index
 		cmd = self.run_list_data[index]['cmd']
+		cmd = an.varsval(cmd)
 		p = os.popen(cmd)
 		p.close()

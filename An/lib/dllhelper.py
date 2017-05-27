@@ -1,7 +1,7 @@
 import ctypes, platform, os.path as Path
 
 class DllHelper:
-	__slots__ = ('clib',)
+	__slots__ = ()
 
 	"""
 	:field __libname__: (pypath, name)
@@ -9,9 +9,10 @@ class DllHelper:
 	    eg. (('attach', None, c_bool),)
 	"""
 
-	def __init__(self):
-		if getattr(self, 'clib', None) is None:
-			self._load()
+	def __new__(cls):
+		if getattr(cls, 'clib', None) is None:
+			cls._load()
+		return super().__new__(cls)
 
 	@classmethod
 	def _load(cls):

@@ -103,9 +103,12 @@ class An:
 			for key, val in self.globals.items():
 				edit.__dict__.setdefault(key, val)
 
+	def getWindow(self):
+		return sublime.Window(self.window_id)
+
 	def open(self, file):
 		"""打开文件或目录"""
-		subl.open(file, sublime.Window(self.window_id))
+		subl.open(file, self.getWindow())
 
 	def popup(self, text, **args):
 		self.view.show_popup('<style>body{margin:0; padding:10px; color:#ccc; font-size:18px; background-color:#000;}</style>' + text, **args);

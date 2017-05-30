@@ -13,4 +13,6 @@ def newthread(fn):
 	def _deco(*args, **kwargs):
 		runner = threading.Thread(target=lambda: fn(*args, **kwargs))
 		runner.start()
+		return runner
+
 	return _deco

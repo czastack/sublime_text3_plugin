@@ -103,12 +103,15 @@ class An:
 			for key, val in self.globals.items():
 				edit.__dict__.setdefault(key, val)
 
-	def getWindow(self):
+	def get_window(self):
 		return sublime.Window(self.window_id)
+
+	def active_view(self):
+		return self.get_window().active_view()
 
 	def open(self, file):
 		"""打开文件或目录"""
-		subl.open(file, self.getWindow())
+		subl.open(file, self.get_window())
 
 	def popup(self, text, **args):
 		self.view.show_popup('<style>body{margin:0; padding:10px; color:#ccc; font-size:18px; background-color:#000;}</style>' + text, **args);
@@ -156,6 +159,13 @@ class An:
 	def replace(self, rulers):
 		result = string.replace(self.text(), rulers)
 		self.view.run_command('set_text', {'text': result})
+
+	def map_selected_text(self, fn, withIndex=False):
+		origin = self.selected_text()
+		if withIndex:
+			origin = enumerate(origin)
+		texts = list(map(fn, origin))
+		self.view.run_command('set_regions_text', {'texts': texts})
 
 	region = staticmethod(viewlib.view_region)
 	run_win_command = sublime.Window.run_command

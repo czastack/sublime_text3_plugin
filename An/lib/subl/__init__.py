@@ -4,8 +4,10 @@ from os import path as Path
 def sublime_path():
 	return Path.dirname(sublime.__file__)
 
+
 def default_packages_path():
 	return Path.join(sublime_path(), 'Packages')
+
 
 def opened_files(change_sep = True):
 	"""当前窗口所有打开的文件名"""
@@ -17,12 +19,14 @@ def opened_files(change_sep = True):
 		files.append(file)
 	return files
 
+
 def load_settings(self, key, prefix = 'an_'):
 	settings = getattr(self, '_settings', None)
 	if not settings:
 		settings = sublime.load_settings(prefix + self.name() + '.sublime-settings')
 		self._settings = settings
 	return settings.get(key)
+
 
 def load_platform_settings(arg1):
 	"""
@@ -46,8 +50,10 @@ def load_platform_settings(arg1):
 		allsetting = specific
 	return allsetting
 
+
 def open(file, win):
 	win.run_command('open_file', {"file": file})
+
 
 def open_zip_file(zfpath, filename):
 	import os
@@ -57,6 +63,7 @@ def open_zip_file(zfpath, filename):
 	view = sublime.active_window().new_file()
 	view.set_name(filename.split(os.path.sep)[-1])
 	view.run_command('append', {"characters": content})
+
 
 def sass_compile_string(text):
 	import sasshelper

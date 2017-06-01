@@ -1,6 +1,7 @@
 import sublime, sublime_api, extypes
 import subl, subl.view as viewlib
-from utils import string
+import utils.string
+import utils.path
 
 class An:
 	__slots__ = ('_data', 'window_id')
@@ -111,7 +112,7 @@ class An:
 
 	def open(self, file):
 		"""打开文件或目录"""
-		subl.open(file, self.get_window())
+		subl.open(utils.path.get_file(file), self.get_window())
 
 	def popup(self, text, **args):
 		self.view.show_popup('<style>body{margin:0; padding:10px; color:#ccc; font-size:18px; background-color:#000;}</style>' + text, **args);
@@ -154,10 +155,10 @@ class An:
 		self.run_win_command('clone_file')
 
 	def matchAll(self, reg, fn):
-		return string.matchAll(self.text(), reg, fn)
+		return utils.string.matchAll(self.text(), reg, fn)
 
 	def replace(self, rulers):
-		result = string.replace(self.text(), rulers)
+		result = utils.string.replace(self.text(), rulers)
 		self.view.run_command('set_text', {'text': result})
 
 	def map_selected_text(self, fn, withIndex=False):

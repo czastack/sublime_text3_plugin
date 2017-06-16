@@ -1,0 +1,9 @@
+{
+	"scope": "source.js",
+
+	"completions":
+	[
+		{ "trigger": "ts", "contents": "this.state." },
+		{ "trigger": "tss", "contents": "this.setState({$1})"},
+	]
+}

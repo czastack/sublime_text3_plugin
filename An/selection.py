@@ -190,3 +190,12 @@ class SelectMiddleCommand(BaseSelect):
 					regions.append(sublime.Region(a, b))
 				aa += 1
 		self.set_regions(regions)
+
+
+# 选中区域暂存
+class SelectToArrayCommand(sublime_plugin.TextCommand):
+	def run(self, edit):
+		data = []
+		for region in self.view.selection:
+			data.append(self.view.substr(region))
+		an.tmp = data

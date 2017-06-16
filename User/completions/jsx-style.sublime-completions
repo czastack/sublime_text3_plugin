@@ -1,0 +1,10 @@
+{
+	"scope": "meta.group.braces.curly.js",
+
+	"completions":
+	[
+		{ "trigger": "padding" },
+		{ "trigger": "paddingHorizontal"},
+		{ "trigger": "paddingVertical" },
+	]
+}

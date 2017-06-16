@@ -10,5 +10,6 @@
     {"caption": "An:  9.交换两个选区的内容",   "command": "exchange_select"},
     {"caption": "An: 10.在此目录运行",         "command": "run_hear"},
     {"caption": "An: 11.选中空行",             "command": "select_empty_lines"},
-    {"caption": "An: 11.选中行尾空白字符",     "command": "select_line_end_space"},
+    {"caption": "An: 12.选中行尾空白字符",     "command": "select_line_end_space"},
+    {"caption": "An: 13.选中区域暂存an.tmp",     "command": "select_to_array"},
 ]

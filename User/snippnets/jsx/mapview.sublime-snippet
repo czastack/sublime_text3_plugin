@@ -1,0 +1,10 @@
+<snippet>
+	<content><![CDATA[
+{this.state.$1_list.map((item, i) => (
+	$2
+))}
+]]></content>
+	<tabTrigger>mapview</tabTrigger>
+	<scope>meta.jsx.js</scope>
+	<description>mapview</description>
+</snippet>

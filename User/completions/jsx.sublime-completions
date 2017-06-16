@@ -1,10 +1,8 @@
 {
-	"scope": "source.js",
+	"scope": "meta.jsx.js",
 
 	"completions":
 	[
-		{ "trigger": "padding" },
-		{ "trigger": "paddingHorizontal"},
-		{ "trigger": "paddingVertical" },
+		{ "trigger": "st", "contents": "style={styles.$1}" },
 	]
 }

@@ -1,5 +1,7 @@
+from functools import partial
 
-def lazyproperty(func):
+
+def lazy(func, type_=property):
     def _deco(self):
         name = '_' + func.__name__
         val = getattr(self, name, None)
@@ -7,10 +9,10 @@ def lazyproperty(func):
             val = func(self)
             setattr(self, name, val)
         return val
-    return property(_deco)
+    return type_(_deco) if type_ else _deco
 
 
-def lazyclassproperty(func):
+def classlazy(func, type_=property):
     def _deco(self):
         name = '_' + func.__name__
         val = getattr(self.__class__, name, None)
@@ -18,4 +20,8 @@ def lazyclassproperty(func):
             val = func(self)
             setattr(self.__class__, name, val)
         return val
-    return property(_deco)
+    return type_(_deco) if type_ else _deco
+
+
+lazymethod = partial(lazy, type_=None)
+lazyclassmethod = partial(lazy, type_=classmethod)

@@ -28,10 +28,10 @@ def puts(dst, src, keys=None):
 
 
 def append_or(dic, key, value):
-    if key in value:
-        dic[dic].append(value)
+    if key in dic:
+        dic[key].append(value)
     else:
-        dic[dic] = [value]
+        dic[key] = [value]
 
 
 class Map(dict):

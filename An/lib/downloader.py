@@ -1,5 +1,5 @@
 import os, threading
-from urllib.request import urlopen
+from urllib.requester import urlopen
 
 class Downloader(threading.Thread):
 	# keepdir datas为url列表且urlprefix不为空时，文件名是否保留路径

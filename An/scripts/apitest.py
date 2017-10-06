@@ -1,5 +1,5 @@
 from utils.thread import newthread
-import request
+import requesterer
 
 def wrapper(fn):
     @newthread
@@ -12,5 +12,5 @@ def wrapper(fn):
             an.echo(e)
     return _deco
 
-an.api_get = wrapper(request.get)
-an.api_post = wrapper(request.post)
+an.api_get = wrapper(requester.get)
+an.api_post = wrapper(requester.post)

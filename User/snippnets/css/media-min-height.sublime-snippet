@@ -1,0 +1,10 @@
+<snippet>
+	<content><![CDATA[
+@media screen and (min-height: $1px) {
+    $2
+}
+]]></content>
+	<tabTrigger>mmih</tabTrigger>
+	<scope>source.scss,source.css</scope>
+	<description>@media min-heith</description>
+</snippet>

@@ -21,11 +21,14 @@ def strsq(a, b, split = ''):
 	sq = (chr(x) for x in range(a, b + 1))
 	return split.join(sq) if isinstance(split, str) else sq
 
+
 def str2codes(s):
-	return list(map(ord, s))
+	return [ord(ch) for ch in s]
+
 
 def codes2str(cs):
-	return ''.join(map(chr, cs))
+	return ''.join(chr(c) for c in cs)
+
 
 def matchAll(reg, text, fn):
 	if isinstance(fn, (list, tuple)):
@@ -37,6 +40,7 @@ def matchAll(reg, text, fn):
 		fn = lambda x: x.group(arg)
 
 	return [fn(m) for m in re.finditer(reg, text)]
+
 
 def replace(s, rulers):
 	"""字符串批量替换"""

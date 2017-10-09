@@ -23,3 +23,13 @@ class Color:
 	def toHalfHex(self):
 		h = lambda c: (c & 0xF0) >> 4
 		return "#{r:X}{g:X}{b:X}".format(r=h(self.r), g=h(self.g), b=h(self.b))
+
+
+def mixColor(c1, c2):
+    """ 混合两种RRGB颜色
+    print(hex(mixColor(0xee8b83, 0x83aadc)))
+    """
+    r = int(((c1 >> 16) + (c2 >> 16)) / 2 + 0.5)
+    g = int((((c1 >> 8) & 0xFF) + ((c2 >> 8) & 0xFF)) / 2 + 0.5)
+    b = int(((c1 & 0xFF) + (c2 & 0xFF)) / 2 + 0.5)
+    return (r << 16) | (g << 8) | b

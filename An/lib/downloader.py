@@ -1,14 +1,22 @@
 import os, threading
+from urllib import request
 from urllib.request import urlopen
 
+
 class Downloader(threading.Thread):
-	# keepdir datas为url列表且urlprefix不为空时，文件名是否保留路径
-	def __init__(self, datas, urlprefix=None, filedir=None, keepdir=False, opener=None):
+	""" 下载器
+	:param keepdir: datas为url列表且urlprefix不为空时，文件名是否保留路径
+	:param header: header dict
+	"""
+	def __init__(self, datas, urlprefix=None, filedir=None, keepdir=False, opener=None, header=None):
 		super(Downloader, self).__init__()
 		self.datas = datas
 		self.urlprefix = urlprefix
 		self.filedir = filedir
 		self.keepdir = keepdir
+		if header and opener is None:
+			opener = request.build_opener()
+			opener.addheaders = header.items()
 		self.opener = opener
 
 	def run(self):

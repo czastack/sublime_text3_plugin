@@ -1,0 +1,10 @@
+<snippet>
+	<content><![CDATA[
+@media screen and (min-width: $1px) {
+    $2
+}
+]]></content>
+	<tabTrigger>mmiw</tabTrigger>
+	<scope>source.scss,source.css</scope>
+	<description>@media min-width</description>
+</snippet>

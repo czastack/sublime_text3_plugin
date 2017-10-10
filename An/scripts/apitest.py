@@ -1,5 +1,5 @@
 from utils.thread import newthread
-import requesterer
+import requester
 
 def wrapper(fn):
     @newthread

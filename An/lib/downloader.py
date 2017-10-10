@@ -1,6 +1,7 @@
 import os, threading
 from urllib import request
 from urllib.request import urlopen
+from urllib.error import HTTPError
 
 
 class Downloader(threading.Thread):
@@ -36,23 +37,24 @@ class Downloader(threading.Thread):
 					filename = data if self.keepdir else os.path.basename(data)
 				else:
 					filename = os.path.basename(data)
-			request = self.opener.open(url) if self.opener else urlopen(url)
-			filepath = filename if not self.filedir else os.path.join(self.filedir, filename)
 			
-			# 创建父目录
-			file_parent_dir = os.path.dirname(filepath)
-			if file_parent_dir and not os.path.isdir(file_parent_dir):
-				print('创建目录:' + file_parent_dir)
-				os.makedirs(file_parent_dir)
-
+			filepath = filename if not self.filedir else os.path.join(self.filedir, filename)
 			try:
+				request = self.opener.open(url) if self.opener else urlopen(url)
+				
+				# 创建父目录
+				file_parent_dir = os.path.dirname(filepath)
+				if file_parent_dir and not os.path.isdir(file_parent_dir):
+					print('创建目录:' + file_parent_dir)
+					os.makedirs(file_parent_dir)
+
 				readed = request.read()
+				with open(filepath, 'wb') as file:
+					file.write(readed)
+				request.close()
 			except:
 				print('下载失败: %s, %s' % (url, filename))
-				return
-			with open(filepath, 'wb') as file:
-				file.write(readed)
-			request.close()
+
 			now += 1
 			print("{0:2d}/{1:2d} {2}".format(now, length, filepath))
 		print('finish')

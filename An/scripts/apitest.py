@@ -1,13 +1,16 @@
 from utils.thread import newthread
+from An import an
 import requester
 
 def wrapper(fn):
     @newthread
-    def _deco(host, *args, **keyArgs):
+    def _deco(url, *args, **keyArgs):
         try:
-            result = fn(an.host + host, *args, **keyArgs)
+            if an.host:
+                url = an.host + url
+            result = fn(url, *args, **keyArgs)
             result = result.encode().decode('unicode_escape')
-            an.echo(result)
+            an.echo(url, result)
         except Exception as e:
             an.echo(e)
     return _deco

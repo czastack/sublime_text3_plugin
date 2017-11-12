@@ -1,4 +1,7 @@
-import ctypes, platform, os.path as Path
+import ctypes
+import platform
+import os
+Path = os.path
 
 class DllHelper:
 	__slots__ = ()
@@ -6,7 +9,7 @@ class DllHelper:
 	"""
 	:field __libname__: (pypath, name)
 	:classmethod fnsign() -> (name, argtypes, restypes)
-	    eg. (('attach', None, c_bool),)
+		eg. (('attach', None, c_bool),)
 	"""
 
 	def __new__(cls):
@@ -17,16 +20,30 @@ class DllHelper:
 	@classmethod
 	def _load(cls):
 		pyfile, libname = cls.__libname__
+		osname = platform.system()
+		libdir = Path.dirname(pyfile)
+		oldir = None
 
-		if platform.system() == 'Windows':
+		if osname == 'Windows':
 			libname = ('%s_x86.dll' if platform.architecture()[0].startswith('32') else '%s.dll') % libname
+		elif osname == 'Darwin':
+			libname = '%s.dylib' % libname
+			oldir = os.getcwd()
+			os.chdir(libdir)
 		else:
 			libname = '%s.so' % libname
 
-		libpath = Path.join(Path.dirname(pyfile), libname)
+		libpath = Path.join(libdir, libname)
 
-		if Path.exists(libpath):
-			cls.clib = ctypes.cdll.LoadLibrary(libpath)
+		if Path.exists(libname):
+			try:
+				cls.clib = ctypes.cdll.LoadLibrary(libname)
+			except Exception as e:
+				if oldir:
+					os.chdir(oldir)
+				raise e
+			if oldir:
+				os.chdir(oldir)
 		else:
 			raise Exception("Could not load " + libpath)
 

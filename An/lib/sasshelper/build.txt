@@ -1,0 +1,6 @@
+# 编译libsass
+c++ -dynamiclib -Wall -O2 -Wl,-undefined,error -std=c++0x -stdlib=libc++ -ldl -fPIC -fPIC -o libsass.dylib src/cencode.o src/ast.o src/node.o src/context.o src/constants.o src/functions.o src/color_maps.o src/environment.o src/ast_fwd_decl.o src/bind.o src/file.o src/util.o src/json.o src/units.o src/values.o src/plugins.o src/position.o src/lexer.o src/parser.o src/prelexer.o src/eval.o src/expand.o src/listize.o src/cssize.o src/extend.o src/output.o src/inspect.o src/emitter.o src/check_nesting.o src/remove_placeholders.o src/sass.o src/sass_util.o src/sass_values.o src/sass_context.o src/sass_functions.o src/sass2scss.o src/to_c.o src/to_value.o src/source_map.o src/subset_map.o src/error_handling.o src/memory/SharedPtr.o src/utf8_string.o src/base64vlq.o -lm -ldl
+
+
+
+gcc main.cpp -shared -fPIC -o sasshelper-darwin.so -L. -l sass-darwin -I /Users/an/Downloads/libsass-3.4.5/include

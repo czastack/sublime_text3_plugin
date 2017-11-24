@@ -6,7 +6,7 @@ def wrapper(fn):
     @newthread
     def _deco(url, *args, **keyArgs):
         try:
-            if an.host:
+            if an.urlpre:
                 url = an.host + url
             result = fn(url, *args, **keyArgs)
             result = result.encode().decode('unicode_escape')

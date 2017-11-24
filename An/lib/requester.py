@@ -1,20 +1,22 @@
 from urllib import request
 from urllib.parse import urlencode, quote
 
-def do_request(url, data=None, headers=None, isGet=True, encoding="UTF-8"):
+def do_request(url, data=None, headers=None, isget=True, encoding="UTF-8"):
 	if data:
-		postdata = urlencode(data, encoding=encoding)
-		if isGet:
-			url = url + ('&' if '?' in url else '?') + postdata
-			postdata = None
+		if isinstance(data, str):
+			data = data.encode(encoding=encoding)
 		else:
-			postdata = postdata.encode()
+			data = urlencode(data, encoding=encoding)
+			if isget:
+				url = url + ('&' if '?' in url else '?') + data
+				data = None
+			else:
+				data = data.encode(encoding=encoding)
 	else:
-		postdata = None if isGet else b''
+		data = None if isget else b''
 	opener = request.build_opener()
-	if headers:
-		opener.addheaders = headers.items()
-	result = opener.open(url, postdata)
+	req = request.Request(url=url, data=data, headers=headers)
+	result = opener.open(req)
 	the_page = result.read()
 	result.close()
 	return the_page.decode(encoding)
@@ -23,5 +25,5 @@ def get(*args, **keyargs):
 	return do_request(*args, **keyargs)
 
 def post(*args, **keyargs):
-	keyargs['isGet'] = False
+	keyargs['isget'] = False
 	return do_request(*args, **keyargs)

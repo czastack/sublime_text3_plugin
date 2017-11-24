@@ -4,13 +4,20 @@ import requester
 
 def wrapper(fn):
     @newthread
-    def _deco(url, *args, **keyArgs):
+    def _deco(url, *args, **kwargs):
         try:
             if an.urlpre:
                 url = an.host + url
-            result = fn(url, *args, **keyArgs)
-            result = result.encode().decode('unicode_escape')
-            an.echo(url, result)
+            jsonzh = kwargs.pop('jsonzh', False)
+            logurl = kwargs.pop('logurl', False)
+            result = fn(url, *args, **kwargs)
+            if jsonzh:
+                if isinstance(result, str):
+                    result = result.encode()
+                result = result.decode('unicode_escape')
+            if logurl:
+                an.echo(url, end=" ")
+            an.echo(result)
         except Exception as e:
             an.echo(e)
     return _deco

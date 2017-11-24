@@ -17,9 +17,13 @@ def do_request(url, data=None, headers=None, isget=True, encoding="UTF-8"):
 	opener = request.build_opener()
 	req = request.Request(url=url, data=data, headers=headers)
 	result = opener.open(req)
-	the_page = result.read()
+	content = result.read()
 	result.close()
-	return the_page.decode(encoding)
+	try:
+		content = content.decode(encoding)
+	except:
+		pass
+	return content
 
 def get(*args, **keyargs):
 	return do_request(*args, **keyargs)

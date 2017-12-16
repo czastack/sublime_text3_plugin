@@ -8,6 +8,6 @@
 		{"title": "git", "cmd": "git"},
 	],
 	"osx": [
-		{"title": "iTerm2", "cmd": "'$packages/An/scripts/terminal/iTerm2-v3.sh'"},
+		{"title": "iTerm2", "cmd": "'$packages/An/scripts/terminal/iTerm2-v3.sh' --open-in-tab"},
 	],
 }

@@ -11,10 +11,7 @@ class RunHearCommand(sublime_plugin.WindowCommand):
 			run_list = [[item['title'], item['cmd']] for item in self.run_list_data]
 			if not path:
 				path = self.window.active_view().file_name()
-				if path:
-					path = os.path.dirname(path)
-				else:
-					path = sublime.packages_path()
+				path = os.path.dirname(path) if path else sublime.packages_path()
 			self.window.show_quick_panel(run_list, run_at(self.onselect, path), selected_index=an._run_hear_last or -1)
 
 	def onselect(self, index):

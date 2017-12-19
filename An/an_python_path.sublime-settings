@@ -1,4 +1,4 @@
 {
-	"linux": ["/work/python"],
-	"windows": ["e:/python"],
+    "linux": ["/work/python"],
+    "windows": ["e:/python"],
 }

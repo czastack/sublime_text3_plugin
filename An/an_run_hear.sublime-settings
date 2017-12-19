@@ -1,13 +1,13 @@
 {
-	"windows": [
-		{"title": "cmd", "cmd": "start cmd"},
-		{"title": "git", "cmd": "start D:/MinGW/git/git-bash.exe"},
-	],
-	"linux": [
-		{"title": "terminal", "cmd": "gnome-terminal"},
-		{"title": "git", "cmd": "git"},
-	],
-	"osx": [
-		{"title": "iTerm2", "cmd": "'$packages/An/scripts/terminal/iTerm2-v3.sh' --open-in-tab"},
-	],
+    "windows": [
+        {"title": "cmd", "cmd": "start cmd"},
+        {"title": "git", "cmd": "start D:/MinGW/git/git-bash.exe"},
+    ],
+    "linux": [
+        {"title": "terminal", "cmd": "gnome-terminal"},
+        {"title": "git", "cmd": "git"},
+    ],
+    "osx": [
+        {"title": "iTerm2", "cmd": "'$packages/An/scripts/terminal/iTerm2-v3.sh' --open-in-tab"},
+    ],
 }

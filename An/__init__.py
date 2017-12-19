@@ -1,16 +1,16 @@
 if __name__ == 'An':
-	import os, sys
-	sys.path.append(os.path.join(os.path.dirname(__file__), 'lib'))
-	del os, sys
+    import os, sys
+    sys.path.append(os.path.join(os.path.dirname(__file__), 'lib'))
+    del os, sys
 
-	from subl.an import An
-	an = An()
+    from subl.an import An
+    an = An()
 else:
-	def plugin_loaded():
-		from An import an
-		an.onload()
+    def plugin_loaded():
+        from An import an
+        an.onload()
 
-		import subl, sys
-		paths = subl.load_platform_settings('an_python_path')
-		if paths:
-			sys.path[:0] = paths
+        import subl, sys
+        paths = subl.load_platform_settings('an_python_path')
+        if paths:
+            sys.path[:0] = paths

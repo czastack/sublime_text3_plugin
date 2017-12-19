@@ -1,53 +1,53 @@
 {
-	"all": [
-		{"name": "设置", "path": "${packages}/", "children": 
-			[
-				{"name": "默认设置", "path": "Default/Preferences.sublime-settings"},
-				{"name": "默认按键", "path": "Default/Default (${platform}).sublime-keymap"},
-				{"name": "默认菜单", "path": "Default/Main.sublime-menu"},
-				{"name": "用户设置", "path": "User/Preferences.sublime-settings"},
-				{"name": "用户按键", "path": "User/Default (${platform}).sublime-keymap"},
-			]
-		},
-		{"name": "Scripts", "path": "${packages}/An/scripts/", "children": 
-			[
-				{"name": "apitest", "path": "apitest.py"},
-			]
-		},
-	],
-	"linux": [
-		{"name": "Note", "path": "/work/note/", "children": 
-			[
-				{"name": "Todo list", "path": "todo.txt"},
-				{"name": "Linux note", "path": "linux.txt"},
-				{"name": "Sublime note", "path": "sublime.txt"},
-				{"name": "JS note", "path": "js.txt"},
-				{"name": "Python note", "path": "python.txt"},
-			]
-		},
-		{"name": "html", "path": "/var/www/html/index.html"},
-	],
-	"osx": [
-		{"name": "Note", "path": "~/Documents/note/", "children": 
-			[
-				{"name": "Mac note", "path": "mac.txt"},
-				{"name": "Linux note", "path": "linux.txt"},
-				{"name": "Sublime note", "path": "sublime.txt"},
-				{"name": "JS note", "path": "js.txt"},
-				{"name": "Python note", "path": "python.txt"},
-			]
-		},
-		{"name": "html", "path": "~/Documents/html/index.html"},
-	],
-	"windows": [
-		{"name": "Note", "path": "E:/note/", "children": 
-			[
-				{"name": "Todo list", "path": "todo.txt"},
-				{"name": "Linux note", "path": "linux.txt"},
-				{"name": "Sublime note", "path": "sublime.txt"},
-				{"name": "JS note", "path": "js.txt"},
-				{"name": "Python note", "path": "python.txt"},
-			]
-		},
-	],
+    "all": [
+        {"name": "设置", "path": "${packages}/", "children": 
+            [
+                {"name": "默认设置", "path": "Default/Preferences.sublime-settings"},
+                {"name": "默认按键", "path": "Default/Default (${platform}).sublime-keymap"},
+                {"name": "默认菜单", "path": "Default/Main.sublime-menu"},
+                {"name": "用户设置", "path": "User/Preferences.sublime-settings"},
+                {"name": "用户按键", "path": "User/Default (${platform}).sublime-keymap"},
+            ]
+        },
+        {"name": "Scripts", "path": "${packages}/An/scripts/", "children": 
+            [
+                {"name": "apitest", "path": "apitest.py"},
+            ]
+        },
+    ],
+    "linux": [
+        {"name": "Note", "path": "/work/note/", "children": 
+            [
+                {"name": "Todo list", "path": "todo.txt"},
+                {"name": "Linux note", "path": "linux.txt"},
+                {"name": "Sublime note", "path": "sublime.txt"},
+                {"name": "JS note", "path": "js.txt"},
+                {"name": "Python note", "path": "python.txt"},
+            ]
+        },
+        {"name": "html", "path": "/var/www/html/index.html"},
+    ],
+    "osx": [
+        {"name": "Note", "path": "~/Documents/note/", "children": 
+            [
+                {"name": "Mac note", "path": "mac.txt"},
+                {"name": "Linux note", "path": "linux.txt"},
+                {"name": "Sublime note", "path": "sublime.txt"},
+                {"name": "JS note", "path": "js.txt"},
+                {"name": "Python note", "path": "python.txt"},
+            ]
+        },
+        {"name": "html", "path": "~/Documents/html/index.html"},
+    ],
+    "windows": [
+        {"name": "Note", "path": "E:/note/", "children": 
+            [
+                {"name": "Todo list", "path": "todo.txt"},
+                {"name": "Linux note", "path": "linux.txt"},
+                {"name": "Sublime note", "path": "sublime.txt"},
+                {"name": "JS note", "path": "js.txt"},
+                {"name": "Python note", "path": "python.txt"},
+            ]
+        },
+    ],
 }

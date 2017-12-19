@@ -1,10 +1,10 @@
 [
-	{
-		"button": "button2", "count": 1, "modifiers": ["super"],
-		"press_command": "select_middle",
-	},
-	{
-		"button": "button2", "count": 1, "modifiers": ["super", "alt"],
-		"press_command": "select_middle", "press_args": {"sort_by_col": true},
-	},
+    {
+        "button": "button2", "count": 1, "modifiers": ["super"],
+        "press_command": "select_middle",
+    },
+    {
+        "button": "button2", "count": 1, "modifiers": ["super", "alt"],
+        "press_command": "select_middle", "press_args": {"sort_by_col": true},
+    },
 ]

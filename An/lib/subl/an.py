@@ -3,12 +3,19 @@ import subl, subl.view as viewlib
 import utils.string
 import utils.path
 
+
 class An:
-    __slots__ = ('_data', 'window_id')
+    __slots__ = ('_data', 'window_id', 'exec_scope')
 
     def __init__(self):
         self._data = {}
         self.attachWindow(0)
+        self.exec_scope = {
+            'an': self,
+            'print': self.echo,
+            '_print': print,
+            'sublime': sublime,
+        }
 
     def onload(self):
         self.attachWindow(sublime_api.active_window())
@@ -42,6 +49,7 @@ class An:
         win.run_command('show_panel', {'panel': 'output.an'})
 
     def cls(self):
+        """清空控制台"""
         if self.output:
             view = self.output
             if view.is_in_edit():
@@ -52,11 +60,12 @@ class An:
                     view.run_command('undo')
 
     def echo(self, *args, **dictArgs):
+        """控制台打印"""
         dictArgs['file'] = self
         print(*args, **dictArgs)
 
-    #作为print file参数
     def flush(self):
+        """作为print file参数"""
         if self.stdout:
             self.stdout.flush()
 
@@ -67,8 +76,8 @@ class An:
             self.output.run_command('append', {"characters": s})
             self.output.run_command('viewport_scrool', {"di": 4})
 
-    # 打印错误
     def logerr(self, e):
+        """打印错误信息"""
         if not self.output:
             self.tout()
         import traceback
@@ -96,10 +105,8 @@ class An:
 
     def init_exec_env(self):
         edit = self.edit
-        edit.an = self
         edit.view = self.view
-        edit.print = self.echo
-        edit._print = print
+        edit.__dict__.update(self.exec_scope)
         if self.globals:
             for key, val in self.globals.items():
                 edit.__dict__.setdefault(key, val)
@@ -139,10 +146,11 @@ class An:
     def varsval(self, val):
         return sublime_api.expand_variables(val, self.sublvars())
 
-    # 复制的数组（用换行分隔）
-    # 另见: selected_text
     @property
     def copied(self):
+        """ 复制的数组（用换行分隔）
+        另见: selected_text
+        """
         return sublime.get_clipboard().split('\n')
 
     def text(self, view=None):

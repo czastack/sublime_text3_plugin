@@ -1,5 +1,6 @@
 {
     "all": [
+        {"name": "这个列表", "path": "${packages}/An/an_my_file.sublime-settings"},
         {"name": "设置", "path": "${packages}/", "children": 
             [
                 {"name": "默认设置", "path": "Default/Preferences.sublime-settings"},

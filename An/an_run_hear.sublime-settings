@@ -1,7 +1,7 @@
 {
     "windows": [
         {"title": "cmd", "cmd": "start cmd"},
-        {"title": "git", "cmd": "start D:/MinGW/git/git-bash.exe"},
+        {"title": "git", "cmd": "start D:/Git/git-bash.exe"},
     ],
     "linux": [
         {"title": "terminal", "cmd": "gnome-terminal"},

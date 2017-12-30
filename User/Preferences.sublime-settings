@@ -1,6 +1,6 @@
 {
 	"auto_find_in_selection": true,
-	"color_scheme": "Packages/Theme - Brogrammer/brogrammer.tmTheme",
+	"color_scheme": "Packages/User/Monokai Soda.tmTheme",
 	"fold_buttons": true,
 	"folder_exclude_patterns":
 	[
@@ -20,5 +20,6 @@
 	"index_files": false,
 	"line_padding_bottom": 2,
 	"line_padding_top": 2,
+	"theme": "Default.sublime-theme",
 	"update_check": false
 }

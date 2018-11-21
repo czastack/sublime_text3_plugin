@@ -1,0 +1,8 @@
+<snippet>
+	<content><![CDATA[
+{% $1 %}{% end %}
+]]></content>
+	<tabTrigger>tt</tabTrigger>
+	<scope>text.html</scope>
+	<description>tornado tag</description>
+</snippet>

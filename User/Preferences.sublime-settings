@@ -1,5 +1,6 @@
 {
 	"auto_find_in_selection": true,
+	"close_windows_when_empty": false,
 	"color_scheme": "Packages/User/Monokai Soda.tmTheme",
 	"fold_buttons": true,
 	"folder_exclude_patterns":
@@ -12,14 +13,18 @@
 		"node_modules"
 	],
 	"font_size": 12,
+	"line_padding_bottom": 2,
+	"line_padding_top": 2,
+	// "font_size": 24,
+	// "line_padding_bottom": 4,
+	// "line_padding_top": 4,
 	"ignored_packages":
 	[
 		"Color Scheme - Default",
 		"Vintage"
 	],
 	"index_files": false,
-	"line_padding_bottom": 2,
-	"line_padding_top": 2,
+	"scroll_past_end": true,
 	"theme": "Default.sublime-theme",
 	"update_check": false
 }

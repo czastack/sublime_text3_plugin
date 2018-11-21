@@ -79,8 +79,8 @@ class InsertListCommand(sublime_plugin.TextCommand):
             return
 
         # 默认是插入数字
-        default = (an.insert_text_last if an.insert_text_last
-            else '["%%01d" %% (x) for x in range(1, %d)]' % (len(self.view.selection) + 1))
+        default = an.insert_text_last if an.insert_text_last else (
+            '["%%01d" %% x for x in range(1, %d)]' % (len(self.view.selection) + 1))
         input_panel = self.view.window().show_input_panel('list expr', default, self.on_input_text, None, None)
         # 选中默认文字
         input_panel.selection.add(an.region(input_panel))

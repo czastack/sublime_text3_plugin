@@ -15,7 +15,8 @@ class BaseTransverter(sublime_plugin.TextCommand):
 
 class TransverterSelect(sublime_plugin.WindowCommand):
     def run(self):
-        self.window.show_quick_panel([choice[0] for choice in __CHOICES__], self.onselect, selected_index=an._transform_last or -1)
+        self.window.show_quick_panel([choice[0] for choice in __CHOICES__], self.onselect,
+            selected_index=an._transform_last or -1)
 
     def onselect(self, index):
         if index == -1:
@@ -53,6 +54,7 @@ def camel_or_lower(text):
 def to_sbc_case(text):
     """转成全角字符"""
     return toggle_bc_case(text, dbc=False)
+
 
 def to_dbc_case(text):
     """转成半角字符"""

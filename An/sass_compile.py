@@ -1,11 +1,15 @@
-import sublime, sublime_plugin, sasshelper
-import os
 from An import an
+import sublime
+import sublime_plugin
+import sasshelper
+import os
 
 helper = None
 
+
 def get_settings():
     return sublime.load_settings('an_sass.sublime-settings')
+
 
 def compile(view):
     Path = os.path
@@ -36,9 +40,9 @@ def compile(view):
     status, content = helper.compile_string(text, Path.dirname(filename))
 
     if status:
-        dirname  = Path.dirname(filename)
+        dirname = Path.dirname(filename)
         filename = Path.join(dirname, '..', 'css', Path.splitext(Path.basename(filename))[0] + '.css')
-        cssdir   = Path.dirname(filename)
+        cssdir = Path.dirname(filename)
         if not Path.exists(cssdir):
             os.mkdir(cssdir)
         with open(filename, 'w', encoding='utf-8') as f:
@@ -49,12 +53,15 @@ def compile(view):
         an.tout(content)
         return False
 
+
 class SassCompileCommand(sublime_plugin.WindowCommand):
     def run(self):
         compile(self.window.active_view())
 
+
 class BuildonSave(sublime_plugin.EventListener):
     def on_post_save(self, view):
         filename = view.file_name()
-        if filename and filename.endswith('.scss') and ('parts' not in filename) and get_settings().get('build_on_save'):
+        if (filename and filename.endswith('.scss') and ('parts' not in filename)
+                and get_settings().get('build_on_save')):
             compile(view)

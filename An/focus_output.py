@@ -1,8 +1,8 @@
 import sublime_plugin
 from An import an
 
-class FocusOutputCommand(sublime_plugin.TextCommand):
 
+class FocusOutputCommand(sublime_plugin.TextCommand):
     def run(self, edit):
         an.set(self.view)
         an.tout()

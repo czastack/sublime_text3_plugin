@@ -1,8 +1,9 @@
 import re
 from array import array
 
-# 生成字符序列
-def strsq(a, b, split = ''):
+
+def strsq(a, b, split=''):
+    """生成字符序列"""
     def check_param(ch):
         ok = False
         if isinstance(ch, str):
@@ -34,11 +35,15 @@ def codes2str(cs):
 def matchAll(reg, text, fn):
     if isinstance(fn, (list, tuple)):
         arg = fn
-        fn = lambda x: [x.group(i) for i in arg]
+
+        def fn(x):
+            return [x.group(i) for i in arg]
 
     elif isinstance(fn, int):
         arg = fn
-        fn = lambda x: x.group(arg)
+
+        def fn(x):
+            return x.group(arg)
 
     return [fn(m) for m in re.finditer(reg, text)]
 

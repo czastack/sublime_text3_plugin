@@ -1,13 +1,12 @@
 import sublime_plugin
 
-# 光标不移动的滚动
-# di: 1  下一行
-# di: -1 上一行
-# di: 2  下一屏
-# di: -2 上一屏
-# di: -4  开头
-# di: 4  结尾
+
 class ViewportScroolCommand(sublime_plugin.TextCommand):
+    """ 光标不移动的滚动
+        di: 1  下一行, di: -1 上一行
+        di: 2  下一屏, di: -2 上一屏
+        di: -4  开头, di: 4  结尾
+    """
     def run(self, edit, di):
         curTop = self.view.viewport_position()[1]
         # 行高(layout单位)

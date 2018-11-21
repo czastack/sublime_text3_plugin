@@ -1,6 +1,7 @@
 import sublime_plugin
 import subl.view
 
+
 class ReloadGbkCommand(sublime_plugin.TextCommand):
     def run(self, edit):
         file_name = self.view.file_name()

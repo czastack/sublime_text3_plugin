@@ -1,5 +1,6 @@
 import xml.etree.ElementTree as ET
 
+
 class Xml2yaml(object):
     """
     it = Xml2yaml()
@@ -10,7 +11,7 @@ class Xml2yaml(object):
 
     def parse(self, file):
         self.stack = []
-        self.put   = None
+        self.put = None
         for event, elem in ET.iterparse(file, events=self.events):
             start = event == "start"
             if elem.tag == 'array':

@@ -1,6 +1,7 @@
 import ctypes
 from dllhelper import DllHelper
 
+
 class SassHelper(DllHelper):
 
     __libname__ = __file__, 'sasshelper'
@@ -19,7 +20,7 @@ class SassHelper(DllHelper):
         p = ctypes.create_string_buffer(path.encode())
         self.clib.set_include_path(p)
 
-    def compile_string(self, text, path = ''):
+    def compile_string(self, text, path=''):
         text = ctypes.create_string_buffer(text.encode())
         path = ctypes.create_string_buffer(path.encode())
         size_status = self.clib.sass_compile_string(text, path)
@@ -32,10 +33,11 @@ class SassHelper(DllHelper):
 
     def _get_result(self, size_status):
         status = bool(size_status & 1)
-        size   = size_status >> 1
+        size = size_status >> 1
         buff = ctypes.create_string_buffer(size)
         self.clib.sass_get_result(buff)
         return status, buff.value.decode()
+
 
 if __name__ == '__main__':
     helper = SassHelper()

@@ -1,5 +1,7 @@
-import re, sublime, sublime_plugin
 from An import an
+import re
+import sublime
+import sublime_plugin
 
 
 class BaseSelect(sublime_plugin.TextCommand):
@@ -8,9 +10,10 @@ class BaseSelect(sublime_plugin.TextCommand):
         self.view.selection.add_all(regions)
 
 
-# 选中所选部分中符合指定正则表达式的内容
 class SelectReg(BaseSelect):
+    """选中所选部分中符合指定正则表达式的内容"""
     flags = re.M
+
     def run(self, edit):
         view = self.view
         regions = []
@@ -28,33 +31,33 @@ class SelectReg(BaseSelect):
         self.set_regions(regions)
 
 
-# 快速选中所有行首
 class SelectLineStartCommand(SelectReg):
+    """快速选中所有行首"""
     reg = '^'
 
 
-# 快速选中所有行尾
 class SelectLineEndCommand(SelectReg):
+    """快速选中所有行尾"""
     reg = '$'
 
 
-# 快速选中所有行
 class SelectLineAllCommand(SelectReg):
+    """快速选中所有行"""
     reg = '.+'
 
 
-# 选中空行
 class SelectEmptyLinesCommand(SelectReg):
+    """选中空行"""
     reg = '\n[ \t]*(?=\n|$)'
 
 
-# 选中行结尾的空白字符
 class SelectLineEndSpaceCommand(SelectReg):
+    """选中行结尾的空白字符"""
     reg = '[ \t]+(?=\n|$)'
 
 
-# 按长度分隔选区
 class SplitSelectByLenCommand(BaseSelect):
+    """按长度分隔选区"""
     def run(self, edit):
         # 显示输入框
         input_panel = self.view.window().show_input_panel('分隔长度', '', self.on_input_text, None, None)
@@ -76,8 +79,8 @@ class SplitSelectByLenCommand(BaseSelect):
                 self.view.selection.add_all(regions)
 
 
-# 用正则表达式分隔选区
 class SplitSelectByRegCommand(BaseSelect):
+    """用正则表达式分隔选区"""
     def run(self, edit):
         # 显示输入框
         input_panel = self.view.window().show_input_panel('分隔文本', '', self.on_input_text, None, None)
@@ -102,21 +105,21 @@ class SplitSelectByRegCommand(BaseSelect):
                         pos = span[1]
 
                     if pos < end:
-                         regions.append(sublime.Region(start + pos, end))
+                        regions.append(sublime.Region(start + pos, end))
             if len(regions) > 0:
                 self.view.selection.clear()
                 self.view.selection.add_all(regions)
 
 
-# 选区行尾互换
 class SelectStartToEndCommand(BaseSelect):
+    """选区行尾互换"""
     def run(self, edit):
         regions = [sublime.Region(region.b, region.a) for region in self.view.selection]
         self.set_regions(regions)
 
 
-# 交换两个选区的内容
 class ExchangeSelectCommand(BaseSelect):
+    """交换两个选区的内容"""
     def run(self, edit):
         if len(self.view.selection) == 2:
             view = self.view
@@ -125,8 +128,8 @@ class ExchangeSelectCommand(BaseSelect):
             view.replace(edit, view.selection[1], tmp)
 
 
-# 选中引号外侧/内侧
 class SelectionQuoteCommand(BaseSelect):
+    """选中引号外侧/内侧"""
     def run(self, edit):
         view = self.view
         regions = []
@@ -165,9 +168,9 @@ class SelectionQuoteCommand(BaseSelect):
             self.set_regions(regions)
 
 
-# 选中每两个光标中间的区域（列模式）
 class SelectMiddleCommand(BaseSelect):
-    def run(self, edit, sort_by_col = False):
+    """选中每两个光标中间的区域（列模式）"""
+    def run(self, edit, sort_by_col=False):
         view = self.view
         regions = []
         selection = list(self.view.selection)
@@ -192,8 +195,8 @@ class SelectMiddleCommand(BaseSelect):
         self.set_regions(regions)
 
 
-# 选中区域暂存
 class SelectToArrayCommand(sublime_plugin.TextCommand):
+    """选中区域暂存"""
     def run(self, edit):
         data = []
         for region in self.view.selection:

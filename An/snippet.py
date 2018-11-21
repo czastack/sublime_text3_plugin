@@ -10,7 +10,7 @@ class AnSnippetCommand(sublime_plugin.TextCommand):
         key = self.view.substr(self.view.selection[0])
         content = an._snip.get_snippet(key, self.view)
         if content:
-            self.view.run_command('insert_snippet', { "contents": content })
+            self.view.run_command('insert_snippet', {"contents": content})
 
 
 class SnippetContainer(object):
@@ -39,4 +39,3 @@ class SnippetContainer(object):
 
     def get_snippet(self, key, view=None):
         return self.get_snippets(view).get(key, None) or self.get_snippets(None).get(key, None)
-    

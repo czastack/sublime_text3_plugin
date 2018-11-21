@@ -1,4 +1,6 @@
 from urllib import parse
+
+
 def urldecode(url):
     """
     解析url参数字符串

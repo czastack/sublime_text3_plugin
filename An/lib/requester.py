@@ -1,6 +1,7 @@
 from urllib import request
 from urllib.parse import urlencode, quote
 
+
 def do_request(url, data=None, headers={}, isget=True, encoding="UTF-8"):
     if data:
         if isinstance(data, str):
@@ -21,12 +22,14 @@ def do_request(url, data=None, headers={}, isget=True, encoding="UTF-8"):
     result.close()
     try:
         content = content.decode(encoding)
-    except:
+    except Exception:
         pass
     return content
 
+
 def get(*args, **keyargs):
     return do_request(*args, **keyargs)
+
 
 def post(*args, **keyargs):
     keyargs['isget'] = False

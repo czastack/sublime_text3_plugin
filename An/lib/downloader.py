@@ -1,7 +1,8 @@
-import os, threading
 from urllib import request
 from urllib.request import urlopen
 from urllib.error import HTTPError
+import os
+import threading
 
 
 class Downloader(threading.Thread):
@@ -37,11 +38,11 @@ class Downloader(threading.Thread):
                     filename = data if self.keepdir else os.path.basename(data)
                 else:
                     filename = os.path.basename(data)
-            
+
             filepath = filename if not self.filedir else os.path.join(self.filedir, filename)
             try:
                 request = self.opener.open(url) if self.opener else urlopen(url)
-                
+
                 # 创建父目录
                 file_parent_dir = os.path.dirname(filepath)
                 if file_parent_dir and not os.path.isdir(file_parent_dir):
@@ -52,12 +53,13 @@ class Downloader(threading.Thread):
                 with open(filepath, 'wb') as file:
                     file.write(readed)
                 request.close()
-            except:
+            except Exception:
                 print('下载失败: %s, %s' % (url, filename))
 
             now += 1
             print("{0:2d}/{1:2d} {2}".format(now, length, filepath))
         print('finish')
+
 
 def download(*args, **kwargs):
     downloader = Downloader(*args, **kwargs)

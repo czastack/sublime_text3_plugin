@@ -1,8 +1,11 @@
-# 在指定文件夹运行程序
-import sublime, sublime_plugin, os
+"""在指定文件夹运行程序"""
 from An import an
 from subl import load_settings
 from utils.path import run_at
+import sublime
+import sublime_plugin
+import os
+
 
 class RunHearCommand(sublime_plugin.WindowCommand):
     def run(self, path=None):

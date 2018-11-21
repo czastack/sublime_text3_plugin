@@ -8,20 +8,21 @@ class Color:
     def __str__(self):
         return self.toRgb()
 
-    def toRgb(self, alpha = False):
+    def toRgb(self, alpha=False):
         return ("rgba({r}, {g}, {b}, {a})" if alpha else rgb({r}, {g}, {b})).format(**self.__dict__)
 
-    def toTuple(self, alpha = False):
+    def toTuple(self, alpha=False):
         return (self.r, self.g, self.b, self.a) if alpha else (self.r, self.g, self.b)
 
-    def toHex(self, alpha = False):
+    def toHex(self, alpha=False):
         tpl = "#{r:02X}{g:02X}{b:02X}"
         if alpha:
             tpl += "{a:02X}"
         return tpl.format(**self.__dict__)
 
     def toHalfHex(self):
-        h = lambda c: (c & 0xF0) >> 4
+        def h(c):
+            return (c & 0xF0) >> 4
         return "#{r:X}{g:X}{b:X}".format(r=h(self.r), g=h(self.g), b=h(self.b))
 
 

@@ -1,14 +1,17 @@
-import codecs, collections, re
-Contact = collections.namedtuple('Contact','name phone')
+import codecs
+import collections
+import re
+Contact = collections.namedtuple('Contact', 'name phone')
+
 
 class Vcf(object):
-    BEGIN   = 'BEGIN:VCARD'
+    BEGIN = 'BEGIN:VCARD'
     VERSION = 'VERSION:2.1'
-    END     = 'END:VCARD'
-    STRING  = ';CHARSET=UTF-8;ENCODING=QUOTED-PRINTABLE:'
-    N       = 'N' + STRING
-    FN      = 'FN' + STRING
-    TEL     = 'TEL;VOICE;PREF:'
+    END = 'END:VCARD'
+    STRING = ';CHARSET=UTF-8;ENCODING=QUOTED-PRINTABLE:'
+    N = 'N' + STRING
+    FN = 'FN' + STRING
+    TEL = 'TEL;VOICE;PREF:'
 
     __slots__ = ()
 
@@ -27,7 +30,7 @@ class Vcf(object):
             elif line.startswith(cls.N):
                 # item.name
                 name = line[len(cls.N):].replace(';', '')
-                if re.match('(=[\da-fA-F])+', name):
+                if re.match('(=[\\da-fA-F])+', name):
                     name = __class__.decode_string(name)
                 item.name = name
             elif line.startswith(cls.TEL):
@@ -37,7 +40,7 @@ class Vcf(object):
         return items
 
     @classmethod
-    def totext(cls, items, utf8 = True, end = '\n'):
+    def totext(cls, items, utf8=True, end='\n'):
         result = []
         for item in items:
             result.append(cls.BEGIN)
@@ -50,9 +53,10 @@ class Vcf(object):
         return end.join(result)
 
     def __repr__(self):
-        return str({key : getattr(self, key) for key in __class__.__slots__})
+        return str({key: getattr(self, key) for key in __class__.__slots__})
 
     __str__ = __repr__
+
 
 if __name__ == '__main__':
     raw = """

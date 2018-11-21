@@ -1,6 +1,7 @@
 import sublime
 from os import path as Path
 
+
 def sublime_path():
     return Path.dirname(sublime.__file__)
 
@@ -9,7 +10,7 @@ def default_packages_path():
     return Path.join(sublime_path(), 'Packages')
 
 
-def opened_files(change_sep = True):
+def opened_files(change_sep=True):
     """当前窗口所有打开的文件名"""
     files = []
     for view in sublime.active_window().views():
@@ -20,7 +21,7 @@ def opened_files(change_sep = True):
     return files
 
 
-def load_settings(self, key, prefix = 'an_'):
+def load_settings(self, key, prefix='an_'):
     settings = getattr(self, '_settings', None)
     if not settings:
         settings = sublime.load_settings(prefix + self.name() + '.sublime-settings')

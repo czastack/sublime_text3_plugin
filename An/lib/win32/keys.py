@@ -1,9 +1,9 @@
-MOD_ALT      = 0x0001
-MOD_CONTROL  = 0x0002
-MOD_SHIFT    = 0x0004
-MOD_WIN      = 0x0008
-MOD_LEFT     = 0x8000
-MOD_RIGHT    = 0x4000
+MOD_ALT = 0x0001
+MOD_CONTROL = 0x0002
+MOD_SHIFT = 0x0004
+MOD_WIN = 0x0008
+MOD_LEFT = 0x8000
+MOD_RIGHT = 0x4000
 MOD_ON_KEYUP = 0x0800
 
 VK_CODE = {
@@ -96,7 +96,7 @@ VK_CODE = {
     'next_track': 0xB0,
     'previous_track': 0xB1,
     'stop_media': 0xB2,
-    'play/ pause_media':0xB3,
+    'play/ pause_media': 0xB3,
     'start_mail': 0xB4,
     'select_media': 0xB5,
     'start_application_1': 0xB6,
@@ -116,9 +116,9 @@ VK_CODE = {
     ';': 0xBA,
     '[': 0xDB,
     '\\': 0xDC,
-     ']': 0xDD,
+    ']': 0xDD,
     "'": 0xDE,
-    '`': 0xC0 
+    '`': 0xC0
 }
 
 

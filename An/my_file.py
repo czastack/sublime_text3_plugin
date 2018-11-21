@@ -2,6 +2,7 @@
 
 from subl import tree_command, open as open_file
 
+
 class Menu(tree_command.Tree):
     __slots__ = ('name', 'path')
 

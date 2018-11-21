@@ -1,6 +1,8 @@
-import sublime_plugin, os
 from utils import runtime
 from subl import load_platform_settings
+import sublime_plugin
+import os
+
 
 class Tree:
     __slots__ = ('parent', 'children', 'last_sel')
@@ -9,7 +11,7 @@ class Tree:
         return None
 
     @classmethod
-    def parse(cls, datas, parent = None):
+    def parse(cls, datas, parent=None):
         """递归解析json数据"""
         if not parent:
             parent = cls()
@@ -22,6 +24,7 @@ class Tree:
             child.parent = parent
             parent.children.append(child)
         return parent
+
 
 class TreeCommandBase(sublime_plugin.WindowCommand):
     __slots__ = ('node')
@@ -63,5 +66,5 @@ class TreeCommandBase(sublime_plugin.WindowCommand):
 
     def show_menu(self):
         sel = self.node.last_sel if self.node.last_sel is not None else -1
-        self.window.show_quick_panel(self.node.to_array(), 
-            self.on_select, selected_index = sel)
+        self.window.show_quick_panel(self.node.to_array(),
+            self.on_select, selected_index=sel)

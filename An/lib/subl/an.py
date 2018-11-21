@@ -1,5 +1,8 @@
-import sublime, sublime_api, extypes
-import subl, subl.view as viewlib
+import sublime
+import sublime_api
+import extypes
+import subl
+import subl.view
 import utils.string
 import utils.path
 
@@ -122,7 +125,8 @@ class An:
         subl.open(utils.path.get_file(file), self.get_window())
 
     def popup(self, text, **args):
-        self.view.show_popup('<style>body{margin:0; padding:10px; color:#ccc; font-size:18px; background-color:#000;}</style>' + text, **args);
+        style = '<style>body{margin:0; padding:10px; color:#ccc; font-size:18px; background-color:#000;}</style>'
+        self.view.show_popup(style + text, **args)
 
     def __getattr__(self, name):
         return self._data[self.window_id].get(name, None)
@@ -154,10 +158,10 @@ class An:
         return sublime.get_clipboard().split('\n')
 
     def text(self, view=None):
-        return viewlib.view_text(view or self.view)
+        return subl.view.view_text(view or self.view)
 
     def selected_text(self, view=None):
-        return viewlib.selected_text(view or self.view)
+        return subl.view.selected_text(view or self.view)
 
     def clone(self):
         self.run_win_command('clone_file')
@@ -176,5 +180,5 @@ class An:
         texts = list(map(fn, origin))
         self.view.run_command('set_regions_text', {'texts': texts})
 
-    region = staticmethod(viewlib.view_region)
+    region = staticmethod(subl.view.view_region)
     run_win_command = sublime.Window.run_command

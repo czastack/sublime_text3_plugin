@@ -3,6 +3,7 @@ import platform
 import os
 Path = os.path
 
+
 class DllHelper:
     __slots__ = ()
 

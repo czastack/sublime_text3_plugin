@@ -5,8 +5,8 @@ from .sendkey import sendVKey, sendComb
 import sys
 import time
 
-WM_HOTKEY    = 0x0312
-WM_KEYUP     = 0x0101
+WM_HOTKEY = 0x0312
+WM_KEYUP = 0x0101
 
 # class MSG(Structure):
 #     _fields_ = [
@@ -91,10 +91,8 @@ class HotKeyHelper:
         else:
             return False
 
-
     def setCallback(self, hotkeyId, callback):
-        self.callbackMap[hotkeyId] = callback 
-
+        self.callbackMap[hotkeyId] = callback
 
     def stopLoop(self):
         self.callbackMap['__stop'] = True

@@ -5,8 +5,8 @@ import time
 
 ULONG_PTR = ctypes.POINTER(DWORD)
 
-KEYUP    = 0x0002
-UNICODE  = 0x0004
+KEYUP = 0x0002
+UNICODE = 0x0004
 SCANCODE = 0x0008
 
 
@@ -34,7 +34,7 @@ class MouseInput(ctypes.Structure):
         ("dy", LONG),
         ("mouseData", DWORD),
         ("dwFlags", DWORD),
-        ("time",DWORD),
+        ("time", DWORD),
         ("dwExtraInfo", ULONG_PTR)
     ]
 
@@ -78,7 +78,7 @@ def sendComb(mod, keyCode):
     """
     usage: sendComb(MOD_CONTROL, getVK('v'))
     """
-    
+
     if mod & MOD_SHIFT:
         sendVKey(0x10)
     if mod & MOD_CONTROL:

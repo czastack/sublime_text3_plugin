@@ -1,6 +1,7 @@
+from subl.view import get_lines
 import sublime
 import difflib
-from subl.view import get_lines
+
 
 def view_diff(viewa, viewa, titlea, titleb):
     diff = difflib.unified_diff(get_lines(viewa), get_lines(viewb), titlea, titleb)

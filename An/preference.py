@@ -1,4 +1,6 @@
-import sublime, sublime_plugin
+import sublime
+import sublime_plugin
+
 
 class LoadPlatformPreferences(sublime_plugin.ApplicationCommand):
     __slots__ = ()

@@ -3,6 +3,7 @@
     { "keys": ["ctrl+f5"], "command": "exec_document" },
     { "keys": ["ctrl+shift+f5"], "command": "to_expr" },
     { "keys": ["ctrl+shift+e"], "command": "eval_selection" },
+    { "keys": ["ctrl+shift+h"], "command": "compute_hex" },
     { "keys": ["alt+c"], "command": "insert_list" },
 
     { "keys": ["ctrl+alt+g"], "command": "reload_gbk" },

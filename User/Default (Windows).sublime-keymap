@@ -10,4 +10,5 @@
         }
     },
     { "keys": ["ctrl+alt+p"], "command": "prompt_select_workspace" },
+    { "keys": ["ctrl+u"], "command": "soft_undo" },
 ]

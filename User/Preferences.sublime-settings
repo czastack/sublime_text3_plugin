@@ -21,5 +21,6 @@
 	"line_padding_bottom": 2,
 	"line_padding_top": 2,
 	"theme": "Default.sublime-theme",
+	"translate_tabs_to_spaces": true,
 	"update_check": false
 }

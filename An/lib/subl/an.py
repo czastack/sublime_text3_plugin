@@ -41,13 +41,15 @@ class An:
 
     def tout(self, text=None):
         win = sublime.Window(self.window_id)
-        if not self.output:
-            self.output = win.create_output_panel('an')
+        output = self.output
+        if not output:
+            output = self.output = win.create_output_panel('an')
             view = self.view or win.active_view()
-            self.output.settings().set('color_scheme', view.settings().get('color_scheme'))
+            # self.output.settings().set('color_scheme', view.settings().get('color_scheme'))
+            output.assign_syntax('Packages/Text/Plain text.tmLanguage')
 
         if text is not None:
-            self.output.run_command('set_text', {'text': extypes.astr(text)})
+            output.run_command('set_text', {'text': extypes.astr(text)})
 
         win.run_command('show_panel', {'panel': 'output.an'})
 
@@ -62,10 +64,10 @@ class An:
                 while view.size():
                     view.run_command('undo')
 
-    def echo(self, *args, **dictArgs):
+    def echo(self, *args, **kwargs):
         """控制台打印"""
-        dictArgs['file'] = self
-        print(*args, **dictArgs)
+        kwargs['file'] = self
+        print(*args, **kwargs)
 
     def flush(self):
         """作为print file参数"""
@@ -156,6 +158,11 @@ class An:
         另见: selected_text
         """
         return sublime.get_clipboard().split('\n')
+
+    @property
+    def copied_tuple(self):
+        """复制的元组"""
+        return tuple(self.copied)
 
     def text(self, view=None):
         return subl.view.view_text(view or self.view)

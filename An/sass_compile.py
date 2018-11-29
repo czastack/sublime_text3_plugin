@@ -50,7 +50,7 @@ def compile(view):
         sublime.status_message('编译成功')
         return True
     else:
-        an.tout(content)
+        an.set_output(content)
         return False
 
 

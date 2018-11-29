@@ -154,4 +154,4 @@ class StartTestCommand(sublime_plugin.WindowCommand):
         view = self.window.new_file(syntax='Python.sublime-syntax')
         view.set_name('Test')
         an.set(view)
-        an.tout()
+        an.set_output()

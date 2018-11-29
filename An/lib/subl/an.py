@@ -39,7 +39,7 @@ class An:
         self.view = view
         self.edit = edit
 
-    def tout(self, text=None):
+    def set_output(self, text=None):
         win = sublime.Window(self.window_id)
         output = self.output
         if not output:
@@ -77,14 +77,17 @@ class An:
     def write(self, s):
         if self.stdout and not self.haserr:
             self.stdout.write(s)
-        elif self.output:
-            self.output.run_command('append', {"characters": s})
-            self.output.run_command('viewport_scrool', {"di": 4})
+        else:
+            output = self.output
+            if output:
+                position = int(output.layout_extent()[1])
+                output.run_command('append', {"characters": s})
+                output.show(position)
 
     def logerr(self, e):
         """打印错误信息"""
         if not self.output:
-            self.tout()
+            self.set_output()
         import traceback
         self.haserr = True
         self.echo(traceback.format_exc())

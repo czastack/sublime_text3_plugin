@@ -28,7 +28,7 @@
                             },
                             {
                                 "command": "open_file",
-                                "args": {"file": "${packages}/An/an_run_hear.sublime-settings"},
+                                "args": {"file": "${packages}/An/an_run_here.sublime-settings"},
                                 "caption": "设置 – 在此运行"
                             },
                             {

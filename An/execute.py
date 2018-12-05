@@ -8,14 +8,14 @@ import re
 class ExecDocumentCommand(sublime_plugin.TextCommand):
     """执行当前文件内的语句"""
     def run(self, edit):
-        an.set(self.view, edit)
+        an.attach(self.view, edit)
         an.exec_(an.text(self.view))
 
 
 class ExecSelectionCommand(sublime_plugin.TextCommand):
     """执行选中的语句"""
     def run(self, edit):
-        an.set(self.view, edit)
+        an.attach(self.view, edit)
         for region in self.view.selection:
             if region.empty():
                 region = self.view.line(region.a)
@@ -27,7 +27,7 @@ class ExecSelectionCommand(sublime_plugin.TextCommand):
 class EvalSelectionCommand(sublime_plugin.TextCommand):
     """执行选中的表达式并替换当前文本"""
     def run(self, edit):
-        an.set(self.view, edit)
+        an.attach(self.view, edit)
         for region in self.view.selection:
             if not region.empty() and an.eval_(self.view.substr(region)):
                 self.view.replace(edit, region, extypes.astr(edit.ret))
@@ -38,7 +38,7 @@ class ComputeHexCommand(sublime_plugin.TextCommand):
     reg_hex = re.compile('([\\da-fA-F]+)')
 
     def run(self, edit):
-        an.set(self.view, edit)
+        an.attach(self.view, edit)
         for region in self.view.selection:
             if not region.empty():
                 ret = "%X" % eval(self.reg_hex.sub('0x\\1', self.view.substr(region)))
@@ -62,7 +62,7 @@ class ToExprCommand(sublime_plugin.TextCommand):
         self.view.run_command(self.name(), {"text": text})
 
     def on_exec(self, edit, text):
-        an.set(self.view, edit)
+        an.attach(self.view, edit)
         edit.i = 0
         for region in self.view.selection:
             edit.src = self.view.substr(region)
@@ -90,7 +90,7 @@ class InsertListCommand(sublime_plugin.TextCommand):
         self.view.run_command(self.name(), {"text": text})
 
     def on_insert(self, edit, text):
-        an.set(self.view, edit)
+        an.attach(self.view, edit)
         edit.ret = None
         edit._n = True  # 是否自动插入换行
         an.eval_(text) or an.exec_(text)
@@ -153,5 +153,5 @@ class StartTestCommand(sublime_plugin.WindowCommand):
     def run(self):
         view = self.window.new_file(syntax='Python.sublime-syntax')
         view.set_name('Test')
-        an.set(view)
+        an.attach(view)
         an.set_output()

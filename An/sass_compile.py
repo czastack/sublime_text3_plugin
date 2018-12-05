@@ -21,7 +21,7 @@ def compile(view):
     if not helper:
         helper = sasshelper.SassHelper()
 
-    an.set(view)
+    an.attach(view)
 
     settings = get_settings()
     include_path = settings.get('include_path')

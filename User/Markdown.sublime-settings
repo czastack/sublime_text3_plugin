@@ -1,5 +1,5 @@
 {
-	"color_scheme": "Packages/MarkdownEditing/MarkdownEditor-Dark.tmTheme",
+	"color_scheme": "Packages/User/MarkdownEditor-Dark.sublime-color-scheme",
 	"draw_centered": false,
 	"highlight_line": true,
 	"line_numbers": true

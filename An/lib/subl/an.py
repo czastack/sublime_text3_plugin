@@ -12,7 +12,7 @@ class An:
 
     def __init__(self):
         self._data = {}
-        self.attachWindow(0)
+        self.attach_window(0)
         self.exec_scope = {
             'an': self,
             'print': self.echo,
@@ -21,21 +21,22 @@ class An:
         }
 
     def onload(self):
-        self.attachWindow(sublime_api.active_window())
+        self.attach_window(sublime_api.active_window())
 
-    def attachWindow(self, window_id):
+    def attach_window(self, window_id):
         self.window_id = window_id
         self._data.setdefault(window_id, {})
         self._data[self.window_id].setdefault('globals', extypes.Map())
 
-    def set(self, view, edit=None):
+    def attach(self, view, edit=None):
         window_id = sublime_api.view_window(view.view_id)
         if self.window_id != window_id:
-            self.attachWindow(sublime_api.view_window(view.view_id))
+            self.attach_window(sublime_api.view_window(view.view_id))
 
         if view == self.output:
             view = sublime.View(sublime_api.window_active_view(window_id))
 
+        self.window = self.get_window()
         self.view = view
         self.edit = edit
 

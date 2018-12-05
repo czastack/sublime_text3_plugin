@@ -4,7 +4,7 @@ from An import an
 
 class AnScriptCommand(sublime_plugin.TextCommand):
     def run(self, edit, name, args=[], kwargs={}):
-        an.set(self.view, edit)
+        an.attach(self.view, edit)
 
         module, name = name.rsplit('.', 1)
         if module[0] == '.':

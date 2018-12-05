@@ -13,17 +13,14 @@
 		"node_modules"
 	],
 	"font_size": 12,
-	"line_padding_bottom": 2,
-	"line_padding_top": 2,
-	// "font_size": 24,
-	// "line_padding_bottom": 4,
-	// "line_padding_top": 4,
 	"ignored_packages":
 	[
 		"Color Scheme - Default",
 		"Vintage"
 	],
 	"index_files": false,
+	"line_padding_bottom": 2,
+	"line_padding_top": 2,
 	"scroll_past_end": true,
 	"theme": "Default.sublime-theme",
 	"translate_tabs_to_spaces": true,

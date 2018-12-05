@@ -21,4 +21,16 @@
     { "keys": ["super+alt+l"], "command": "focus_output" },
     { "keys": ["super+shift+alt+l"], "command": "an_script", "args": {"name": ".sublime.clear_output"} },
     { "keys": ["alt+tab"], "command": "an_snippet" },
+
+    {
+        "keys": ["alt+shift+`"], "args": {"contents": "```$1\n${0:$SELECTION}\n```"},
+        "command": "insert_snippet", 
+        "context": [
+            {
+                "operand": "meta.paragraph.markdown", 
+                "match_all": true, 
+                "key": "selector"
+            },
+        ]
+    },
 ]

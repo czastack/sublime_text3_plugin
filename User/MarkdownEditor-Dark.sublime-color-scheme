@@ -389,6 +389,12 @@
             "scope": "markup.untracked.git_gutter",
             "name": "GitGutter untracked",
             "foreground": "#565656"
+        },
+        {
+            "scope": "meta.dummy.line-break",
+            "name": "Line break",
+            "font_style": "underline",
+            "background": "#333333"
         }
     ]
 }

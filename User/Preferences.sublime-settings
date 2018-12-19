@@ -16,8 +16,8 @@
 	"ignored_packages":
 	[
 		"Color Scheme - Default",
-		"Vintage",
-		"Markdown"
+		"Markdown",
+		"Vintage"
 	],
 	"index_files": false,
 	"line_padding_bottom": 2,

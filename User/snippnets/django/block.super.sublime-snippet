@@ -1,8 +1,8 @@
 <snippet>
 	<content><![CDATA[
-{{block.super}}
+{{ block.super }}
 ]]></content>
-	<tabTrigger>djsuper</tabTrigger>
+	<tabTrigger>djsu</tabTrigger>
 	<scope>text.html</scope>
 	<description>django block</description>
 </snippet>

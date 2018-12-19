@@ -2,7 +2,7 @@
 	<content><![CDATA[
 {% block $1 %}$2{% endblock %}
 ]]></content>
-	<tabTrigger>djblock</tabTrigger>
+	<tabTrigger>djbl</tabTrigger>
 	<scope>text.html</scope>
 	<description>django block</description>
 </snippet>

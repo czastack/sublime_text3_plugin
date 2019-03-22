@@ -19,6 +19,7 @@
     { "keys": ["ctrl+shift+-"], "command": "select_line_start" },
     { "keys": ["ctrl+shift+="], "command": "start_test" },
     { "keys": ["ctrl+shift+o"], "command": "my_file" },
+    { "keys": ["alt+shift+o"], "command": "open_an_file" },
     { "keys": ["ctrl+alt+l"], "command": "focus_output" },
     { "keys": ["ctrl+shift+alt+l"], "command": "an_script", "args": {"name": ".sublime.clear_output"} },
     {

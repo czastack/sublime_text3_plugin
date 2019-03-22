@@ -1,8 +1,9 @@
 """调用winrar/file-roller打开包"""
 
-import sublime_plugin
 import os
+import sublime_plugin
 import subl
+import sublime
 from utils import runtime
 
 
@@ -27,5 +28,4 @@ class ViewDefaultPackageCommand(ViewPackageCommand):
 
 class ViewInstalledPackageCommand(ViewPackageCommand):
     def run(self):
-        import sublime
         ViewPackageCommand.show(self, sublime.installed_packages_path())
